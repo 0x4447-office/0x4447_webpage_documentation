@@ -7,10 +7,9 @@ site_author: '0x4447, LLC.'
 copyright: 'Est. 2016, Copr. <a href="https://0x4447.com">0x4447, LLC.</a>'
 
 nav:
-    - Home: index.md
-    - Products:
-      - Rsyslog Server: rsyslog-server.md
-      - OpenVPN Server: openvpn-server.md
-    - About: about.md
+    - 'Home': index.md
+    - 'Products':
+      - 'Rsyslog Server': rsyslog-server.md
+      - 'OpenVPN Server': openvpn-server.md
 
 use_directory_urls: false
