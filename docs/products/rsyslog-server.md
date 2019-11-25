@@ -26,25 +26,35 @@ The main frame of reference to be aware off, is that you'll use your computer as
 ## Copy the SSL cert to your client server
 
 1. Copy the cert to your local computer.
-`scp -i /path/to/key ec2-user@INSTANCE_IP:/etc/ssl/ca-cert.pem`
+
+	`scp -i /path/to/key ec2-user@INSTANCE_IP:/etc/ssl/ca-cert.pem`
+
 2. Upload the cert to the client server in the `tmp` folder.
-`scp -i /path/to/key ca-cert.pem ec2-user@INSTANCE_IP:/tmp`
+
+	`scp -i /path/to/key ca-cert.pem ec2-user@INSTANCE_IP:/tmp`
+
 3. Move the cert I the final location using `sudo` since SCP dose not support running commands using `sudo`.
-`ssh -i /path/to/key ec2-user@INSTANCE_IP sudo mv /tmp/ca-cert.pem /etc/ssl`
+
+	`ssh -i /path/to/key ec2-user@INSTANCE_IP sudo mv /tmp/ca-cert.pem /etc/ssl`
 
 ## How to configure the Rsyslog Client
 
 1. Copy the script to your local computer.
-`scp -i /path/to/key ec2-user@INSTANCE_IP:/home/ec2-user/client-setup.sh`
+
+	`scp -i /path/to/key ec2-user@INSTANCE_IP:/home/ec2-user/client-setup.sh`
+
 2. Upload the script to the client server in the `tmp` folder.
-`scp -i /path/to/key client-setup.sh ec2-user@INSTANCE_IP:/tmp`
+
+	`scp -i /path/to/key client-setup.sh ec2-user@INSTANCE_IP:/tmp`
+
 3. Once the file gets uploaded, we need to make it executable.
-`ssh -i /path/to/key ec2-user@INSTANCE_IP chmod +x /tmp/client-setup.sh`
+
+	`ssh -i /path/to/key ec2-user@INSTANCE_IP chmod +x /tmp/client-setup.sh`
+
 4. As the last step we have to log in to your client server and run the script.
-`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
+
+	`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
 
 ## Where are my logs?
 
 The logs can be found in the `/var/log` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
-
-[End User License Agreement for rsyslog-server](https://www.notion.so/2d4e7306f3ba4da889b63ce7bb62c940)
