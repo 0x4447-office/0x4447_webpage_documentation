@@ -6,4 +6,7 @@ site_author: '0x4447, LLC.'
 copyright: '0x4447, LLC.'
 nav:
     - Home: index.md
+    - Products:
+      - Rsyslog Server: rsyslog-server.md
+      - OpenVPN Server: openvpn-server.md
     - About: about.md

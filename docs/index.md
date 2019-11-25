@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+# Welcome to 0x4447, LLC. Documentation Page
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+On this site you will will find all the documentation for all the products that we have on the [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=80edcebf-11fb-4c36-a3f4-49eb40b518a3).
 
-## Commands
+## Contact
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+To get in touch with us follow the this [link](https://0x4447.com/contact).
