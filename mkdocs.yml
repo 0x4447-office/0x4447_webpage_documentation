@@ -1,4 +1,9 @@
 site_name: 0x4447, LLC. Documentation
+site_url: https://documentation.0x4447.com
+repo_url: https://github.com/0x4447-office/0x4447_webpage_documentation
+site_description: '0x4447, LLC. Documentation Page for all of our products.'
+site_author: '0x4447, LLC.'
+copyright: '0x4447, LLC.'
 nav:
     - Home: index.md
     - About: about.md
