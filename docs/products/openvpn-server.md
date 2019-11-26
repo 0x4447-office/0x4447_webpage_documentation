@@ -51,9 +51,12 @@ Since every time you create a user, the OpenVPN configuration for the connection
 
 ` ls -la /home/ec2-user/openvpn_users`
 
-# Where are the OpenVPN configuration files?
+# Configuration files location
 
-The configuration files are located in the `openvpn_users` folder located in your `ec2-user` home folder. This files are for your users. The OpenVPN users are located in this folder `/etc/openvpn/easy-rsa/keys`.
+There are two places where new data is beeing created when you use our product
+
+- `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
+- `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
 
 # How to enable resilience
 
