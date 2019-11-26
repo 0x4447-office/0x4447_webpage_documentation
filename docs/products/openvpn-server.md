@@ -27,13 +27,13 @@ The main frame of reference to be aware off, is that you'll use your computer as
 
 Create the main certificate by running this command, when prompted answer all the questions.
 
-`bash /opt/0x4447/openvpn/ov_generate_server_certs.sh`
+`sudo bash /opt/0x4447/openvpn/ov_generate_server_certs.sh`
 
 ## How to create a OpenVPN user
 
 1. Run this command and answer all the questions
 
-	`bash /opt/0x4447/openvpn/ov_user_add.sh "USER_NAME"`
+	`sudo bash /opt/0x4447/openvpn/ov_user_add.sh "USER_NAME"`
 
 2. Every time you do so, a new `.ovpn` file will be created in the `openvpn_users` folder.  You can copy the new file to your local computer using the `SCP` command like so:
 
@@ -45,7 +45,7 @@ Create the main certificate by running this command, when prompted answer all th
 
 Just run the following command by changing the user name you want to remove
 
-`bash /opt/0x4447/openvpn/ov_user_delete.sh "USER_NAME"`
+`sudo bash /opt/0x4447/openvpn/ov_user_delete.sh "USER_NAME"`
 
 # Where are the OpenVPN configuration files?
 
