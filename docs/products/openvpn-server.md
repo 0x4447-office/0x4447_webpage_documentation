@@ -19,10 +19,6 @@ We want to give you a good foundation for your ideas.
 
 After the instance is up and running, you'll have some manual work to do. Bellow you'll find all the necessary details.
 
-**WARNING**: text written in capital letters needs to be replaced with real values.
-
-The main frame of reference to be aware off, is that you'll use your computer as a proxy for the following operations.
-
 # Create the main certificate first
 
 Create the main certificate by running this command, when prompted answer all the questions.
