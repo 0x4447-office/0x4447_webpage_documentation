@@ -47,6 +47,12 @@ Just run the following command by changing the user name you want to remove
 
 `sudo bash /opt/0x4447/openvpn/ov_user_delete.sh "USER_NAME"`
 
+## How to list all the OpenVPN users
+
+Since every time you create a user, the OpenVPN configuration for the connection will be created in your home folder under the `openvpn_users` fodler. Just list the content of that older to see all your users:
+
+` ls -la /home/ec2-user/openvpn_users`
+
 # Where are the OpenVPN configuration files?
 
 The configuration files are located in the `openvpn_users` folder located in your `ec2-user` home folder. This files are for your users. The OpenVPN users are located in this folder `/etc/openvpn/easy-rsa/keys`.
