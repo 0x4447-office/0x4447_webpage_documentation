@@ -23,11 +23,13 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 The main frame of reference to be aware off, is that you'll use your computer as a proxy for the following operations.
 
-## Create the main certificate first
+# Create the main certificate first
 
 Create the main certificate by running this command, when prompted answer all the questions.
 
 `sudo bash /opt/0x4447/openvpn/ov_generate_server_certs.sh`
+
+# User Management
 
 ## How to create a OpenVPN user
 
