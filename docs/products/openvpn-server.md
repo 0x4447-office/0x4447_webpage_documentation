@@ -128,3 +128,9 @@ To keep your user backed up and always available, our server has support for a E
 `EFS_ID=fs-XXXXXX`
 
 Our server will read this value, and will mount the EFS drive to the system. On this drive all the unique data for the OpenVPN server will be saved to, this way your data is safe, you can terminate the server, create a new one, and as long as the EFS ID is the same the OpenVPN server will work as if nothing happened.
+
+# Before you go in production
+
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and how it works. Especially the resiliance mode. 
+
+Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct userData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
