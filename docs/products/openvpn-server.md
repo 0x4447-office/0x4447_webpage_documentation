@@ -91,9 +91,9 @@ Before you can set the UserData, you have to attach a Role to the Instance with 
 
 This Policy Document will allow the instance the ability to attach the Elastic IP to itself.
 
-### UserData
+### Bash Script for UserData
 
-Bellow is the Bash code needed to attach an Elastic IP to the instance at boot time.
+And this is the whole Bash script file that you have to copy and past in the UserData field when you start the instacne for the first time. Make srue to replace the values in all CAPS, with the real data.
 
 ```bash
 #!/bin/bash
@@ -104,30 +104,27 @@ INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/nu
 AWS_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone 2>/dev/null)
 AWS_REGION=${AWS_ZONE::-1}
 
-echo $EFS_ID > /home/ec2-user/efs_id
+echo $EFS_ID > /home/ec2-user/efs.sh
 
 aws ec2 associate-address --allocation-id $EIP_ID --instance-id $INSTANCE_ID --allow-reassociation --region=$AWS_REGION
 ```
 
 Explanation:
 
-1. Set the ID of the Elastic IP
-2. Get the Instance ID
-3. Get the Zone where the instance is
-4. Remove the last letter which is the Zone, since we just need the Region of where the instance is
-5. Associate the Elastic IP with the instance.
+1. Set the ID of the EFS drive.
+1. Set the ID of the Elastic IP.
+1. Get the Instance ID.
+1. Get the Availability Zone where the istance was deployed.
+1. Remove the last letter from the AZ to be let with the Region.
+1. Save the EFS ID to disk for our script.
+1. Associate the Elastic IP with the instance.
 
-How to make the the UserData run each time
+# Understand how UserData works
 
+It is important to note that the content of the UserData field, will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users. 
+
+But there is also a work around, and you can force the UserData to be triggered at each boot, follow this link for more:
 [https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/)
-
-## External Drive
-
-To keep your user backed up and always available, our server has support for a EFS drive. If in he EC2 Instance UserData you provide the following line:
-
-`EFS_ID=fs-XXXXXX`
-
-Our server will read this value, and will mount the EFS drive to the system. On this drive all the unique data for the OpenVPN server will be saved to, this way your data is safe, you can terminate the server, create a new one, and as long as the EFS ID is the same the OpenVPN server will work as if nothing happened.
 
 # Understant our files:
 
@@ -139,6 +136,6 @@ In our appliance we create files needed to make the server works, and here is th
 
 # Before you go in production
 
-Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and how it works. Especially the resiliance mode. 
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode. 
 
-Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct userData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
+Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
