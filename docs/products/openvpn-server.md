@@ -91,8 +91,8 @@ Bellow is the Bash code needed to attach an Elastic IP to the instance at boot t
 
 ```bash
 #!/bin/bash
-EFS_ID=fs-d5e77b54
-EIP_ID=eipalloc-018778e2501d4e432
+EFS_ID=fs-REPLACE_WITH_REAL_VALUE
+EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
 
 INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null)
 AWS_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone 2>/dev/null)
