@@ -23,11 +23,11 @@ Our goal is to give you a good foundation for your company.
 
 # Documentation
 
-After the instance is up and running, you'll have some manual work to do. Bellow you'll find all the necessary details.
-
 # Create the main certificate first
 
-Create the main certificate by running this command, when prompted answer all the questions.
+Before you start working with the OpenVPN, you have to generate the main SSL certificate that will be used to sign all the subsequent certificats for the individual users. This process will take few minutes depending on the instance type. Be patient.
+
+Start the cert generation with the following command:
 
 `sudo bash /opt/0x4447/openvpn/ov_generate_server_certs.sh`
 
