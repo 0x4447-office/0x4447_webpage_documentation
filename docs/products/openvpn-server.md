@@ -59,25 +59,22 @@ Since every time you create a user, a `.ovpn` configuration file is created. You
 
 The output is the list of all the users you have available for your OpenVPN server.
 
-# Understant our files:
-
-In our appliance we create files needed to make the server works, and here is the full list with an explanation:
-
-- `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
-- `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
-- `/home/ec2-user/efs.sh`: is where the EFS ID is saved when the UserData is executed
-
 # How to enable resilience
 
-Our OpenVPN Server has build in resilience to make sure that you are protected against Instance termination, or to allow you the setup of autoscaling with a setting of minimum 1 and max 1, to allow auto recovery of terminated instances.
+Our OpenVPN Server has build in resilience to make sure that you don't loose all your users that are added in the system. Or the IP of the server. This way you can protect yourself by the following scenarious:
 
-## Fixed IP
+- accitental instance termination.
+- you can build an autoscaling group with minimum of 1 so even if the server gose down it will be recreated.
+- you can chagne the instance type whenever needed.
+- no matter what the IP of the instacne stais the same.
 
-For a VPN server it is important that it always has the same IP, this way even if you stop and start the server, or use autoscaling to mantain a minimum of one server, you need to have a way to set alays the same IP. To do so, you can take advantage of the UserData of the EC2 Instance.
+# UserData
+
+To achive this we use the UserData feature of EC2, where you can set a Bash script that will be execute the first time the Instacne boots. This way without havign access to the instacne you can automate the whole process. In the following steps we are going to setup the fixed IP and the EFS drive.
 
 ### Before you set the UserData
 
-Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Policy Document:
+Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
 
 ```json
 {
@@ -92,7 +89,7 @@ Before you can set the UserData, you have to attach a Role to the Instance with 
 }
 ```
 
-This Policy Document will allow the instance to attach the Elastic IP to itself.
+This Policy Document will allow the instance the ability to attach the Elastic IP to itself.
 
 ### UserData
 
@@ -131,6 +128,14 @@ To keep your user backed up and always available, our server has support for a E
 `EFS_ID=fs-XXXXXX`
 
 Our server will read this value, and will mount the EFS drive to the system. On this drive all the unique data for the OpenVPN server will be saved to, this way your data is safe, you can terminate the server, create a new one, and as long as the EFS ID is the same the OpenVPN server will work as if nothing happened.
+
+# Understant our files:
+
+In our appliance we create files needed to make the server works, and here is the full list with an explanation:
+
+- `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
+- `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
+- `/home/ec2-user/efs.sh`: is where the EFS ID is saved when the UserData is executed
 
 # Before you go in production
 
