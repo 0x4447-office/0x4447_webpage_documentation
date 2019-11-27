@@ -5,15 +5,21 @@ summary: OpenVPN Server with unlimited users.
 
 # OpenVPN Server
 
-This is a OpenVPN server with no limits. There isn't a limit on how many accounts or active connections you can have. The limits depends on the Instance type you selected, and not on an arbitrary soft limits.
+Our OpenVPN apliance is an OpenVPN server with no limits imposed by us. For example there isn't a limit on how many accounts or active connections you can have. The limits depends on the Instance type you select, and not on an arbitrary soft limits.
 
-Meaning, the limiting factor is the performance of the server itself. If your user starts complaining about the connection being to slow, or you see the CPU time is above 75%, just change the instance type to a bigger one to accommodate the new traffic and users.
+Meaning, the limiting factor is the performance of the server itself. If your user starts complaining about the connection being to slow, or you see the CPU time is above 75%, just change the instance type to a bigger one to accommodate the new traffic and users. It is this simple.
 
-The setup also have built in resilience, meaning the EC2 Instance UserData takes in to Environment variables, one for the Elastic IP ID, and the other for the EFS ID. If the first ID is present the instance will always get the same IP address at boot time. If the the EFS ID is present we will mount that drive, and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. This means that even if your instance gets terminated, as long as you provide at boot time the same EFS ID, all the data and OpenVPN configuration will be present.
+The setup also have built in resilience, meaning the EC2 Instance UserData can take in two Environment variables, one for the Elastic IP ID, and the other one for the EFS ID. 
 
-We also want to let you know that this is not a regular product, what we build for the market place is what we use on a day to day basis ourselves. One of our signature trait is that we hate with a passion repetitive tasks that can be easily automate. This means that if in our day-to-day use of our products we find something repetitive, rest assure the repetition will be automated.
+If the first ID is present the instance will always get the same IP address at boot time. If the the EFS ID is present we will mount that drive, and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. 
 
-We want to give you a good foundation for your ideas.
+This means that even if your instance gets terminated, as long as you provide at boot time the same EFS ID, all the data and OpenVPN configuration will be preserved in the EFS drive.
+
+# Our Diferenciating Faktor
+
+What we build for the market place is what we use on a day to day basis ourselves. One of our signature trait is that we hate with a passion repetitive tasks that can be easily automate. This means that if in our day-to-day use of our products we find something repetitive, rest assure the repetition will be automated and removed. We don't wait for your obious feedback, we constatly seek to improve our products. Of course your feedback is welcome, we are aware that we might use our products differently then you do, and this is valubalbe information for us.
+
+Our goal is to give you a good foundation for your company.
 
 # Documentation
 
