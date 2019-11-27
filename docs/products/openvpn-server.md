@@ -35,34 +35,37 @@ Start the cert generation with the following command:
 
 ## How to create a OpenVPN user
 
-1. Run this command and answer all the questions
+1. Run this command and answer all the questions:
 
 	`sudo bash /opt/0x4447/openvpn/ov_user_add.sh "USER_NAME"`
 
-2. Every time you do so, a new `.ovpn` file will be created in the `openvpn_users` folder.  You can copy the new file to your local computer using the `SCP` command like so:
+2. Every time you do so, a new `.ovpn` file will be created in the `openvpn_users` folder located in the `ec2-user` folder.  You can copy the new file to your local computer using the `SCP` command like so:
 
-	`scp 0x4447_marketplace_server:/home/ec2-user/openvpn_users/server.tlsauth .`
+	`scp -i /cert/path/ SERVER_IP:/home/ec2-user/openvpn_users/USER_NAME.ovpn .`
 
-3. Share the file with the selected user
+3. Share the file with the selected user.
 
 ## How to delete a OpenVPN user
 
-Just run the following command by changing the user name you want to remove
+Just run the following command and set the right user name:
 
 `sudo bash /opt/0x4447/openvpn/ov_user_delete.sh "USER_NAME"`
 
 ## How to list all the OpenVPN users
 
-Since every time you create a user, the OpenVPN configuration for the connection will be created in your home folder under the `openvpn_users` fodler. Just list the content of that older to see all your users:
+Since every time you create a user, a `.ovpn` configuration file is created. You can just list the content of the `openvpn_users` folder, like so:
 
 ` ls -la /home/ec2-user/openvpn_users`
 
-# Configuration files location
+The output is the list of all the users you have available for your OpenVPN server.
 
-There are two places where new data is beeing created when you use our product
+# Understant our files:
+
+In our appliance we create files needed to make the server works, and here is the full list with an explanation:
 
 - `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
 - `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
+- `/home/ec2-user/efs.sh`: is where the EFS ID is saved when the UserData is executed
 
 # How to enable resilience
 
