@@ -89,7 +89,7 @@ Before you can set the UserData, you have to attach a Role to the Instance with 
 }
 ```
 
-This Policy Document will allow the instance the ability to attach the Elastic IP to itself.
+This Policy Document will allow the instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is on purpouse not becasue of lazyness, the `AssociateAddress` actions is not resource specific.
 
 ### Bash Script for UserData
 
