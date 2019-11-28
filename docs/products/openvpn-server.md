@@ -66,11 +66,11 @@ Our OpenVPN Server has build in resilience to make sure that you don't loose all
 - accitental instance termination.
 - you can build an autoscaling group with minimum of 1 so even if the server gose down it will be recreated.
 - you can chagne the instance type whenever needed.
-- no matter what the IP of the instacne stais the same.
+- no matter what, the IP of the instacne stais the same.
 
 # UserData
 
-To achive this we use the UserData feature of EC2, where you can set a Bash script that will be execute the first time the Instacne boots. This way without havign access to the instacne you can automate the whole process. In the following steps we are going to setup the fixed IP and the EFS drive.
+To achive this we use the UserData feature of EC2, where you can set a Bash script that will be execute the first time the Instacne boots. This way without havign access to the instacne we can automate the EFS mounting process and the Elastic IP attachement.
 
 ### Before you set the UserData
 
