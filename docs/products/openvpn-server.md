@@ -104,7 +104,7 @@ INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/nu
 AWS_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone 2>/dev/null)
 AWS_REGION=${AWS_ZONE::-1}
 
-echo $EFS_ID > /home/ec2-user/efs.sh
+echo EFS_ID=$EFS_ID > /home/ec2-user/efs.sh
 
 aws ec2 associate-address --allocation-id $EIP_ID --instance-id $INSTANCE_ID --allow-reassociation --region=$AWS_REGION
 ```
