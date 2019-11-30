@@ -107,6 +107,8 @@ AWS_REGION=${AWS_ZONE::-1}
 echo EFS_ID=$EFS_ID > /home/ec2-user/efs.sh
 
 aws ec2 associate-address --allocation-id $EIP_ID --instance-id $INSTANCE_ID --allow-reassociation --region=$AWS_REGION
+
+yum install -y amazon-efs-utils
 ```
 
 Explanation:
@@ -118,6 +120,7 @@ Explanation:
 1. Remove the last letter from the AZ to be let with the Region.
 1. Save the EFS ID to disk for our script.
 1. Associate the Elastic IP with the instance.
+1. Install the EFS tools needed to mount the EFS drive.
 
 # Understand how UserData works
 
