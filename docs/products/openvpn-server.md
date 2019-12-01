@@ -142,3 +142,13 @@ In our appliance we create files needed to make the server works, and here is th
 Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode. 
 
 Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
+
+# OpenVPN Clients
+
+- Desktop
+  - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
+  - [MacOS](https://openvpn.net/client-connect-vpn-for-mac-os/)
+  - [Linux](https://openvpn.net/vpn-server-resources/how-to-connect-to-access-server-from-a-linux-computer/)
+- Mobile
+  - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
+  - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
