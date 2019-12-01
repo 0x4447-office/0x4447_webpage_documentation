@@ -146,9 +146,9 @@ Make sure to make a test user, see that all works, and then termiante the instac
 # OpenVPN Clients
 
 - Desktop
-  - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
-  - [MacOS](https://openvpn.net/client-connect-vpn-for-mac-os/)
-  - [Linux](https://openvpn.net/vpn-server-resources/how-to-connect-to-access-server-from-a-linux-computer/)
+    - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
+    - [MacOS](https://openvpn.net/client-connect-vpn-for-mac-os/)
+    - [Linux](https://openvpn.net/vpn-server-resources/how-to-connect-to-access-server-from-a-linux-computer/)
 - Mobile
-  - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
-  - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
+    - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
+    - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
