@@ -10,5 +10,12 @@ use_directory_urls: false
 nav:
     - Home: index.md
     - Products:
-      - Rsyslog Server: products/rsyslog-server.md
-      - OpenVPN Server: products/openvpn-server.md
+      - Cloud:
+        - AWS Marketplace:
+          - Rsyslog Server: products/cloud/aws-marketplace/rsyslog-server.md
+          - OpenVPN Server: products/cloud/aws-marketplace/openvpn-server.md
+        - Azure:
+          - Rsyslog Server: products/cloud/azure/rsyslog-server.md
+          - OpenVPN Server: products/cloud/azure/openvpn-server.md
+      - Hardware:
+        - Placeholder: products/hardware/placeholder.md

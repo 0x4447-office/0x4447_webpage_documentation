@@ -1,9 +1,9 @@
 ---
-title: Rsyslog Server
+title: Rsyslog Server for AWS
 summary: Rsyslog Server for developers for ease debugging.
 ---
 
-# Rsyslog Server
+# Rsyslog Server for AWS
 
 Collecting logs is useful for many things, but some time it's very expensive if you use managed Cloud solutions. It seams easy end convenient, but once you start sending thousands of entries a day, your Cloud bill will inflate dramatically for such a simple task. Of course there are use cases where the features of managed Cloud solutions outweigh the price, but in some cases you just want to see what the OS or your app is doing to debug issues.
 

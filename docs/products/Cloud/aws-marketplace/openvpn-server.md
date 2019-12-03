@@ -1,9 +1,9 @@
 ---
-title: OpenVPN Server
+title: OpenVPN Server for AWS
 summary: OpenVPN Server with unlimited users.
 ---
 
-# OpenVPN Server
+# OpenVPN Server for AWS
 
 Our OpenVPN apliance is an OpenVPN server with no limits imposed by us. For example there isn't a limit on how many accounts or active connections you can have. The limits depends on the Instance type you select, and not on an arbitrary soft limits.
 
