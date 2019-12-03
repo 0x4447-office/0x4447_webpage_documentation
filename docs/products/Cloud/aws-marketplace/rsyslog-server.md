@@ -5,15 +5,17 @@ summary: Rsyslog Server for developers for ease debugging.
 
 # Rsyslog Server for AWS
 
-Collecting logs is useful for many things, but some time it's very expensive if you use managed Cloud solutions. It seams easy end convenient, but once you start sending thousands of entries a day, your Cloud bill will inflate dramatically for such a simple task. Of course there are use cases where the features of managed Cloud solutions outweigh the price, but in some cases you just want to see what the OS or your app is doing to debug issues.
+Collecting logs is useful for many purposes, but over time it can become very expensive to use solutions from Cloud providers. Such solutions may seem easy and convenient, but when you start sending thousands of entries a day, your Cloud bill will dramatically inflate.
 
-We preconfigured an AMI with rsyslog to act as a log collection server and be the centralized place where you can get in, check the logs of all the clients, and find out the problem.
+Of course, the features of a managed Cloud solution outweigh the price in some cases, but in others, you just want to see what the OS or your app is doing for easy debugging.
 
-The AMI price is affordable and the total cost fixed, no matter how many logs you send.
+Our rsyslog server can help you centralize all your log collections in one place for a fixed price, regardless of how many logs you send. Our server is set up in such a way that the logs have a 30-day retention period and are organized in folders using the host name of the client server. Logs are all stored in the default folder path `/var/log` for easy access.
 
-The Rsyslog is setup in a way where the logs have a retention period of 30 days, and the logs are organized in folders using the host name of the client server. All the logs are stored in the default folder path `/var/log`
+We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
-Once the server is deployed, give your developer the ssh key to access the instance, and let them debug.
+We want to give you a good foundation for your ideas.
+
+Bring down your costs now.
 
 # Documentation
 

@@ -5,15 +5,17 @@ summary: OpenVPN Server with unlimited users.
 
 # OpenVPN Server for AWS
 
-Our OpenVPN apliance is an OpenVPN server with no limits imposed by us. For example there isn't a limit on how many accounts or active connections you can have. The limits depends on the Instance type you select, and not on an arbitrary soft limits.
+This is an OpenVPN server with no limits on how many accounts or active connections you can have. The limits depend on the Instance type you select rather than on arbitrary soft limits.
 
-Meaning, the limiting factor is the performance of the server itself. If your user starts complaining about the connection being to slow, or you see the CPU time is above 75%, just change the instance type to a bigger one to accommodate the new traffic and users. It is this simple.
+This means that the limiting factor is the performance of the server itself. If your user starts complaining about the connection being too slow, or you see the CPU time is above 75 percent, just change the instance type to a bigger one to accommodate the new traffic and users.
 
-The setup also have built in resilience, meaning the EC2 Instance UserData can take in two Environment variables, one for the Elastic IP ID, and the other one for the EFS ID. 
+The setup also has built-in resilience; the EC2 Instance UserData takes in two environment variables, one for the Elastic IP ID, and the other for the EFS ID. If the first ID is present, the instance will always get the same IP address at boot time. If the EFS ID is present, we will mount that drive and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. So even if your instance is terminated, as long as you provide the same EFS ID at boot time, all data and OpenVPN configuration will be present.
 
-If the first ID is present the instance will always get the same IP address at boot time. If the the EFS ID is present we will mount that drive, and keep the OpenVPN related data on it.
+We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
-This means that even if your instance gets terminated, as long as you provide at boot time the same EFS ID, all the data and OpenVPN configuration will be preserved in the EFS drive.
+We want to give you a good foundation for your ideas.
+
+Secure your connection now.
 
 # Our Diferenciating Faktor
 
@@ -124,7 +126,7 @@ Explanation:
 
 # Understand how UserData works
 
-It is important to note that the content of the UserData field, will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users. 
+It is important to note that the content of the UserData field, will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users.
 
 But there is also a work around, and you can force the UserData to be triggered at each boot, follow this link for more:
 [https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/)
@@ -139,7 +141,7 @@ In our appliance we create files needed to make the server works, and here is th
 
 # Before you go in production
 
-Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode. 
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
 
 Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
 
