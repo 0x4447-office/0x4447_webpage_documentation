@@ -21,6 +21,10 @@ We want to give you a good foundation for your ideas.
 
 # Documentation
 
+After the instance is up and running, you'll have some manual work to do. Bellow you'll find all the necessary details.
+
+**WARNING**: text written in capital letters needs to be replaced with real values.
+
 # Create the main certificate first
 
 Before you start working with the OpenVPN, you have to generate the main SSL certificate that will be used to sign all the subsequent certificats for the individual users. This process will take few minutes depending on the instance type. Be patient.
