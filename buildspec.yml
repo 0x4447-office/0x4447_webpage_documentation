@@ -5,10 +5,10 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
-      - pip install mkdocs
+      - python -m pip install mkdocs
   build:
     commands:
-      - mkdocs build
+      - python -m mkdocs build
   post_build:
     commands:
       - aws s3 rm --recursive s3://$S3_BUCKET
