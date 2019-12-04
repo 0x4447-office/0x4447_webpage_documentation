@@ -11,17 +11,13 @@ This means that the limiting factor is the performance of the server itself. If 
 
 The setup also has built-in resilience; the EC2 Instance UserData takes in two environment variables, one for the Elastic IP ID, and the other for the EFS ID. If the first ID is present, the instance will always get the same IP address at boot time. If the EFS ID is present, we will mount that drive and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. So even if your instance is terminated, as long as you provide the same EFS ID at boot time, all data and OpenVPN configuration will be present.
 
-We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
-
-We want to give you a good foundation for your ideas.
-
-Secure your connection now.
+Secure your connections now.
 
 # Our Diferenciating Faktor
 
-What we build for the market place is what we use on a day to day basis ourselves. One of our signature trait is that we hate with a passion repetitive tasks that can be easily automate. This means that if in our day-to-day use of our products we find something repetitive, rest assure the repetition will be automated and removed. We don't wait for your obious feedback, we constatly seek to improve our products. Of course your feedback is welcome, we are aware that we might use our products differently then you do, and this is valubalbe information for us.
+We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
-Our goal is to give you a good foundation for your company.
+We want to give you a good foundation for your ideas.
 
 # Documentation
 
