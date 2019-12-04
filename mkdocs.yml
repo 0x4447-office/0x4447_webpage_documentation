@@ -12,10 +12,10 @@ nav:
     - Products:
       - Cloud:
         - AWS Marketplace:
-          - Rsyslog Server: products/cloud/aws-marketplace/rsyslog-server.md
-          - OpenVPN Server: products/cloud/aws-marketplace/openvpn-server.md
+          - Rsyslog Server: products/Cloud/aws-marketplace/rsyslog-server.md
+          - OpenVPN Server: products/Cloud/aws-marketplace/openvpn-server.md
         - Azure:
-          - Rsyslog Server: products/cloud/azure/rsyslog-server.md
-          - OpenVPN Server: products/cloud/azure/openvpn-server.md
+          - Rsyslog Server: products/Cloud/azure/rsyslog-server.md
+          - OpenVPN Server: products/Cloud/azure/openvpn-server.md
       - Hardware:
         - Placeholder: products/hardware/placeholder.md
