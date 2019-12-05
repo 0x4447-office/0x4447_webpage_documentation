@@ -104,15 +104,8 @@ And this is the whole Bash script file that you have to copy and past in the Use
 EFS_ID=fs-REPLACE_WITH_REAL_VALUE
 EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
 
-INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id 2>/dev/null)
-AWS_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone 2>/dev/null)
-AWS_REGION=${AWS_ZONE::-1}
-
-echo EFS_ID=$EFS_ID > /home/ec2-user/efs.sh
-
-aws ec2 associate-address --allocation-id $EIP_ID --instance-id $INSTANCE_ID --allow-reassociation --region=$AWS_REGION
-
-yum install -y amazon-efs-utils
+echo EFS_ID=$EFS_ID >> /home/ec2-user/.env
+echo EIP_ID=$EIP_ID >> /home/ec2-user/.env
 ```
 
 Explanation:
