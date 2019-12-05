@@ -13,7 +13,7 @@ This means that the limiting factor is the performance of the server itself. If 
 
 The setup also has built-in resilience; the EC2 Instance UserData takes in two environment variables, one for the Elastic IP ID, and the other for the EFS ID. If the first ID is present, the instance will always get the same IP address at boot time. If the EFS ID is present, we will mount that drive and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. So even if your instance is terminated, as long as you provide the same EFS ID at boot time, all data and OpenVPN configuration will be present.
 
-Secure your connections now.
+Secure your connection now.
 
 # Our Diferenciating Faktor
 
