@@ -5,7 +5,12 @@ phases:
     runtime-versions:
       python: 3.7
     commands:
+      - pip install --upgrade pip
       - python -m pip install mkdocs
+      
+      - python --version
+      - pip --version
+      - mkdocs --version
   build:
     commands:
       - python -m mkdocs build
