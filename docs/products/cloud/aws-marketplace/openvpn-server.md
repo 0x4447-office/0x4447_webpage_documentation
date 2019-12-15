@@ -27,6 +27,10 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
+# The First Boot
+
+Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But, not to warry, this happens only when the certificate is not found in the system.
+
 # User Management
 
 ## How to create a OpenVPN user
