@@ -113,8 +113,7 @@ It is important to note that the content of the UserData field will be only exec
 
 **IMPORTANT**
 
-There is a work around, and you can force the UserData to be triggered at each boot. To find out how: follow this link for more:
-[https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/)
+There is a work around, and you can force the UserData to be triggered at each boot. To find out how: follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for more.
 
 # Understant our files:
 
@@ -132,7 +131,7 @@ Make sure to make a test user, see that all works, and then termiante the instac
 
 # Don't forget to backup your data
 
-Make sure you regullary backup your EFS drive. One simple solution would be to use AWS backup.
+Make sure you regullary backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
 # OpenVPN Clients
 
