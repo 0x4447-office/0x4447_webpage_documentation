@@ -27,14 +27,6 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-# Create the main certificate first
-
-Before you start working with the OpenVPN, you have to generate the main SSL certificate that will be used to sign all the subsequent certificats for the individual users. This process will take few minutes depending on the instance type. Be patient.
-
-Start the cert generation with the following command:
-
-`sudo bash /opt/0x4447/openvpn/ov_generate_server_certs.sh`
-
 # User Management
 
 ## How to create a OpenVPN user
@@ -65,10 +57,10 @@ The output is the list of all the users you have available for your OpenVPN serv
 
 # How to enable resilience
 
-Our OpenVPN Server has build in resilience to make sure that you don't loose all your users that are added in the system. Or the IP of the server. This way you can protect yourself by the following scenarious:
+Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. This allows you to do the following:
 
-- accitental instance termination.
-- you can build an autoscaling group with minimum of 1 so even if the server gose down it will be recreated.
+- Protect against accitental instance termination.
+- You can build an autoscaling group with a minimum of 1 server, so even if the server gose down it will be recreated.
 - you can chagne the instance type whenever needed.
 - no matter what, the IP of the instacne stais the same.
 
@@ -97,7 +89,7 @@ This Policy Document will allow the instance the ability to attach the Elastic I
 
 ### Bash Script for UserData
 
-And this is the whole Bash script file that you have to copy and past in the UserData field when you start the instacne for the first time. Make srue to replace the values in all CAPS, with the real data.
+And this is the whole Bash script file that you have to copy and past in the UserData field when you start the instacne for the first time – to enable resiliance. Make srue to replace the values in all CAPS, with the real data.
 
 ```bash
 #!/bin/bash
@@ -112,18 +104,16 @@ Explanation:
 
 1. Set the ID of the EFS drive.
 1. Set the ID of the Elastic IP.
-1. Get the Instance ID.
-1. Get the Availability Zone where the istance was deployed.
-1. Remove the last letter from the AZ to be let with the Region.
-1. Save the EFS ID to disk for our script.
-1. Associate the Elastic IP with the instance.
-1. Install the EFS tools needed to mount the EFS drive.
+1. Append the EFS Drive ID to the .env file
+1. Append the ElasticIP ID to the .env file
 
 # Understand how UserData works
 
-It is important to note that the content of the UserData field, will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users.
+It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne later, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users.
 
-But there is also a work around, and you can force the UserData to be triggered at each boot, follow this link for more:
+**IMPORTANT**
+
+There is a work around, and you can force the UserData to be triggered at each boot. To find out how: follow this link for more:
 [https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/)
 
 # Understant our files:
@@ -132,13 +122,17 @@ In our appliance we create files needed to make the server works, and here is th
 
 - `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
 - `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
-- `/home/ec2-user/efs.sh`: is where the EFS ID is saved when the UserData is executed
+- `/home/ec2-user/.env`: is where you should store the IDs to enable resiliance.
 
 # Before you go in production
 
 Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
 
-Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side. If all sucesfull the EFS shoul have mounted and the same data should be in place.
+Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side.
+
+# Don't forget to backup your data
+
+Make sure you regullary backup your EFS drive. One simple solution would be to use AWS backup.
 
 # OpenVPN Clients
 
