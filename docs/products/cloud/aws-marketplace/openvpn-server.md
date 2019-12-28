@@ -29,7 +29,63 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 # The First Boot
 
-Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But, not to warry, this happens only when the certificate is not found in the system.
+Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But not to warry, this happens only when the certificate is not found in the system.
+
+# Resilience
+
+Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
+
+# Manual Work
+
+### Elastic IP Role
+
+Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
+
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "ec2:AssociateAddress",
+			"Resource": "*"
+		}
+	]
+}
+```
+
+This Policy Document will give the instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is on purpouse not becasue of lazyness, the `AssociateAddress` actions is not resource specific.
+
+### EFS Security Group
+
+When you create a new EFS, you'll deploy it in the same VPC and Subnet the instance will exists, but alos, you'll have to attach a Security Group, make sure the port `2049` is open twoards the drive, oterwise the EC2 Instance won't be able to mount the drive.
+
+### Bash Script for UserData
+
+Once you have evrything setup. You can replace the place holder values with the real IDs. Make srue to replace the values in all CAPS, with the real data.
+
+```bash
+#!/bin/bash
+EFS_ID=fs-REPLACE_WITH_REAL_VALUE
+EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
+
+echo EFS_ID=$EFS_ID >> /home/ec2-user/.env
+echo EIP_ID=$EIP_ID >> /home/ec2-user/.env
+```
+
+Explanation:
+
+1. Set the ID of the EFS drive.
+1. Set the ID of the Elastic IP.
+1. Append the EFS Drive ID to the .env file
+1. Append the ElasticIP ID to the .env file
+
+### Understand how UserData works
+
+It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect the Elastic IP and the EFS drive to be mounted. You have to options: 
+
+- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around 
+- Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
 # User Management
 
@@ -58,66 +114,6 @@ Since every time you create a user, a `.ovpn` configuration file is created. You
 ` ls -la /home/ec2-user/openvpn_users`
 
 The output is the list of all the users you have available for your OpenVPN server.
-
-# How to enable resilience
-
-Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. This allows you to do the following:
-
-- Protect against accitental instance termination.
-- You can build an autoscaling group with a minimum of 1 server, so even if the server gose down it will be recreated.
-- you can chagne the instance type whenever needed.
-- no matter what, the IP of the instacne stais the same.
-
-# UserData
-
-To achive this we use the UserData feature of EC2, where you can set a Bash script that will be execute the first time the Instacne boots. This way without havign access to the instacne we can automate the EFS mounting process and the Elastic IP attachement.
-
-### Before you set the UserData
-
-Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
-
-```json
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:AssociateAddress",
-			"Resource": "*"
-		}
-	]
-}
-```
-
-This Policy Document will allow the instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is on purpouse not becasue of lazyness, the `AssociateAddress` actions is not resource specific.
-
-### Bash Script for UserData
-
-And this is the whole Bash script file that you have to copy and past in the UserData field when you start the instacne for the first time – to enable resiliance. Make srue to replace the values in all CAPS, with the real data.
-
-```bash
-#!/bin/bash
-EFS_ID=fs-REPLACE_WITH_REAL_VALUE
-EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
-
-echo EFS_ID=$EFS_ID >> /home/ec2-user/.env
-echo EIP_ID=$EIP_ID >> /home/ec2-user/.env
-```
-
-Explanation:
-
-1. Set the ID of the EFS drive.
-1. Set the ID of the Elastic IP.
-1. Append the EFS Drive ID to the .env file
-1. Append the ElasticIP ID to the .env file
-
-# Understand how UserData works
-
-It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. Meaning you can't test our product, make some users, and then decide to add resiliance to the Instacne later, since the UserData will never trigger. You'll have to start a new Instacne, and then copy over your users.
-
-**IMPORTANT**
-
-There is a work around, and you can force the UserData to be triggered at each boot. To find out how: follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for more.
 
 # Understant our files:
 
