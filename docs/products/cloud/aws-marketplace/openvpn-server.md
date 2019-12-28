@@ -21,7 +21,7 @@ We also want to let you know that this is not a regular product; what we build f
 
 We want to give you a good foundation for your ideas.
 
-# Documentation
+# 📚 Documentation
 
 After the instance is up and running, you'll have some manual work to do. Bellow you'll find all the necessary details.
 
@@ -87,7 +87,7 @@ It is important to note that the content of the UserData field will be only exec
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around 
 - Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
-# User Management
+# 💪 User Management
 
 ## How to create a OpenVPN user
 
