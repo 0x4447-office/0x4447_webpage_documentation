@@ -115,15 +115,7 @@ Since every time you create a user, a `.ovpn` configuration file is created. You
 
 The output is the list of all the users you have available for your OpenVPN server.
 
-# Understant our files:
-
-In our appliance we create files needed to make the server works, and here is the full list with an explanation:
-
-- `/etc/openvpn/easy-rsa/keys`: this folder holds all the user that you create, and OpenVPN uses this `.pem` files for authentication.
-- `/home/ec2-user/openvpn_users`: holds all the OpenVPN cnfiguration files for your users to be used in their OpenVPN clients.
-- `/home/ec2-user/.env`: is where you should store the IDs to enable resiliance.
-
-# Before you go in production
+# 🚨 Before you go in production
 
 Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
 
