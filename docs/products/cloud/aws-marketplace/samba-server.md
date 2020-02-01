@@ -23,7 +23,7 @@ Our goal is to give you a good foundation for your company.
 
 # 📜 Understand the basics
 
-## Security - how to go about it
+## Security
 
 Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
 
