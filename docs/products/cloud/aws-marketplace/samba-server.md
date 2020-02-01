@@ -89,7 +89,7 @@ Explanation:
 1. Create a .env file in the home folder of the main user
 1. Write in the file the content till EOF, which is one variable with an `array` of IDs. Meaning you can add `one` or `multiple` id's, and mix EBS drives and EFS ones.
 
-### Understand how UserData works
+**Understand how UserData works**
 
 It is important to note that the content of the UserData field will be only executed once, when the Instance starts for the first time. Meaning it won't be triggered if you stop and start the instance. But there are two work arounds:
 
