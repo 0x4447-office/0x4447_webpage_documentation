@@ -21,7 +21,7 @@ We also want to let you know that this is not a regular product; what we build f
 
 Our goal is to give you a good foundation for your company.
 
-# Understand the basics
+# 📜 Understand the basics
 
 ## Security - how to go about it
 
@@ -106,6 +106,6 @@ Be sure to test the server to make sure it behaves the way we advertise it, not 
 
 Make sure copy some data to the drives, then terminate the instance, start a new one, and after re-connecting to the server, you should have the copied data still present.
 
-# Don't forget to backup your data
+# 💾 Don't forget to backup your data
 
 Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS, and snapshotting for EBS.
