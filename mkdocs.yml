@@ -14,8 +14,6 @@ nav:
         - AWS Marketplace:
           - OpenVPN Server: products/cloud/aws-marketplace/openvpn-server.md
           - Rsyslog Server: products/cloud/aws-marketplace/rsyslog-server.md
-        - Azure:
-          - OpenVPN Server: products/cloud/azure/openvpn-server.md
-          - Rsyslog Server: products/cloud/azure/rsyslog-server.md
+          - Samba Server: products/cloud/aws-marketplace/samba-server.md
       - Hardware:
         - Placeholder: products/hardware/placeholder.md
