@@ -5,6 +5,8 @@ summary: Mount dozens of drive under one Samba server.
 
 # Samba Server for AWS
 
+<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/samba.png?raw=true">
+
 This is a Samba server which has the ability to mount multiple drive at once, and have them all available at once.
 
 Technically: You can attach an infinite amount of EFS drives, and up to 25 EBS ones. There is also no limits on how many active connections you can have.
