@@ -27,7 +27,85 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-The main frame of reference to be aware off, is that you'll use your computer as a proxy for the following operations.
+# Resilience
+
+Our Rsyslog server has built in resiliance to make sure that even if the server gets terminated, it has all the capability for the same configuration to be applied to a new instacne. Meaning, if you provide a bucket in the EC2 UserData, we will store all the necessary data in this bucket to allow you to automate the whole client setup in the most autoamted way possible. This way the clietns can keep sending longs as soon as the server shows up.
+
+A very important fact, the certificate relises in the internal IP of the server. This means that for the cert to work even after termiantion, the instacne needs to start with the same intenral (local) IP that was used to create the initial cert.
+
+# Manual Work
+
+### S3 Role
+
+You need to create a EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script for it to reuse the same cert on termination, and for your clients to autoamtically pull the cert when they boot up. Or start fresh and need a new Rsyslog configiration.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::BUCKET_NAME/*",
+                "arn:aws:s3:::BUCKET_NAME"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:HeadBucket"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+### Security group
+
+To send logs to the Rsyslog server you need to have the 6514 port open over TCP. Of coruse if you need to log in to the instacne you can also open port 22 for SSH. 
+
+### Bash Script for UserData
+
+When you start your instacne to autmate the whole process you should provide a bucket name so we cen copy over to S3 the auto generate certificate which must be used by the clietns to send encrypted data to the server.
+
+```
+#!/bin/bash
+S3_BUCKET=BUCKET_NAME
+
+echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
+```
+
+# Clietns setup
+
+Once the server is deployed correctly, you can configure your clietns with the following UserData to setup evrything autoamtically. This whay at boo time everything will be setup automatically for you.
+
+```
+#!/bin/bash
+
+BUCKET_RSYSLOG=BUCKET_NAME
+IP=RSYLOG_INTERNAL_IP
+
+aws s3 cp s3://$BUCKET_RSYSLOG/cert/ca-cert.pem /tmp
+
+sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
+
+aws s3 cp s3://$BUCKET_RSYSLOG/bash/client-setup.sh /home/ec2-user/client-setup.sh
+
+chmod +x /home/ec2-user/client-setup.sh
+
+/home/ec2-user/client-setup.sh $IP
+```
+
+# Completelly Manual Work
+
+If you don't want to autome things, you can always do the whole setup manually, and the followign instruction shows you how.
 
 ## Copy the SSL cert to your client server
 
