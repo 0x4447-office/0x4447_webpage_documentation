@@ -82,7 +82,15 @@ S3_BUCKET=BUCKET_NAME
 echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
 ```
 
-# Clietns setup
+### Add users to the server
+
+By default we create a custom user group in the system called `rsyslog`. This meaks it easier for you to add developers as individual users to access the logs. This way they can freerley debug wothut you worng about the secuirty of the system.
+
+```
+useradd -g rsyslog USER_NAME
+```
+
+# Clietns Setup
 
 Once the server is deployed correctly, you can configure your clietns with the following UserData to setup evrything autoamtically. This whay at boo time everything will be setup automatically for you.
 
