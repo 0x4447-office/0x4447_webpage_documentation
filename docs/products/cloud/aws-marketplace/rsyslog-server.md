@@ -35,7 +35,7 @@ Not everything is automated, and here is all the work that you need to do yourse
 
 ## S3 Role
 
-You need to create a EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script, for it - to reuse the same cert on termination, and for your clients to automatically pull the cert when they boot up. 
+You need to create a EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script, for it - to reuse the same cert on termination, and for your clients to automatically pull the cert when they boot up. This is the Poliyc Document you need add create.
 
 ```json
 {
