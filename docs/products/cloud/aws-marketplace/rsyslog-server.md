@@ -17,13 +17,23 @@ Not to mention security. Our setup creates a SSL certificate automatically, and 
 
 Bring down your costs now.
 
-# Our Differentiating Factor
+## Our Differentiating Factor
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
 We want to give you a good foundation for your ideas.
 
-# Resilience
+# 📜 Understand the basics
+
+## Security
+
+Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
+
+But this means that **you can't have the server deployed in a public network with a public IP**. You need to deploy the server in a private network, and use a VPN server to access it. 
+
+This way the Samba-server can be accessed only thought a VPN connection. If you are looking for an affordable VPN server we can recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+
+## Resilience
 
 Our Rsyslog server has built in resilience to make sure that even if the server gets terminated, it has all the capability for the same configuration to be applied to a new instance. Meaning, if you provide a S3 bucket in the EC2 UserData, we will store all the necessary data in this bucket to allow you to automate the whole client setup in the most automated way possible. This way the clients can keep sending longs as soon as the server shows up.
 
@@ -65,11 +75,11 @@ You need to create a EC2 role to allow the Rsyslog Server to upload and get the 
 }
 ```
 
-### Security group
+## Security group
 
 To send logs to the Rsyslog server you need to have the `6514` port open over `TCP`. Of course if you need to log in to the instance you can also open port `22` for `SSH`. 
 
-### Bash Script for UserData
+## Bash Script for UserData
 
 When you start your instance to automate the whole process you should provide a bucket name so we can copy over to S3 the auto generate certificate which must be used by the clients to send encrypted data to the server.
 
@@ -82,7 +92,7 @@ echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
 
 At boot time, our product will check if a cert is already present in the bucket, and if so, we will download it instead of creating it again.
 
-### Add users to the server
+## Add users to the server
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. This way they can freely look at the logs without having access to the whole system.
 
@@ -98,7 +108,7 @@ How to set the password to the new user:
 sudo passwd USER_NAME
 ```
 
-# Clients Setup
+## Clients Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This way at boot time everything will be setup automatically for you.
 
@@ -125,7 +135,7 @@ chmod +x /home/ec2-user/client-setup.sh
 /home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
-# Where are my logs?
+## Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
 

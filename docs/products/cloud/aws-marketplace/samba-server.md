@@ -41,7 +41,7 @@ If you want to always be able to connect the same internal IP, make sure to star
 
 Before launching an instance you'll have to do some manual work to make everything work correctly.
 
-### Custom Role
+## Custom Role
 
 Create a new Role for the instance that will carry our product.   The role must be for the `EC2` resource, it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy, and have this inline policy 
 
@@ -65,7 +65,7 @@ Create a new Role for the instance that will carry our product.   The role must 
 }
 ```
 
-### Security Group
+## Security Group
 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
@@ -74,7 +74,7 @@ A default security group will be created for you automatically from the product 
 
 Opening port 22 is unnecessary since this product is unmanaged, meaning there is no manual work needed in the OS itself. 
 
-### Bash Script for UserData
+## Bash Script for UserData
 
 Once you have everything setup. You can replace the place holder values with the real ID's. Make sure to replace the values in all CAPS that ends with `_ID`, with the real data.
 

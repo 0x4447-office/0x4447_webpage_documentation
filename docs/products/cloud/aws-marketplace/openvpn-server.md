@@ -15,11 +15,25 @@ The setup also has built-in resilience; the EC2 Instance UserData takes in two e
 
 Secure your connection now.
 
-# Our Diferenciating Faktor
+## Our Diferenciating Faktor
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
 We want to give you a good foundation for your ideas.
+
+# 📜 Understand the basics
+
+## Security
+
+Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
+
+But this means that **you can't have the server deployed in a public network with a public IP**. You need to deploy the server in a private network, and use a VPN server to access it. 
+
+This way the Samba-server can be accessed only thought a VPN connection. If you are looking for an affordable VPN server we can recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+
+## Resilience
+
+Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
 
 # 📚 Documentation
 
@@ -27,15 +41,11 @@ After the instance is up and running, you'll have some manual work to do. Bellow
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-# The First Boot
+## The First Boot
 
 Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But not to warry, this happens only when the certificate is not found in the system.
 
-# Resilience
-
-Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
-
-# Manual Work
+## Manual Work
 
 ### Elastic IP Role
 
@@ -56,11 +66,11 @@ Before you can set the UserData, you have to attach a Role to the Instance with 
 
 This Policy Document will give the instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is on purpouse not becasue of lazyness, the `AssociateAddress` actions is not resource specific.
 
-### EFS Security Group
+## EFS Security Group
 
 When you create a new EFS, you'll deploy it in the same VPC and Subnet the instance will exists, but alos, you'll have to attach a Security Group, make sure the port `2049` is open twoards the drive, oterwise the EC2 Instance won't be able to mount the drive.
 
-### Bash Script for UserData
+## Bash Script for UserData
 
 Once you have evrything setup. You can replace the place holder values with the real IDs. Make srue to replace the values in all CAPS, with the real data.
 
@@ -80,7 +90,7 @@ Explanation:
 1. Append the EFS Drive ID to the .env file
 1. Append the ElasticIP ID to the .env file
 
-### Understand how UserData works
+## Understand how UserData works
 
 It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect the Elastic IP and the EFS drive to be mounted. You have to options: 
 
