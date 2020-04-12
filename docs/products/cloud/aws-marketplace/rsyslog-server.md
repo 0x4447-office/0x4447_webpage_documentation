@@ -17,7 +17,7 @@ Not to mention security. Our setup creates a SSL certificate automatically, and 
 
 Bring down your costs now.
 
-## Our Differentiating Factor
+# 📍 Our Differentiating Factor
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 

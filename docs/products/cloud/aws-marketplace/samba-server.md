@@ -17,7 +17,7 @@ The setup also has built-in resilience; as long as you provide the same UserData
 
 Share your drives now.
 
-# 🌟 Our Differentiating Factor
+# 📍 Our Differentiating Factor
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
