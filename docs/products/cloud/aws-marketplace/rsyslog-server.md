@@ -178,8 +178,14 @@ If you don't want to automate the whole process, you can always do the whole set
 4. As the last step we have to log in to your client server and run the script.
 
 	`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
-	
-# ⚠️ Security Concerns
+
+# 🚨 Test The Setup
+
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
+
+Termiante the instace and start a new one with the correct UserData, and see if after the instacne booted everything works as expected.
+
+# 🔔 Security Concerns
 
 Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
 

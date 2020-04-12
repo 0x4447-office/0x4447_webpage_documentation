@@ -104,17 +104,17 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
 
-# 🚨 Before you go in production
+# 🚨 Test The Setup
 
-Be sure to test the server to make sure it behaves the way we advertise it, not because we don't believe it works correctly, but to make sure you are comfortable with the product and knows how it works. Especially the resilience mode.
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
 
-Make sure copy some data to the drives, then terminate the instance, start a new one, and after re-connecting to the server, you should have the copied data still present.
+Termiante the instace and start a new one with the correct UserData, and see if after the instacne booted everything works as expected.
 
 # 💾 Backup your Data
 
 Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS, and snapshotting for EBS.
 
-# ⚠️ Security Concerns
+# 🔔 Security Concerns
 
 Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
 

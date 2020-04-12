@@ -139,17 +139,17 @@ The output is the list of all the users you have available for your OpenVPN serv
     - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
     - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
 
-# 🚨 Before you go in production
+# 🚨 Test The Setup
 
 Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
 
-Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side.
+Termiante the instace and start a new one with the correct UserData, and see if after the instacne booted everything works as expected.
 
 # 💾 Backup your Data
 
 Make sure you regullary backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
-# ⚠️ Security Concerns
+# 🔔 Security Concerns
 
 Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
 
