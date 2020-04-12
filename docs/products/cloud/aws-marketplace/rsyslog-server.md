@@ -168,11 +168,11 @@ chmod +x /home/ec2-user/client-setup.sh
 /home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
-# Where are my logs?
+# ❓ Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
 
-# Completely Manual Work
+# ✍️ Completely Manual Work
 
 If you don't want to automate the whole process, you can always do the whole setup manually, and the following instruction shows you how.
 
