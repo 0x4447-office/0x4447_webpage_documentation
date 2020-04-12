@@ -71,10 +71,10 @@ Create a new Role for the instance that will carry our product.   The role must 
 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
-- 2049 over TCP for connectivity to EFS
-- 445 over TCP for connectivity to Samba
+- `445` over `TCP` for connectivity to Samba
+- `2049` over `TCP` for connectivity to EFS
 
-Opening port 22 is unnecessary since this product is unmanaged, meaning there is no manual work needed in the OS itself. 
+Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual work needed in the OS itself. 
 
 ## Bash Script for UserData
 

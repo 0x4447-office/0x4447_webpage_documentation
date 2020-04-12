@@ -37,7 +37,7 @@ Before launching an instance you'll have to do some manual work to make everythi
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-### Elastic IP Role
+## Custom Role
 
 Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
 
@@ -56,9 +56,13 @@ Before you can set the UserData, you have to attach a Role to the Instance with 
 
 This Policy Document will give the instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is on purpouse not becasue of lazyness, the `AssociateAddress` actions is not resource specific.
 
-## EFS Security Group
+## Security Group
 
-When you create a new EFS, you'll deploy it in the same VPC and Subnet the instance will exists, but alos, you'll have to attach a Security Group, make sure the port `2049` is open twoards the drive, oterwise the EC2 Instance won't be able to mount the drive.
+A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
+
+- `22` over `TCP` for remote managment.
+- `443` over `TCP` for EFS to be mounted.
+- `2049` over `TCP` for EFS to be mounted.
 
 ## Bash Script for UserData
 

@@ -43,7 +43,7 @@ Before launching an instance you'll have to do some manual work to make everythi
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-## S3 Role
+## Custom Role
 
 You need to create a EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script, for it - to reuse the same cert on termination, and for your clients to automatically pull the cert when they boot up. This is the Poliyc Document you need add create.
 
@@ -77,7 +77,10 @@ You need to create a EC2 role to allow the Rsyslog Server to upload and get the 
 
 ## Security group
 
-To send logs to the Rsyslog server you need to have the `6514` port open over `TCP`. Of course if you need to log in to the instance you can also open port `22` for `SSH`. 
+A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
+
+- `22` over `TCP` for remote managment.
+- `6514` over `TCP` for Rsyslog to take logs in.
 
 ## Bash Script for UserData
 
