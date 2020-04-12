@@ -39,7 +39,9 @@ If you want to always be able to connect the same internal IP, make sure to star
 
 # 📚 Documentation
 
-Before launching an instance you'll have to do some manual work to make everything work correctly.
+Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
+
+**WARNING**: text written in capital letters needs to be replaced with real values.
 
 ## Custom Role
 

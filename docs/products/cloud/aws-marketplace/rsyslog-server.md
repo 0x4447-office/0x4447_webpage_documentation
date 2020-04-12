@@ -39,7 +39,9 @@ A very important fact, the certificate relies in the internal IP of the server. 
 
 # 📚 Documentation
 
-Not everything is automated, and here is all the work that you need to do yourself to create a healthy instance.
+Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
+
+**WARNING**: text written in capital letters needs to be replaced with real values.
 
 ## S3 Role
 

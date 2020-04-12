@@ -37,7 +37,7 @@ Our OpenVPN Server has build in resilience to make sure that you don't loose all
 
 # 📚 Documentation
 
-After the instance is up and running, you'll have some manual work to do. Bellow you'll find all the necessary details.
+Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
