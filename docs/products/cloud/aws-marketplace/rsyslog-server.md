@@ -37,13 +37,17 @@ Our Rsyslog server has built in resilience to make sure that even if the server 
 
 A very important fact, the certificate relies in the internal IP of the server. This means that for the cert to work even after termination, the instance needs to start with the same internal (local) IP that was used to create the initial cert.
 
-# 📚 Documentation
+# Quick Setup with CloudFormation
+
+For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_rsyslog), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
+
+# 📚  Manual
 
 Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
-## Custom Role
+### Custom Role
 
 You need to create a EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script, for it - to reuse the same cert on termination, and for your clients to automatically pull the cert when they boot up. This is the Poliyc Document you need add create.
 
@@ -75,14 +79,14 @@ You need to create a EC2 role to allow the Rsyslog Server to upload and get the 
 }
 ```
 
-## Security Group
+### Security Group
 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
 - `22` over `TCP` for remote managment.
 - `6514` over `TCP` for Rsyslog to take logs in.
 
-## Bash Script for UserData
+### Bash Script for UserData
 
 When you start your instance to automate the whole process you should provide a bucket name so we can copy over to S3 the auto generate certificate which must be used by the clients to send encrypted data to the server.
 
@@ -105,7 +109,7 @@ It is important to note that the content of the UserData field will be only exec
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
-# 📞 Connect to the server
+### Connect to the server
 
 Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
@@ -113,31 +117,31 @@ Once the instance is up and running, get it's IP and connect to the instance ove
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. This way they can freely look at the logs without having access to the whole system.
 
-## How to create a user
+### How to create a user
 
 ```bash
 sudo useradd -g rsyslog USER_NAME
 ```
 
-## How to set a password
+### How to set a password
 
 ```bash
 sudo passwd USER_NAME
 ```
 
-## How to delete a user
+### How to delete a user
 
 ```bash
 sudo userdel USER_NAME
 ```
 
-## How to change a password
+### How to change a password
 
 ```bash
 sudo passwd USER_NAME
 ```
 
-# Clients Setup
+### Clients Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This way at boot time everything will be setup automatically for you.
 
@@ -172,7 +176,7 @@ The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll fin
 
 If you don't want to automate the whole process, you can always do the whole setup manually, and the following instruction shows you how.
 
-## Copy the SSL cert to your client server
+### Copy the SSL cert to your client server
 
 1. Copy the cert to your local computer.
 
@@ -186,7 +190,7 @@ If you don't want to automate the whole process, you can always do the whole set
 
 	`ssh -i /path/to/key ec2-user@INSTANCE_IP sudo mv /tmp/ca-cert.pem /etc/ssl`
 
-## How to configure the Rsyslog Client
+### How to configure the Rsyslog Client
 
 1. Copy the script to your local computer.
 
