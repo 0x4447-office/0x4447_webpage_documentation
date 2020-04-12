@@ -75,7 +75,7 @@ You need to create a EC2 role to allow the Rsyslog Server to upload and get the 
 }
 ```
 
-## Security group
+## Security Group
 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
