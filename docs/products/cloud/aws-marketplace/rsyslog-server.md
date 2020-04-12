@@ -96,17 +96,29 @@ At boot time, our product will check if a cert is already present in the bucket,
 
 Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
-# Add users to the server
+# 👷‍♂️ User Management
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. This way they can freely look at the logs without having access to the whole system.
 
-How to add a user:
+## How to create a user
 
 ```bash
 sudo useradd -g rsyslog USER_NAME
 ```
 
-How to set the password to the new user:
+## How to set a password
+
+```bash
+sudo passwd USER_NAME
+```
+
+## How to delete a user
+
+```bash
+sudo userdel USER_NAME
+```
+
+## How to change a password
 
 ```bash
 sudo passwd USER_NAME

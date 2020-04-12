@@ -101,7 +101,7 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
-# 💪 User Management
+# 👷‍♂️ User Management
 
 ## How to create a user
 
@@ -125,7 +125,7 @@ Just run the following command and set the right user name:
 
 Since every time you create a user, a `.ovpn` configuration file is created. You can just list the content of the `openvpn_users` folder, like so:
 
-` ls -la /home/ec2-user/openvpn_users`
+`ls -la /home/ec2-user/openvpn_users`
 
 The output is the list of all the users you have available for your OpenVPN server.
 
