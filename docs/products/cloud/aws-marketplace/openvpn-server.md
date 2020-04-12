@@ -15,7 +15,7 @@ The setup also has built-in resilience; the EC2 Instance UserData takes in two e
 
 Secure your connection now.
 
-## Our Diferenciating Faktor
+## Our Differentiating Factor
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
@@ -97,9 +97,13 @@ It is important to note that the content of the UserData field will be only exec
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around 
 - Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
+# 📞 Connect to the server
+
+Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
+
 # 💪 User Management
 
-## How to create a OpenVPN user
+## How to create a user
 
 1. Run this command and answer all the questions:
 
@@ -111,29 +115,19 @@ It is important to note that the content of the UserData field will be only exec
 
 3. Share the file with the selected user.
 
-## How to delete a OpenVPN user
+## How to delete a user
 
 Just run the following command and set the right user name:
 
 `sudo bash /opt/0x4447/openvpn/ov_user_delete.sh "USER_NAME"`
 
-## How to list all the OpenVPN users
+## How to list all the users
 
 Since every time you create a user, a `.ovpn` configuration file is created. You can just list the content of the `openvpn_users` folder, like so:
 
 ` ls -la /home/ec2-user/openvpn_users`
 
 The output is the list of all the users you have available for your OpenVPN server.
-
-# 🚨 Before you go in production
-
-Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
-
-Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side.
-
-# Don't forget to backup your data
-
-Make sure you regullary backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
 # OpenVPN Clients
 
@@ -144,3 +138,27 @@ Make sure you regullary backup your EFS drive. One simple solution would be to u
 - Mobile
     - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
     - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
+
+# 🚨 Before you go in production
+
+Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
+
+Make sure to make a test user, see that all works, and then termiante the instace and start a new one with the correct UserData, and see if after the instacne booted you can still connect to the OpenVPN without any chagnes on the client side.
+
+# 💾 Backup your Data
+
+Make sure you regullary backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
+
+# ⚠️ Security Concerns
+
+Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
+
+- Expose to the pbulic only the ports needed for clients to connect to the VPN.
+- Block public SSH access.
+- Allow SSH connection only from limited subnets.
+- Ideally allow SSH connection only from another central instance.
+- Don't give root access to anyone but yourself.
+
+# Support 
+
+If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.

@@ -21,8 +21,6 @@ Bring down your costs now.
 
 We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
-We want to give you a good foundation for your ideas.
-
 # 📜 Understand the basics
 
 ## Security
@@ -90,9 +88,13 @@ S3_BUCKET=BUCKET_NAME
 echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
 ```
 
-At boot time, our product will check if a cert is already present in the bucket, and if so, we will download it instead of creating it again.
+At boot time, our product will check if a cert is already present in the bucket, and if so, we will download it instead of creating it again. By doing this we ensure that the server settings are alwasy the same.
 
-## Add users to the server
+# 📞 Connect to the server
+
+Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
+
+# Add users to the server
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. This way they can freely look at the logs without having access to the whole system.
 
@@ -108,7 +110,7 @@ How to set the password to the new user:
 sudo passwd USER_NAME
 ```
 
-## Clients Setup
+# Clients Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This way at boot time everything will be setup automatically for you.
 
@@ -135,7 +137,7 @@ chmod +x /home/ec2-user/client-setup.sh
 /home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
-## Where are my logs?
+# Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
 
@@ -175,6 +177,17 @@ If you don't want to automate the whole process, you can always do the whole set
 
 	`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
 	
-	# Support 
-	
-	If you have any questions regarding our product, go to our [support page](https://support.0x4447.com), and fill the form.
+# ⚠️ Security Concerns
+
+Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
+
+- Never expose this server to the public. Use it only inside a private network to limit who can send logs to it.
+- Allow logging only from specific subnets.
+- Block public SSH access.
+- Allow SSH connection only from limited subnets.
+- Ideally allow SSH connection only from another central instance.
+- Don't give root access to anyone but yourself.
+
+# Support 
+
+If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.

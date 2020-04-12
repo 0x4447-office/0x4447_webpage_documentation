@@ -98,9 +98,9 @@ It is important to note that the content of the UserData field will be only exec
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/).
 - Or you start a new Instance with updated UserData.
 
-# 💪 Connect to the server
+# 📞 Connect to the server
 
-Once the instance is up and running in your private network, and you are connected to the VPN, you can mount the network drive by using the local IP of the instance, and choose Guest access.
+Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
 
 # 🚨 Before you go in production
 
@@ -108,6 +108,21 @@ Be sure to test the server to make sure it behaves the way we advertise it, not 
 
 Make sure copy some data to the drives, then terminate the instance, start a new one, and after re-connecting to the server, you should have the copied data still present.
 
-# 💾 Backup your data
+# 💾 Backup your Data
 
 Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS, and snapshotting for EBS.
+
+# ⚠️ Security Concerns
+
+Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
+
+- Never expose this server to the public. Use it only inside a private network to limit who can send logs to it.
+- Allow mounting only from specific subnets.
+- Block public SSH access.
+- Allow SSH connection only from limited subnets.
+- Ideally allow SSH connection only from another central instance.
+- Don't give root access to anyone but yourself.
+
+# Support 
+
+If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.
