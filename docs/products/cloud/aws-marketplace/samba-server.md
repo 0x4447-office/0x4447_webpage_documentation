@@ -13,7 +13,7 @@ Technically: You can attach an infinite amount of EFS drives, and up to 25 EBS o
 
 This means that the limiting factor is the performance of the server itself. If your user starts complaining about the connection being too slow, or you see the CPU time is above 75 percent, just change the instance type to a bigger one to accommodate the new traffic and users.
 
-The setup also has built-in resilience; as long as you provide the same UserData for the new EC2 instance, our product will mount all those drives automatically. This way you have no data los, and your user can re-connect as soon as the instance is up and running. Just remember to set the same fixed local IP to the instance.
+The setup also has built-in resilience; as long as you provide the same UserData for the new EC2 instance, our product will mount all those drives automatically. This way you have no data loss, and your user can re-connect as soon as the instance is up and running. Just remember to set the same fixed local IP to the instance.
 
 Share your drives now.
 
