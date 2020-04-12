@@ -37,7 +37,7 @@ This way the Samba-server can be accessed only thought a VPN connection. If you 
 
 If you want to always be able to connect the same internal IP, make sure to start the EC2 Instance and setting the local IP to always be the same. This way even if the instance gets terminated, and you recreate it, the IP will stay the same and your user won't have to change anything in their configuration.
 
-# CloudFormation
+# 🗂 CloudFormation
 
 For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_samba), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
 

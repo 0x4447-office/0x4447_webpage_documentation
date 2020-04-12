@@ -37,7 +37,7 @@ Our Rsyslog server has built in resilience to make sure that even if the server 
 
 A very important fact, the certificate relies in the internal IP of the server. This means that for the cert to work even after termination, the instance needs to start with the same internal (local) IP that was used to create the initial cert.
 
-# CloudFormation
+# 🗂 CloudFormation
 
 For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_rsyslog), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
 
