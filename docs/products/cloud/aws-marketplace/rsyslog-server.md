@@ -27,11 +27,9 @@ Our goal is to give you a good foundation for your company.
 
 ## Security
 
-Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
+Our product is configured to allow any server to send logs to it. The data will be sent over an ecrypted connection, but there is not credential system to prevent instances to send data. For this reason, this product should not be acessible from the public internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send logs to it. 
 
-But this means that **you can't have the server deployed in a public network with a public IP**. You need to deploy the server in a private network, and use a VPN server to access it. 
-
-This way the Samba-server can be accessed only thought a VPN connection. If you are looking for an affordable VPN server we can recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+You can block traffic and instances using ACL rules at the VPC or instance level.
 
 ## Resilience
 
@@ -92,7 +90,17 @@ S3_BUCKET=BUCKET_NAME
 echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
 ```
 
-At boot time, our product will check if a cert is already present in the bucket, and if so, we will download it instead of creating it again. By doing this we ensure that the server settings are alwasy the same.
+Explanation:
+
+1. Set the name of the S3 bucket.
+1. Append the S3 bucket anem to the .env file
+
+**Understand how UserData works**
+
+It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect for the autoamtion to take place. You have to options: 
+
+- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
+- Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
 # 📞 Connect to the server
 

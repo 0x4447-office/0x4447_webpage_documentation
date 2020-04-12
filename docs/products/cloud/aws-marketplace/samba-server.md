@@ -95,10 +95,10 @@ Explanation:
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, when the Instance starts for the first time. Meaning it won't be triggered if you stop and start the instance. But there are two work arounds:
+It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect for the autoamtion to take place. You have to options: 
 
-- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/).
-- Or you start a new Instance with updated UserData.
+- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
+- Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
 
 # 📞 Connect to the server
 

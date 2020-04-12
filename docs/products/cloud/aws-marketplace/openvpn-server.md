@@ -25,11 +25,7 @@ Our goal is to give you a good foundation for your company.
 
 ## Security
 
-Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
-
-But this means that **you can't have the server deployed in a public network with a public IP**. You need to deploy the server in a private network, and use a VPN server to access it. 
-
-This way the Samba-server can be accessed only thought a VPN connection. If you are looking for an affordable VPN server we can recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+This product was designed for public access, but we recomend you don't allow SSH conections from the public intenret. Expose only the OpenVPN ports, and allow SSH access from a special instance within your network. 
 
 ## Resilience
 
@@ -40,12 +36,6 @@ Our OpenVPN Server has build in resilience to make sure that you don't loose all
 Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
-
-## The First Boot
-
-Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But not to warry, this happens only when the certificate is not found in the system.
-
-## Manual Work
 
 ### Elastic IP Role
 
@@ -90,12 +80,16 @@ Explanation:
 1. Append the EFS Drive ID to the .env file
 1. Append the ElasticIP ID to the .env file
 
-## Understand how UserData works
+**Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect the Elastic IP and the EFS drive to be mounted. You have to options: 
+It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect for the autoamtion to take place. You have to options: 
 
-- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around 
+- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
+
+## The First Boot
+
+Grab a cup of caffe since the first boot will be slowwer then what you are use to. This is due to the certificate that we need to geenrate for OpenVPN. Since at boot time there isn't much goin on in the system this process can take around 12 min depending on the instance type. But not to warry, this happens only when the certificate is not found in the system.
 
 # 📞 Connect to the server
 
