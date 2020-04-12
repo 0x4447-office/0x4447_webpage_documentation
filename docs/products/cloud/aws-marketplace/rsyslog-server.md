@@ -25,19 +25,19 @@ Our goal is to give you a good foundation for your company.
 
 # 📜 Understand the basics
 
-## Security
+### Security
 
 Our product is configured to allow any server to send logs to it. The data will be sent over an ecrypted connection, but there is not credential system to prevent instances to send data. For this reason, this product should not be acessible from the public internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send logs to it. 
 
 You can block traffic and instances using ACL rules at the VPC or instance level.
 
-## Resilience
+### Resilience
 
 Our Rsyslog server has built in resilience to make sure that even if the server gets terminated, it has all the capability for the same configuration to be applied to a new instance. Meaning, if you provide a S3 bucket in the EC2 UserData, we will store all the necessary data in this bucket to allow you to automate the whole client setup in the most automated way possible. This way the clients can keep sending longs as soon as the server shows up.
 
 A very important fact, the certificate relies in the internal IP of the server. This means that for the cert to work even after termination, the instance needs to start with the same internal (local) IP that was used to create the initial cert.
 
-# Quick Setup with CloudFormation
+# CloudFormation
 
 For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_rsyslog), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
 

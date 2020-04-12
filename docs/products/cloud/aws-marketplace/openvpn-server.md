@@ -23,15 +23,15 @@ Our goal is to give you a good foundation for your company.
 
 # 📜 Understand the basics
 
-## Security
+### Security
 
 This product was designed for public access, but we recomend you don't allow SSH conections from the public intenret. Expose only the OpenVPN ports, and allow SSH access from a special instance within your network. 
 
-## Resilience
+### Resilience
 
 Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
 
-# Quick Setup with CloudFormation
+# CloudFormation
 
 For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_openvpn), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
 
@@ -131,7 +131,7 @@ Since every time you create a user, a `.ovpn` configuration file is created. You
 
 The output is the list of all the users you have available for your OpenVPN server.
 
-# OpenVPN Clients
+# ⬇️ OpenVPN Clients
 
 - Desktop
     - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
