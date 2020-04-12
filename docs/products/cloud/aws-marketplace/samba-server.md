@@ -102,7 +102,7 @@ It is important to note that the content of the UserData field will be only exec
 
 # 📞 Connect to the server
 
-Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
+Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
 # 🚨 Test The Setup
 
@@ -125,6 +125,6 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
 
-# Support 
+# 🎗 Support 
 
 If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.

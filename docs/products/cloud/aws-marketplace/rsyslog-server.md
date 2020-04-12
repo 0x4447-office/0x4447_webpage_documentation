@@ -94,7 +94,7 @@ At boot time, our product will check if a cert is already present in the bucket,
 
 # 📞 Connect to the server
 
-Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at teployment time.
+Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
 # Add users to the server
 
@@ -196,6 +196,6 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
 
-# Support 
+# 🎗 Support 
 
 If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.
