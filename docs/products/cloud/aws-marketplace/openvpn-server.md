@@ -66,7 +66,7 @@ This Policy Document will give the instance the ability to attach the Elastic IP
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
 - `22` over `TCP` for remote managment.
-- `443` over `TCP` for EFS to be mounted.
+- `443` over `TCP` for OpenVPN connections.
 - `2049` over `TCP` for EFS to be mounted.
 
 ### Bash Script for UserData
