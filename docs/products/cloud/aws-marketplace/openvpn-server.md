@@ -33,7 +33,8 @@ Our OpenVPN Server has build in resilience to make sure that you don't loose all
 
 # 🗂 CloudFormation
 
-For our product, we provide a CloudFormation file that with one click of a button will deploy the product and the whole stack around it. Follow this [link](https://github.com/0x4447/0x4447_product_paid_openvpn), and read carefully the README.md file where we explain exactly what will be deployed. If you want to setup everything manually, you can keep reading.
+<a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json">
+<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a> We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow this [link](https://github.com/0x4447/0x4447_product_paid_openvpn).
 
 # 📚  Manual
 
