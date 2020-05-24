@@ -7,15 +7,11 @@ summary: Mount dozens of drive under one Samba server.
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/samba.png?raw=true">
 
-This is a Samba server which has the ability to mount multiple drive at once, and have them all available at once.
+This is a Samba server preconfigured to share multiple EBS (up to 25) drives within the same server. Ideal for Office environments, or for quickly accessing data stored in pre existing EBS drives (The EBS and Server needs to be deployed in the same AZ).
 
-Technically: You can attach an infinite amount of EFS drives, and up to 25 EBS ones. There is also no limits on how many active connections you can have.
+The setup has also built-in resilience; as long as you provide the same UserData for the new EC2 instance. You can specify the EBS drive IDs, Host name, and local IP. This way restoring the state of the server after hardware failure is trivial.
 
-This means that the limiting factor is the performance of the server itself. If your user starts complaining about the connection being too slow, or you see the CPU time is above 75 percent, just change the instance type to a bigger one to accommodate the new traffic and users.
-
-The setup also has built-in resilience; as long as you provide the same UserData for the new EC2 instance, our product will mount all those drives automatically. This way you have no data loss, and your user can re-connect as soon as the instance is up and running. Just remember to set the same fixed local IP to the instance.
-
-Share your drives now.
+Share all the drives now.
 
 # 📍 Our Differentiating Factor
 
@@ -63,10 +59,7 @@ Create a new Role for the instance that will carry our product.   The role must 
             "Action": [
                 "ec2:AttachVolume",
                 "ec2:DetachVolume",
-                "ec2:DescribeVolumes",
-                "elasticfilesystem:List*",
-                "elasticfilesystem:Describe*",
-                "elasticfilesystem:ClientMount"
+                "ec2:DescribeVolumes"
             ],
             "Resource": "*"
         }
@@ -79,7 +72,6 @@ Create a new Role for the instance that will carry our product.   The role must 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
 
 - `445` over `TCP` for connectivity to Samba
-- `2049` over `TCP` for connectivity to EFS
 
 Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual work needed in the OS itself. 
 
@@ -91,14 +83,14 @@ Once you have everything setup. You can replace the place holder values with the
 #!/usr/bin/env bash
 
 cat << EOF > /home/ec2-user/.env
-PERSISTENCE=(EFS_ID EBS_ID MORE_ID)
+PERSISTENCE=EBS_ID,EBS_ID,EBS_ID,EBS_ID,ETC...
 EOF
 ```
 
 Explanation:
 
 1. Create a .env file in the home folder of the main user
-1. Write in the file the content till EOF, which is one variable with an `array` of IDs. Meaning you can add `one` or `multiple` id's, and mix EBS drives and EFS ones.
+1. Set the variable with a list (come separated) of EBS drives to be mounted - max 25.
 
 **Understand how UserData works**
 
