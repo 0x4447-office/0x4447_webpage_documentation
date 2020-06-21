@@ -25,16 +25,20 @@ Our goal is to give you a good foundation for your company.
 
 ### Security
 
-This product was designed for public access, but we recomend you don't allow SSH conections from the public intenret. Expose only the OpenVPN ports, and allow SSH access from a special instance within your network. 
+This product was designed for public access, but we recomend you don't allow SSH conections from the public intenret. Expose only the OpenVPN ports, and allow SSH access from a special instance within your private network. 
 
 ### Resilience
 
-Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
+Our OpenVPN Server has build in resilience to make sure that you don't loose all your users, the VPN configuration, or lose connectiving by a chaning IP. For this to work you'll need to allocate an Elastic IP, and create a EFS Drive. And take note of the IDs that you'll get so you can use them in the EC2 UserData section.
 
 # 🗂 CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a> We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow this [link](https://github.com/0x4447/0x4447_product_paid_openvpn).
+
+Using our CF will allow you to deploy the stack with minimal work on your part. But if you'd like to do the deployment by hand, from this point on you'll find the manual how to do so.
+
+---
 
 # 📚  Manual
 
@@ -77,17 +81,30 @@ Once you have evrything setup. You can replace the place holder values with the 
 #!/bin/bash
 EFS_ID=fs-REPLACE_WITH_REAL_VALUE
 EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
+SERVER_DNS=DNS_NAME
+
+VPN_SPLIT_TUNNEL=DNS_NAME
+VPN_SPLIT_TUNNEL_NETWORK=IP_OF_THE_NETWORK_FOR_EXAMPLE_10.0.0.0
+VPN_SPLIT_TUNNEL_SUBNET=IP_OF_THE_NETWORK_MASK_FOR_EXAMPLE_255.255.255.0
 
 echo EFS_ID=$EFS_ID >> /home/ec2-user/.env
 echo EIP_ID=$EIP_ID >> /home/ec2-user/.env
+echo SERVER_DNS=$SERVER_DNS >> /home/ec2-user/.env
+
+echo VPN_SPLIT_TUNNEL=$VPN_SPLIT_TUNNEL >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL_NETWORK=$VPN_SPLIT_TUNNEL_NETWORK >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL_SUBNET=$VPN_SPLIT_TUNNEL_SUBNET >> /home/ec2-user/.env
 ```
 
 Explanation:
 
 1. Set the ID of the EFS drive.
 1. Set the ID of the Elastic IP.
-1. Append the EFS Drive ID to the .env file
-1. Append the ElasticIP ID to the .env file
+1. Set the DNS name that you will use to map the public instance IP. This will be used in the OpenVPN profile file.
+1. Set if you want partial all traffic going thorugh the VPN
+1. Set the Private VPN server IP.
+1. Set the network mask for the IP.
+1. Append all the values to the .env file.
 
 **Understand how UserData works**
 
@@ -164,4 +181,4 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 
 # 🎗 Support 
 
-If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.
+If you have any questions regarding our product, go to our [support page](https://support.0x4447.com/).
