@@ -40,6 +40,10 @@ If you want to always be able to connect the same internal IP, make sure to star
 
 We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow this [link](https://github.com/0x4447-Paid-Products/0x4447_product_paid_samba).
 
+Using our CF will allow you to deploy the stack with minimal work on your part. But if you'd like to do the deployment by hand, from this point on you'll find the manual how to do so.
+
+---
+
 # 📚  Manual
 
 Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
@@ -83,14 +87,15 @@ Once you have everything setup. You can replace the place holder values with the
 #!/usr/bin/env bash
 
 cat << EOF > /home/ec2-user/.env
-PERSISTENCE=EBS_ID,EBS_ID,EBS_ID,EBS_ID,ETC...
+DRIVES=EBS_ID,EBS_ID,EBS_ID,EBS_ID,ETC...
+HOSTNAME=THE_NAME_OF_THE_HOST
 EOF
 ```
 
 Explanation:
 
-1. Create a .env file in the home folder of the main user
 1. Set the variable with a list (come separated) of EBS drives to be mounted - max 25.
+1. Set the hostname of the instance, so you you can name your server.
 
 **Understand how UserData works**
 
@@ -126,4 +131,4 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 
 # 🎗 Support 
 
-If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.
+If you have any questions regarding our product, go to our [support page](https://support.0x4447.com/).
