@@ -44,6 +44,10 @@ A very important fact, the certificate relies in the internal IP of the server. 
 
 We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow this [link](https://github.com/0x4447-Paid-Products/0x4447_product_paid_rsyslog).
 
+Using our CF will allow you to deploy the stack with minimal work on your part. But if you'd like to do the deployment by hand, from this point on you'll find the manual how to do so.
+
+---
+
 # 📚  Manual
 
 Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
@@ -116,6 +120,33 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
 
+# 🖥 Clients Setup
+
+Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This way at boot time everything will be setup automatically for you.
+
+```bash
+#!/bin/bash
+
+# Set the main variables
+BUCKET_RSYSLOG=BUCKET_RSYSLOG
+RSYLOG_INTERNAL_IP=RSYLOG_INTERNAL_IP
+
+# Pull the cert from S3
+aws s3 cp s3://0x4447-marketplace-us-east-1-rsylog-v2/certs/ca-cert.pem /tmp
+
+# move the cert in to the final destination
+sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
+
+# Copy the bash script which will configure the client
+aws s3 cp s3://$BUCKET_RSYSLOG/bash/client-setup.sh /home/ec2-user/client-setup.sh
+
+# Make the script executable
+chmod +x /home/ec2-user/client-setup.sh
+
+# Configure the client to send the logs to the Rsyslog server
+/home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
+```
+
 # 👷‍♂️ User Management
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. This way they can freely look at the logs without having access to the whole system.
@@ -144,40 +175,9 @@ sudo userdel USER_NAME
 sudo passwd USER_NAME
 ```
 
-### Clients Setup
+# ✍️ Manual Client Setup
 
-Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This way at boot time everything will be setup automatically for you.
-
-```bash
-#!/bin/bash
-
-# Set the main variables
-BUCKET_RSYSLOG=BUCKET_RSYSLOG
-RSYLOG_INTERNAL_IP=RSYLOG_INTERNAL_IP
-
-# Pull the cert from S3
-aws s3 cp s3://0x4447-marketplace-us-east-1-rsylog-v2/certs/ca-cert.pem /tmp
-
-# move the cert in to the final destination
-sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
-
-# Copy the bash script which will configure the client
-aws s3 cp s3://$BUCKET_RSYSLOG/bash/client-setup.sh /home/ec2-user/client-setup.sh
-
-# Make the script executable
-chmod +x /home/ec2-user/client-setup.sh
-
-# Configure the client to send the logs to the Rsyslog server
-/home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
-```
-
-# ❓ Where are my logs?
-
-The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
-
-# ✍️ Completely Manual Work
-
-If you don't want to automate the whole process, you can always do the whole setup manually, and the following instruction shows you how.
+You can also setup a client manually if you can't use the EC2 UserData.
 
 ### Copy the SSL cert to your client server
 
@@ -211,6 +211,10 @@ If you don't want to automate the whole process, you can always do the whole set
 
 	`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
 
+# ❓ Where are my logs?
+
+The logs can be found in the `/var/log/0x4447-rsyslog` folder. There, you'll find folders for each client sending logs. The client host name will be used for the folder names.
+
 # 🚨 Test The Setup
 
 Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
@@ -230,4 +234,4 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 
 # 🎗 Support 
 
-If you have any questions regarding our product, go to our [contact page](https://0x4447.com/contact.html), and fill the form.
+If you have any questions regarding our product, go to our [support page](https://support.0x4447.com/).
