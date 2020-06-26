@@ -7,52 +7,52 @@ summary: Mount dozens of drive under one Samba server.
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/samba.png?raw=true">
 
-This is a Samba server preconfigured to share multiple EBS (up to 25) drives within the same server. Ideal for Office environments, or for quickly accessing data stored in pre existing EBS drives (The EBS and Server needs to be deployed in the same AZ).
+This is a Samba server preconfigured to share multiple EBS drives (up to 25) within the same server. A Samba server is ideal for office environments or for quickly accessing data stored in pre-existing EBS drives (the EBS drive and Server need to be deployed in the same AZ).
 
-The setup has also built-in resilience; as long as you provide the same UserData for the new EC2 instance. You can specify the EBS drive IDs, Host name, and local IP. This way restoring the state of the server after hardware failure is trivial.
+The setup is very beneficial because it also has built-in resilience, as long as you provide the same UserData for the new EC2 instance. You can specify the EBS drive IDs, host name, and local IP; this way restoring the state of the server after hardware failure is trivial.
 
 Share all the drives now.
 
 # 📍 Our Differentiating Factor
 
-We also want to let you know that this is not a regular product; what we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
+We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
-Our goal is to give you a good foundation for your company.
+Our goal is to provide you with the right foundation for your company.
 
 # 📜 Understand the basics
 
 ### Security
 
-Our product is configured to only allow Guest access, meaning there are no user accounts. This makes is very straight forward for users to mount the drive and share data across the company. 
+Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company. 
 
-But this means that **you can't have the server deployed in a public network with a public IP**. You need to deploy the server in a private network, and use a VPN server to access it. 
+But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. 
 
-This way the Samba-server can be accessed only thought a VPN connection. If you are looking for an affordable VPN server we can recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
 ### Resilience
 
-If you want to always be able to connect the same internal IP, make sure to start the EC2 Instance and setting the local IP to always be the same. This way even if the instance gets terminated, and you recreate it, the IP will stay the same and your user won't have to change anything in their configuration.
+If you want to always be able to connect the same internal IP, make sure to start the EC2 Instance and keep the same local IP settings. This way, even if the instance gets terminated and you have to recreate it, the IP will stay the same and your user won't have to change any of their configurations.
 
 # 🗂 CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
 
-We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow this [link](https://github.com/0x4447-Paid-Products/0x4447_product_paid_samba).
+We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow [this link](https://github.com/0x4447-Paid-Products/0x4447_product_paid_samba).
 
-Using our CF will allow you to deploy the stack with minimal work on your part. But if you'd like to do the deployment by hand, from this point on you'll find the manual how to do so.
+Using our CF will allow you to deploy the stack with minimal work on your part. But, if you'd like to deploy the stack by hand, from this point on you'll find the manual on how to do so.
 
 ---
 
 # 📚  Manual
 
-Before launching an instance you'll have to do some manual work to make everything work correctly. Please follow this steps in order displayed here.
+Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
 **WARNING**: text written in capital letters needs to be replaced with real values.
 
 ### Custom Role
 
-Create a new Role for the instance that will carry our product.   The role must be for the `EC2` resource, it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy, and have this inline policy 
+Create a new role for the instance that will carry our product. The role must be for the `EC2` resource; it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy and have this inline policy: 
 
 ```json
 {
@@ -73,15 +73,15 @@ Create a new Role for the instance that will carry our product.   The role must 
 
 ### Security Group
 
-A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have this ports open towards the instance:
+A default security group will be automatically created for you from the product configuration, but if you'd like to make one by hand, you need to have this port open towards the instance:
 
 - `445` over `TCP` for connectivity to Samba
 
-Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual work needed in the OS itself. 
+Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual input needed in the OS itself. 
 
 ### Bash Script for UserData
 
-Once you have everything setup. You can replace the place holder values with the real ID's. Make sure to replace the values in all CAPS that ends with `_ID`, with the real data.
+Once you have everything setup, you can replace the place holder values with the real ID's. Make sure to replace the values that are in all CAPS that end with `_ID` with the real data.
 
 ```bash
 #!/usr/bin/env bash
@@ -99,30 +99,30 @@ Explanation:
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, when the Instacne starts for the first time. Meaning it won't be trigered if you stop and start the instacne. If you chose to not enable resiliance, and skip the UserData script at boot time, you won't be able to later on update the UserData with the script and expect for the autoamtion to take place. You have to options: 
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options: 
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
-- Or your start a new Instacne, this time with the right UserData, and then copy over from the old isntance to the new one all the configuration files.
+- Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
 
-### Connect to the server
+### Connect to the Server
 
-Once the instance is up and running, get it's IP and connect to the instance over SSH uisng the slected key at deployment time.
+Once the instance is up and running, get its IP and connect to the instance over SSH using the slected key at deployment time.
 
 # 🚨 Test The Setup
 
-Be sure to test the server to make sure it behaves the way we advertise it, not becasue we don't belive it works correctly, but to make sure you are confortable with the product and knows how it works. Especially the resiliance mode.
+Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
-Termiante the instace and start a new one with the correct UserData, and see if after the instacne booted everything works as expected.
+Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
-# 💾 Backup your Data
+# 💾 Backup Your Data
 
-Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS, and snapshotting for EBS.
+Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
 
 # 🔔 Security Concerns
 
-Bellow we give you a list of potentail ideas worth considiering regarding security, but this list dose not exausts all posobilities. It is just a good starting point.
+Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
 
-- Never expose this server to the public. Use it only inside a private network to limit who can send logs to it.
+- Never expose this server to the public. Use it only inside a private network to limit who can send logs.
 - Allow mounting only from specific subnets.
 - Block public SSH access.
 - Allow SSH connection only from limited subnets.
@@ -131,4 +131,4 @@ Bellow we give you a list of potentail ideas worth considiering regarding securi
 
 # 🎗 Support 
 
-If you have any questions regarding our product, go to our [support page](https://support.0x4447.com/).
+If you have any questions regarding our products, go to our [support page](https://support.0x4447.com/).
