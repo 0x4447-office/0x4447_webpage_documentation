@@ -56,7 +56,7 @@ Before launching an instance, you'll have to do some manual inputs to make every
 
 ### Custom Role
 
-You need to create an EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script, for it - to reuse the same cert on termination, and for your clients to automatically pull the cert when they boot up. This is the Policy Document you need add create.
+You need to create an EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script from S3. This allows you to reuse the same cert on termination, and allows for your clients to automatically pull the public cert when they boot up. Below is the Policy Document that you need add to create this:
 
 ```json
 {
