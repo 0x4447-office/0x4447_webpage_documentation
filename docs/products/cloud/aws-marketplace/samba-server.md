@@ -94,7 +94,7 @@ EOF
 
 Explanation:
 
-1. Set the variable with a list (come separated) of EBS drives to be mounted - max 25.
+1. Set the variable with a list (separated by commas) of EBS drives to be mounted - max 25.
 1. Set the hostname of the instance, so you you can name your server.
 
 **Understand how UserData works**
