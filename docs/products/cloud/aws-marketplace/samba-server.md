@@ -112,6 +112,29 @@ Once the instance is up and running, get its IP and connect to the instance over
 
 Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
+## Test 1 - Viewing shares from your Ubuntu Client
+
+```
+# sudo apt install smbclient
+# smbclient -L \\<samba-local-ip>\
+Enter WORKGROUP\ubuntu's password:
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        vol-02df7017709d5ec45 Disk
+        IPC$            IPC       IPC Service (samba_server)
+```
+
+## Test 2 - Mounting the Samba Drive from your Ubuntu Client
+
+```
+# sudo apt install cifs-utils
+# sudo mount -t cifs //172.31.0.21/vol-02df7017709d5ec45 /mnt/samba
+# cd /mnt/samba
+```
+
+## Test 3 - Termination and IP retention
+
 Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
 # 💾 Backup Your Data
