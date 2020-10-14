@@ -120,19 +120,19 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SSH uisng the slected key at deployment time.
 
-# 🖥 Clients Setup
+# 🖥 Automatic Client Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This ensures that everything will be automatically set up at boot time.
 
 ```bash
 #!/bin/bash
 
-# Set the main variables
-BUCKET_RSYSLOG=BUCKET_RSYSLOG
+# Set the main variables, Replace <S3_BUCKET_RSYSLOG> with the name of the S3 bucket that you provided as a parameter to the Cloud Formation
+BUCKET_RSYSLOG=<S3_BUCKET_RSYSLOG>
 RSYLOG_INTERNAL_IP=RSYLOG_INTERNAL_IP
 
 # Pull the cert from S3
-aws s3 cp s3://0x4447-marketplace-us-east-1-rsylog-v2/certs/ca-cert.pem /tmp
+aws s3 cp s3://$BUCKET_RSYSLOG/certs/ca-cert.pem /tmp
 
 # move the cert in to the final destination
 sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
@@ -145,6 +145,36 @@ chmod +x /home/ec2-user/client-setup.sh
 
 # Configure the client to send the logs to the Rsyslog server
 /home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
+```
+
+# ✍️ Manual Client Setup
+
+You can also setup a client manually if you can't use the EC2 UserData by executing the following commands on your client.
+
+## Copy certs and client setup scripts to your local system
+Run the following on your local system
+
+```bash
+
+# Copy the cert and client-setup from the AWS S3 bucket to your local system.
+aws s3 cp s3://<S3_BUCKET_RSYSLOG>/certs/ca-cert.pem .
+aws s3 cp s3://<S3_BUCKET_RSYSLOG>/bash/client-setup.sh .
+
+# Now, copy both these files to the client you wish to setup
+scp ca-cert.pem client-setup.sh ec2-user@<YOUR-CLIENT-IP>
+
+```
+
+## Configure your client to send logs to Rsyslog
+Login to your Client represented by <YOUR-CLIENT-IP>, and run the following
+
+```bash
+
+# Move the cert to the SSL path on your client
+sudo mv ca-cert.pm /etc/ssl/
+chmod +x client-setup.sh
+./client-setup.sh <RSYSLOG_SERVER_IP>
+
 ```
 
 # 👷‍♂️ User Management
@@ -174,42 +204,6 @@ sudo userdel USER_NAME
 ```bash
 sudo passwd USER_NAME
 ```
-
-# ✍️ Manual Client Setup
-
-You can also setup a client manually if you can't use the EC2 UserData.
-
-### Copy the SSL cert to your client server
-
-1. Copy the cert to your local computer.
-
-	`scp -i /path/to/key ec2-user@INSTANCE_IP:/etc/ssl/ca-cert.pem`
-
-2. Upload the cert to the client server in the `tmp` folder.
-
-	`scp -i /path/to/key ca-cert.pem ec2-user@INSTANCE_IP:/tmp`
-
-3. Move the cert to the final location using `sudo` since SCP dose not support running commands using `sudo`.
-
-	`ssh -i /path/to/key ec2-user@INSTANCE_IP sudo mv /tmp/ca-cert.pem /etc/ssl`
-
-### How to configure the Rsyslog Client
-
-1. Copy the script to your local computer.
-
-	`scp -i /path/to/key ec2-user@INSTANCE_IP:/home/ec2-user/client-setup.sh`
-
-2. Upload the script to the client server in the `tmp` folder.
-
-	`scp -i /path/to/key client-setup.sh ec2-user@INSTANCE_IP:/tmp`
-
-3. Once the file gets uploaded, make sure it's executable.
-
-	`ssh -i /path/to/key ec2-user@INSTANCE_IP chmod +x /tmp/client-setup.sh`
-
-4. For the last step, log in to your client server and run the script.
-
-	`/tmp/client-setup.sh IP_OR_DNS_TO_THE_RSYSLOGSERVER`
 
 # ❓ Where are my logs?
 
