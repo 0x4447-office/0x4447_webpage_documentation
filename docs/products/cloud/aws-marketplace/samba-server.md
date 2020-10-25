@@ -25,7 +25,7 @@ Our goal is to provide you with the right foundation for your company.
 
 Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company. 
 
-But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. 
+But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. By default we do set a public IP using the CloudFormation file, for you to access the server to manage it if needed, but the default setting for the security group is not to have the SSH port open. This way there is no remote access to the public, but the server is always set to be accesed publicly if needed.
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
