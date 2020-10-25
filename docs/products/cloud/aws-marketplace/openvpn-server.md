@@ -38,9 +38,6 @@ Our OpenVPN Server has built in resilience to make sure that you don't lose all 
 Before you hit the orange icon below to launch our complementary CloudFormation file, you will need the following pre-requisite resources in AWS:
 
 - **EC2 Key Pair**: An EC2 key pair to access your EC2 instance via SSH. This needs to be specified in the CloudFormation parameter *KeyNameParam*
-- **EC2 Elastic IP**: An Elastic IP that will be used by your EC2 instance. Both the IP as well as the ID need to be specified in the CloudFormation parameters *ElasticIPParam* and *ElasticIPIDParam* respectively.
-- **EFS Drive**: An EFS drive that will store your OpenVPN user data. The EFS file system ID needs to be specified in the CloudFormation parameter *EFSID*. 
-**Note**: It is important to allow inbound access to your EFS Drive from the EC2 Elastic IP and the EC2 subnet where you would launch your OpenVPN server. This inbound rule needs to be set up in your default Security Group, or else, your OpenVPN server will not be able to mount your EFS drive.
 
 ### Launch the Stack
 
