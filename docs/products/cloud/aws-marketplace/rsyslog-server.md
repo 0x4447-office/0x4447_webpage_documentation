@@ -132,7 +132,7 @@ BUCKET_RSYSLOG=<S3_BUCKET_RSYSLOG>
 RSYLOG_INTERNAL_IP=RSYLOG_INTERNAL_IP
 
 # Pull the cert from S3
-aws s3 cp s3://$BUCKET_RSYSLOG/certs/ca-cert.pem /tmp
+aws s3 cp s3://$BUCKET_RSYSLOG/certs/ca-cert/tmp
 
 # move the cert in to the final destination
 sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
@@ -171,7 +171,7 @@ Login to your Client represented by <YOUR-CLIENT-IP>, and run the following
 ```bash
 
 # Move the cert to the SSL path on your client
-sudo mv ca-cert.pm /etc/ssl/
+sudo mv ca-cert.pem /etc/ssl/
 chmod +x client-setup.sh
 ./client-setup.sh <RSYSLOG_SERVER_IP>
 
