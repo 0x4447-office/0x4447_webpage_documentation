@@ -171,7 +171,7 @@ Login to your Client represented by <YOUR-CLIENT-IP>, and run the following
 ```bash
 
 # Move the cert to the SSL path on your client
-sudo mv ca-cert.pm /etc/ssl/
+sudo mv ca-cert.pem /etc/ssl/
 chmod +x client-setup.sh
 ./client-setup.sh <RSYSLOG_SERVER_IP>
 
