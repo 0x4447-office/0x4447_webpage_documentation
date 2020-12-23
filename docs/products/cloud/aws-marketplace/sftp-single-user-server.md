@@ -9,9 +9,9 @@ summary: Single user SFTP with infinite storage.
 
 We cutely call this product the Ingestor because it is a single account SFTP that takes no time and not configuration to setup. You are up and running with a server that can accept infinite amount of data thanks to the attached EFS drive in few minutes.
 
-Our product has also resilience built in, meaning that you can change the instance type depending on your needs and not lose any data, since all the account credentials are tied to the EFS drive itself. So your data always has the same SFTP account. 
+Our product has also resilience built in, meaning that you can change the instance type depending on your needs and not lose any data, since all the data is stored in the EFS drive itself.
 
-The server is configured thought the EC2 UserData. If you provide the user name, password and a EFS ID. You won’t even have to access the instance to do any configuration. Once the server is booted and the configuration finishes working, you will be ready to go to ingest data. 
+The server is configured thought the EC2 UserData. If you provide the user name, password and a EFS ID. You won’t even have to access the instance to do any configuration. Once the server is booted and the configuration finishes working, you will be ready to ingest data. 
 
 # 📍 Our Differentiating Factor
 
@@ -23,7 +23,7 @@ Our goal is to provide you with the right foundation for your company.
 
 ### Resilience
 
-Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
+Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a qucik qay to be up end running with all that you need.
 
 # 🗂 CloudFormation
 
@@ -40,32 +40,11 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
-**WARNING**: text written in capital letters needs to be replaced with real values.
-
-### Custom Role
-
-Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
-
-```json
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:AssociateAddress",
-			"Resource": "*"
-		}
-	]
-}
-```
-
-This Policy Document will give the Instance the ability to attach the Elastic IP to itself. The `"Resource": "*"` is stated this way intentionally, and the `AssociateAddress` actions is not resource specific.
-
 ### Security Group
 
-A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have one of these ports open towards the instance:
+A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have one of these ports open:
 
-- `22` over `TCP` for remote managment.
+- `22` over `TCP` for remote accessover SSH.
 - `2049` over `TCP` for EFS to be mounted.
 
 ### Bash Script for UserData
@@ -91,7 +70,7 @@ It is important to note that the content of the UserData field will be only exec
 
 ### Connect to the Server
 
-Once the instance is up and running, get its IP and connect to the instance over SSH using the credentials that you provided. You can still access the server using thie defualt `ec2-user` account and the SSH you selected at boot time.
+Once the instance is up and running, get its IP and connect to the instance over SFTP using the credentials that you provided. You can still access the server using thie defualt `ec2-user` account and the SSH you selected at boot time.
 
 # 🚨 Test The Setup
 
