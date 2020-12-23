@@ -5,7 +5,7 @@ summary: Single user SFTP with infinite storage.
 
 # SFTP Server for AWS
 
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/sftp-single-user.jpg?raw=true">
+<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/sftp-single-user.png?raw=true">
 
 We cutely call this product the Ingestor because it is a single account SFTP that takes no time and not configuration to setup. You are up and running with a server that can accept infinite amount of data thanks to the attached EFS drive in few minutes.
 
