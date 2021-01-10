@@ -15,4 +15,4 @@ nav:
           - OpenVPN Server: products/cloud/aws-marketplace/openvpn-server.md
           - Rsyslog Server: products/cloud/aws-marketplace/rsyslog-server.md
           - Samba Server: products/cloud/aws-marketplace/samba-server.md
-          - SFTP Single User Server: products/cloud/aws-marketplace/sftp-single-user-server.md
+          - SFTP Server - Single: products/cloud/aws-marketplace/sftp-single-user-server.md
