@@ -96,11 +96,11 @@ Bellow we give you a list of potential ideas worth considiering regarding securi
 
 If you have any questions regarding our products, go to our [support page](https://support.0x4447.com/).
 
-### Troubleshooting tips
+## Troubleshooting tips
 
 These are some of the common solutions to problems you may run into:
 
-#### My CloudFormation stack failed with the following error
+### My CloudFormation stack failed with the following error
 
 ```
 API: ec2:RunInstances Not authorized for images:
@@ -109,3 +109,21 @@ API: ec2:RunInstances Not authorized for images:
 **SOLUTION**
 
 - Accept the subscription for this image on AWS marketplace and then re-launch your stack.
+
+## The product is not behaving as expected
+
+When the server got deployed after following the documentation the prodcut is not acting as documented. 
+
+**SOLUTION**
+
+Forst check the user-data file, to see if what you entered while seting up the deployment actually ended up in the file. What you typed in the AWS should be represented in the file bellow.
+
+```
+cat /var/lib/cloud/instance/user-data.txt
+```
+
+If this looks OK, the next thing would to display the system logs and look for errors.
+
+```
+cat /var/log/messages
+```
