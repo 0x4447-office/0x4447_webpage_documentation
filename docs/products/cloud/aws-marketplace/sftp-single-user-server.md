@@ -13,6 +13,10 @@ Our product has also resilience built in, meaning that you can change the instan
 
 The server is configured thought the EC2 UserData. If you provide the user name, password and a EFS ID. You won’t even have to access the instance to do any configuration. Once the server is booted and the configuration finishes working, you will be ready to ingest data. 
 
+# ⚠️ Prerequisites  
+
+Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product. 
+
 # 📍 Our Differentiating Factor
 
 We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
