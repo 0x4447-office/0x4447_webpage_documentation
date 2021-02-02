@@ -7,21 +7,9 @@ summary: Rsyslog Server for developers for ease debugging.
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/rsyslog.png?raw=true">
 
-Collecting logs is useful for many purposes, but over time it can become very expensive to use solutions from Cloud providers. Such solutions may seem easy and convenient at first, but when you start sending thousands of entries a day, your Cloud bill will dramatically inflate.
-
-Of course, the benefits of a managed Cloud solution often outweigh the price in some cases, but sometimes you just want to quickly and easily see what the OS or your app is doing for easy debugging.
-
-Our Rsyslog server can help you centralize all your log collections in one place for a fixed price, regardless of how many logs you send. Our server is set up in such a way that the logs have a 30-day retention period and are organized in folders using the host name of the client server. Logs are all stored in the default folder path `/var/log/0x4447-rsyslog` for easy access.
-
-Not to mention security, the connection is encrypted by default. Our setup automatically creates a SSL certificate and stores it in S3 to make sure that you can send data in an encrypted way, while also allowing the system to pull the generated cert from S3. This way the cert stays the same across the operation, allowing your clients to keep sending logs securely to the server.
-
-Use our Rsyslog server to bring down your costs now.
-
 # 📍 Our Differentiating Factor
 
-We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
-
-Our goal is to provide you with the right foundation for your company.
+Our goal is to provide you with the right foundation for your company. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
 
 # 📜 Understand the basics
 
@@ -100,8 +88,10 @@ When you start to automate your instance, the whole process will provide you wit
 ```bash
 #!/bin/bash
 S3_BUCKET=BUCKET_NAME
+LOG_TTL=DAYS
 
 echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
+echo LOG_TTL=$LOG_TTL >> /home/ec2-user/.env
 ```
 
 Explanation:
@@ -138,13 +128,13 @@ aws s3 cp s3://$BUCKET_RSYSLOG/certs/ca-cert.pem /tmp
 sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
 
 # Copy the bash script which will configure the client
-aws s3 cp s3://$BUCKET_RSYSLOG/bash/client-setup.sh /home/ec2-user/client-setup.sh
+aws s3 cp s3://$BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
 
 # Make the script executable
-chmod +x /home/ec2-user/client-setup.sh
+chmod +x /home/ec2-user/rsyslog-client-setup.sh
 
 # Configure the client to send the logs to the Rsyslog server
-/home/ec2-user/client-setup.sh $RSYLOG_INTERNAL_IP
+/home/ec2-user/rsyslog-client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
 # ✍️ Manual Client Setup
@@ -156,12 +146,12 @@ Run the following on your local system
 
 ```bash
 
-# Copy the cert and client-setup from the AWS S3 bucket to your local system.
+# Copy the cert and rsyslog-client-setup from the AWS S3 bucket to your local system.
 aws s3 cp s3://<S3_BUCKET_RSYSLOG>/certs/ca-cert.pem .
-aws s3 cp s3://<S3_BUCKET_RSYSLOG>/bash/client-setup.sh .
+aws s3 cp s3://<S3_BUCKET_RSYSLOG>/bash/rsyslog-client-setup.sh .
 
 # Now, copy both these files to the client you wish to setup
-scp ca-cert.pem client-setup.sh ec2-user@<YOUR-CLIENT-IP>
+scp ca-cert.pem rsyslog-client-setup.sh ec2-user@<YOUR-CLIENT-IP>
 
 ```
 
@@ -172,8 +162,8 @@ Login to your Client represented by <YOUR-CLIENT-IP>, and run the following
 
 # Move the cert to the SSL path on your client
 sudo mv ca-cert.pm /etc/ssl/
-chmod +x client-setup.sh
-./client-setup.sh <RSYSLOG_SERVER_IP>
+chmod +x rsyslog-client-setup.sh
+./rsyslog-client-setup.sh <RSYSLOG_SERVER_IP>
 
 ```
 
