@@ -7,12 +7,6 @@ summary: Single user SFTP with infinite storage.
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/sftp-single-user.png?raw=true">
 
-We cutely call this product the Ingestor because it is a single account SFTP that takes no time and not configuration to setup. You are up and running with a server that can accept infinite amount of data thanks to the attached EFS drive in few minutes.
-
-Our product has also resilience built in, meaning that you can change the instance type depending on your needs and not lose any data, since all the data is stored in the EFS drive itself.
-
-The server is configured thought the EC2 UserData. If you provide the user name, password and a EFS ID. You won’t even have to access the instance to do any configuration. Once the server is booted and the configuration finishes working, you will be ready to ingest data. 
-
 # ⚠️ Prerequisites  
 
 Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product. 

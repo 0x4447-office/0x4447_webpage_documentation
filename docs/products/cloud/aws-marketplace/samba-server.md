@@ -7,12 +7,6 @@ summary: Mount dozens of drive under one Samba server.
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/samba.png?raw=true">
 
-This is a Samba server preconfigured to share multiple EBS drives (up to 25) within the same server. A Samba server is ideal for office environments or for quickly accessing data stored in pre-existing EBS drives (the EBS drive and Server need to be deployed in the same AZ).
-
-The setup is very beneficial because it also has built-in resilience, as long as you provide the same UserData for the new EC2 instance. You can specify the EBS drive IDs, host name, and local IP; this way restoring the state of the server after hardware failure is trivial.
-
-Share all the drives now.
-
 # 📍 Our Differentiating Factor
 
 We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
