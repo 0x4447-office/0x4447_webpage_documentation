@@ -12,7 +12,7 @@ nav:
     - Products:
       - Cloud:
         - AWS Marketplace:
-          - OpenVPN Server: products/cloud/aws-marketplace/openvpn-server.md
+          - VPN Server: products/cloud/aws-marketplace/vpn-server.md
           - Rsyslog Server: products/cloud/aws-marketplace/rsyslog-server.md
           - Samba Server: products/cloud/aws-marketplace/samba-server.md
           - SFTP Server - Single: products/cloud/aws-marketplace/sftp-single-user-server.md

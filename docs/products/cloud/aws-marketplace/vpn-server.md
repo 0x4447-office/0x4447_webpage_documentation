@@ -1,23 +1,15 @@
 ---
-title: OpenVPN Server for AWS
-summary: OpenVPN Server with unlimited users.
+title: VPN Server - Powered by OpenVPN
+summary: VPN Server with unlimited users.
 ---
 
-# OpenVPN Server for AWS
+# VPN Server for AWS
 
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/openvpn.png?raw=true">
 
-Our OpenVPN server does not have limits on how many accounts or active connections you can have. The limits depend on the instance type that you select, rather than on arbitrary soft limits that you'll see with much of the competition.
-
-This means that the only limiting factor is the performance of the server itself. If your user starts to complain about a slow connection, or if you see the CPU time is above 75 percent, then just change the server to a bigger instance type to accommodate the new traffic and users.
-
-The setup also has built-in resilience. The EC2 Instance UserData takes in two environment variables: one for the Elastic IP ID, and the other for the EFS ID. If the first ID is present, the instance will always get the same IP address at boot time. If the EFS ID is present, we will mount that drive and keep the OpenVPN user database on it with all the `.ovpn` profiles files for your user. So, even if your instance is terminated, as long as you provide the same EFS ID at boot time, all data and OpenVPN configuration will be present.
-
-Secure your connection now.
-
 # 📍 Our Differentiating Factor
 
-We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in the day-to-day use of our products, rest assured that we'll automate the repetition.
+We want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in the day-to-day use of our products, rest assured that we'll automate the repetition.
 
 Our goal is to provide you with the right kind of foundation for your company.
 
@@ -25,11 +17,11 @@ Our goal is to provide you with the right kind of foundation for your company.
 
 ### Security
 
-This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the OpenVPN ports and allow SSH access from a special instance within your private network. 
+This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network. 
 
 ### Resilience
 
-Our OpenVPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
+Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
 
 # 🗂 CloudFormation
 
@@ -78,7 +70,7 @@ This Policy Document will give the Instance the ability to attach the Elastic IP
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have one of these ports open towards the instance:
 
 - `22` over `TCP` for remote managment.
-- `443` over `TCP` for OpenVPN connections.
+- `443` over `TCP` for VPN connections.
 - `2049` over `TCP` for EFS to be mounted.
 
 ### Bash Script for UserData
@@ -108,7 +100,7 @@ Explanation:
 
 1. Set the ID of the EFS drive.
 1. Set the ID of the Elastic IP.
-1. Set the DNS name that you will use to map the public instance IP. This will be used in the OpenVPN profile file.
+1. Set the DNS name that you will use to map the public instance IP. This will be used in the VPN profile file.
 1. Set if you want partial or all traffic going thorugh the VPN.
 1. Set the Private VPN server IP.
 1. Set the network mask for the IP.
@@ -123,12 +115,12 @@ It is important to note that the content of the UserData field will be only exec
 
 ### The First Boot
 
-Grab a cup of coffee since the first boot will be slower then what you are used to. This is due to the certificate that we need to generate for OpenVPN. Since at boot time there isn't much going on in the system, this process can take around 12 min, depending on the instance type. But not to worry; this only happens when the certificate is not found in the system.
+Grab a cup of coffee since the first boot will be slower then what you are used to. This is due to the certificate that we need to generate for VPN. Since at boot time there isn't much going on in the system, this process can take around 12 min, depending on the instance type. But not to worry; this only happens when the certificate is not found in the system.
 
 ### Connect to the server
 
 Once the instance is up and running, get its IP and connect to the instance over SSH using the selected key at deployment time. 
-**Note**: SSH access is restricted to the public and to the root user. You will need to allow your specific system access by adding an inbound rule to the Security group used by the OpenVPN EC2 instance. You can then access the OpenVPN server using the EC2 key pair and login as *ec2-user*.
+**Note**: SSH access is restricted to the public and to the root user. You will need to allow your specific system access by adding an inbound rule to the Security group used by the VPN EC2 instance. You can then access the VPN server using the EC2 key pair and login as *ec2-user*.
 
 # 👷‍♂️ User Management
 
@@ -156,9 +148,9 @@ Since every time you create a user a `.ovpn` configuration file is created, you 
 
 `ls -la /home/ec2-user/openvpn_users`
 
-The output is the list of all the users you have available for your OpenVPN server.
+The output is the list of all the users you have available for your VPN server.
 
-# ⬇️ OpenVPN Clients
+# ⬇️ VPN Clients
 
 - Desktop
     - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
@@ -175,14 +167,14 @@ Be sure to test the server to confirm that it behaves the way we advertise it; n
 ### Step 1 - Generate Ubuntu and Windows Clients
 
 ```
-### Login to your OpenVPN Server
+### Login to your VPN Server
 $ ssh -i ec2_key_pair ec2-user@<your-elastic-ip> 
 
-### On your OpenVPN Server
+### On your VPN Server
 $ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "win-client" 
 $ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "ubuntu-client" 
 
-### Download the keys to the system that has access to your OpenVPN server
+### Download the keys to the system that has access to your VPN server
 $ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/win-client.ovpn . 
 $ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/ubuntu-client.ovpn . 
 ```
@@ -190,7 +182,7 @@ $ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/ubuntu-client.ovpn
 ### Step 2 - Test connectivity from a Ubuntu instance
 
 ```
-### Install and run the OpenVPN client on a Ubuntu instance
+### Install and run the VPN client on a Ubuntu instance
 $ sudo apt install openvpn 
 $ openvpn --config ubuntu-client.ovpn
 
@@ -205,7 +197,7 @@ tun0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 1500
         TX packets 1  bytes 48 (48.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-### Ping the OpenVPN gateway
+### Ping the VPN gateway
 $ ping 10.8.0.1
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_seq=1 ttl=118 time=1.02 ms
@@ -217,7 +209,7 @@ PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 ### Step 3 - Test connectivity from a windows client
 
 ```
-### Download the OpenVPN client for windows and load the win-client.ovpn that was created in Step 1
+### Download the VPN client for windows and load the win-client.ovpn that was created in Step 1
 ### Run ipconfig on windows cmd prompt or ifconfig on WSL
 ipconfig/ifconfig: 
 eth6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -229,7 +221,7 @@ eth6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
-### Ping the OpenVPN gateway
+### Ping the VPN gateway
 $ ping 10.8.0.1
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_seq=1 ttl=118 time=1.02 ms
@@ -239,15 +231,15 @@ PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 ```
 ### Step 4 - Test instance scale-up or scale-down
 
-Stop the EC2 instance and change the instance type to a larger or smaller one based on your need. Both the Ubuntu and the windows clients should connect automatically once the OpenVPN Server is up.
+Stop the EC2 instance and change the instance type to a larger or smaller one based on your need. Both the Ubuntu and the windows clients should connect automatically once the VPN Server is up.
 
 ### Step 5 - Site to Site connectivity
 
 ```
-### Login to your OpenVPN Server 
+### Login to your VPN Server 
 $ ssh -i ec2_key_pair ec2-user@<your-elastic-ip> 
 
-### On your OpenVPN Server
+### On your VPN Server
 $ sysctl net.ipv4.ip_forward=1
 
 ### Ping the windows client from the ubuntu client. On you Ubuntu client:
@@ -288,10 +280,10 @@ API: ec2:RunInstances Not authorized for images:
 **SOLUTION**: 
 - Accept the subscription for this image on AWS marketplace and then re-launch your stack.
 
-#### Failed to access the OpenVPN server using SSH
+#### Failed to access the VPN server using SSH
 
 **SOLUTION**: 
-- Ensure that your public IP address is allowed to access the OpenVPN EC2 instance. You will need to add an inbound rule to the Security Group used by the OpenVPN EC2 instance.
+- Ensure that your public IP address is allowed to access the VPN EC2 instance. You will need to add an inbound rule to the Security Group used by the VPN EC2 instance.
 - Ensure you are using the right EC2 Key Pair that you provided when you launched your stack using Cloud Formation.
 - Ensure you are not using the *root* user to login as this is disabled. You need to login as *ec2-user*
 
@@ -309,15 +301,15 @@ sh-4.2$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "test-client"
 amazon/efs/mount.log:2020-09-04 23:29:58,803 - ERROR - Failed to mount fs-90d252e8.efs.us-east-2.amazonaws.com at /etc/openvpn/easy-rsa: retu Connection timed out"
 ```
 
-- Ensure that your EFS Drive allows inbound connections on TCP Port 2049 from your Elastic IP and the EC2 subnet being used by the OpenVPN Server
+- Ensure that your EFS Drive allows inbound connections on TCP Port 2049 from your Elastic IP and the EC2 subnet being used by the VPN Server
 
-#### Ping to another client instance over OpenVPN fails
+#### Ping to another client instance over VPN fails
 
 **SOLUTION**: 
-- If you can ping the default gateway 10.8.0.1 but cannot reach another client behind OpenVPN, check if you have enabled ip_forward on the OpenVPN Server.
+- If you can ping the default gateway 10.8.0.1 but cannot reach another client behind VPN, check if you have enabled ip_forward on the VPN Server.
 
 ```
-### On your OpenVPN Server
+### On your VPN Server
 $ sysctl net.ipv4.ip_forward=1
 ```
 
