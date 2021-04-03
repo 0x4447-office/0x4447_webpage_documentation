@@ -1,6 +1,6 @@
 ---
-title: VPN Server - Powered by OpenVPN
-summary: VPN Server with unlimited users.
+title: VPN Server - Using OpenVPN
+summary: Ready to go VPN server using OpenVPN with no soft limits.
 ---
 
 # VPN Server for AWS
