@@ -3,31 +3,25 @@ title: Samba Server for AWS
 summary: Mount dozens of drive under one Samba server.
 ---
 
-# Samba Server for AWS
+# Prerequisites
 
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/samba.png?raw=true">
+Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# 📍 Our Differentiating Factor
-
-We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
-
-Our goal is to provide you with the right foundation for your company.
-
-# 📜 Understand the basics
-
-### Security
-
-Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company. 
-
-But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. By default we do set a public IP using the CloudFormation file, for you to access the server to manage it if needed, but the default setting for the security group is not to have the SSH port open. This way there is no remote access to the public, but the server is always set to be accesed publicly if needed.
-
-This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+# Understand the basics
 
 ### Resilience
 
 If you want to always be able to connect the same internal IP, make sure to start the EC2 Instance and keep the same local IP settings. This way, even if the instance gets terminated and you have to recreate it, the IP will stay the same and your user won't have to change any of their configurations.
 
-# 🗂 CloudFormation
+### Security
+
+Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company.
+
+But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. By default we do set a public IP using the CloudFormation file, for you to access the server to manage it if needed, but the default setting for the security group is not to have the SSH port open. This way there is no remote access to the public, but the server is always set to be accesed publicly if needed.
+
+This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
+
+# CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
@@ -38,7 +32,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# 📚  Manual
+# Manual
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -46,7 +40,7 @@ Before launching an instance, you'll have to do some manual inputs to make every
 
 ### Custom Role
 
-Create a new role for the instance that will carry our product. The role must be for the `EC2` resource; it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy and have this inline policy: 
+Create a new role for the instance that will carry our product. The role must be for the `EC2` resource; it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy and have this inline policy:
 
 ```json
 {
@@ -71,7 +65,7 @@ A default security group will be automatically created for you from the product 
 
 - `445` over `TCP` for connectivity to Samba
 
-Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual input needed in the OS itself. 
+Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual input needed in the OS itself.
 
 ### Bash Script for UserData
 
@@ -93,7 +87,7 @@ Explanation:
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options: 
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options:
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
@@ -102,7 +96,7 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SSH using the slected key at deployment time.
 
-# 🚨 Test The Setup
+# Test The Setup
 
 Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
@@ -131,11 +125,11 @@ Enter WORKGROUP\ubuntu's password:
 
 Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
-# 💾 Backup Your Data
+# Backup Your Data
 
 Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
 
-# 🔔 Security Concerns
+# Security Concerns
 
 Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
 
@@ -145,7 +139,3 @@ Bellow we give you a list of potential ideas worth considiering regarding securi
 - Allow SSH connection only from limited subnets.
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
-
-# 🎗 Support 
-
-If you have any questions regarding our products, go to our [support page](https://support.0x4447.com/).

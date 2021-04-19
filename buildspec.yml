@@ -3,19 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.8
+      nodejs: 12
     commands:
-      - python --version
-      - pip --version
-      
-      - pip install mkdocs
-
-      - mkdocs --version
+      - npm instsll
   build:
     commands:
-      - python -m mkdocs build
+      - npm run build
   post_build:
     commands:
       - aws s3 rm --recursive s3://$S3_BUCKET
-      - aws s3 cp ./site s3://$S3_BUCKET --recursive
+      - aws s3 cp ./docs/.vuepress/dist s3://$S3_BUCKET --recursive
       - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"

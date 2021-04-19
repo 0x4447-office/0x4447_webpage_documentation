@@ -1,0 +1,28 @@
+{
+  "name": "0x4447_webpage_documentation",
+  "version": "1.0.0",
+  "description": "📚 This is the foundation of 0x4447, LLC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x4447-office/0x4447_webpage_documentation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0x4447-office/0x4447_webpage_documentation/issues"
+  },
+  "homepage": "https://github.com/0x4447-office/0x4447_webpage_documentation#readme",
+  "dependencies": {
+    "create-vuepress-site": "^0.4.2-beta"
+  },
+  "devDependencies": {
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-auto-sidebar": "^2.2.2"
+  }
+}

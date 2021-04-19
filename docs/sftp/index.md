@@ -3,27 +3,17 @@ title: SFTP Server for AWS
 summary: Single user SFTP with infinite storage.
 ---
 
-# SFTP Server for AWS
+# Prerequisites
 
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/sftp-single-user.png?raw=true">
+Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# ⚠️ Prerequisites  
-
-Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product. 
-
-# 📍 Our Differentiating Factor
-
-We also want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
-
-Our goal is to provide you with the right foundation for your company.
-
-# 📜 Understand the basics
+# Understand the basics
 
 ### Resilience
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 
-# 🗂 CloudFormation
+# CloudFormation
 
 Before you click on the button, make sure to [subscribe first](https://aws.amazon.com/marketplace/pp/B08R9BKR8Q) to the product on the AWS Marketplace.
 
@@ -36,7 +26,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# 📚  Manual
+# Manual
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -63,7 +53,7 @@ EOF
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options: 
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options:
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
@@ -72,7 +62,7 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SFTP using the credentials that you provided. You can still access the server using thie defualt `ec2-user` account and the SSH you selected at boot time.
 
-# 🚨 Test The Setup
+# Test The Setup
 
 Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
@@ -80,21 +70,17 @@ Be sure to test the server to make sure it behaves the way we have described it;
 
 Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
-# 💾 Backup Your Data
+# Backup Your Data
 
 Make sure you regularly backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
 
-# 🔔 Security Concerns
+# Security Concerns
 
 Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
 
 - Don't give root access to anyone but yourself.
 
-# 🎗 Support 
-
-If you have any questions regarding our products, go to our [support page](https://support.0x4447.com/).
-
-## Troubleshooting tips
+# Troubleshooting tips
 
 These are some of the common solutions to problems you may run into:
 
@@ -110,7 +96,7 @@ API: ec2:RunInstances Not authorized for images:
 
 ## The product is not behaving as expected
 
-When the server got deployed after following the documentation the prodcut is not acting as documented. 
+When the server got deployed after following the documentation the prodcut is not acting as documented.
 
 **SOLUTION**
 

@@ -3,21 +3,11 @@ title: Rsyslog Server for AWS
 summary: Rsyslog Server for developers for ease debugging.
 ---
 
-# Rsyslog Server for AWS
+# Prerequisites
 
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/rsyslog.png?raw=true">
+Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# 📍 Our Differentiating Factor
-
-Our goal is to provide you with the right foundation for your company. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. So, if we find something repetitive in our day-to-day use of our products, rest assured that we'll automate the repetition.
-
-# 📜 Understand the basics
-
-### Security
-
-Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public Internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs. 
-
-You can block traffic and instances using ACL rules at the VPC or instance level.
+# Understand the basics
 
 ### Resilience
 
@@ -25,7 +15,13 @@ Our Rsyslog server has built in resilience to make sure that even if the server 
 
 Another important component is that the certificate relies on the internal IP of the server. This means that for the cert to work even after termination, the instance needs to start with the same internal (local) IP that was used to create the initial cert.
 
-# 🗂 CloudFormation
+### Security
+
+Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public Internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs.
+
+You can block traffic and instances using ACL rules at the VPC or instance level.
+
+# CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-rsyslog&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/rsyslog-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
@@ -36,7 +32,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# 📚  Manual
+# Manual
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -101,7 +97,7 @@ Explanation:
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options: 
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options:
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
@@ -110,7 +106,7 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SSH uisng the slected key at deployment time.
 
-# 🖥 Automatic Client Setup
+# Automatic Client Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This ensures that everything will be automatically set up at boot time.
 
@@ -137,26 +133,25 @@ chmod +x /home/ec2-user/rsyslog-client-setup.sh
 /home/ec2-user/rsyslog-client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
-# ✍️ Manual Client Setup
+# Manual Client Setup
 
 You can also setup a client manually if you can't use the EC2 UserData by executing the following commands on your client.
 
 ## Copy certs and client setup scripts to your local system
+
 Run the following on your local system
 
 ```bash
-
 # Copy the cert and rsyslog-client-setup from the AWS S3 bucket to your local system.
 aws s3 cp s3://<S3_BUCKET_RSYSLOG>/certs/ca-cert.pem .
 aws s3 cp s3://<S3_BUCKET_RSYSLOG>/bash/rsyslog-client-setup.sh .
 
 # Now, copy both these files to the client you wish to setup
-scp ca-cert.pem rsyslog-client-setup.sh ec2-user@<YOUR-CLIENT-IP>
-
+scp ca-cert.pem rsyslog-client-setup.sh ec2-user@YOUR-CLIENT-IP
 ```
 
 ## Configure your client to send logs to Rsyslog
-Login to your Client represented by <YOUR-CLIENT-IP>, and run the following
+Login to your Client represented by YOUR-CLIENT-IP, and run the following
 
 ```bash
 
@@ -167,7 +162,7 @@ chmod +x rsyslog-client-setup.sh
 
 ```
 
-# 👷‍♂️ User Management
+# User Management
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. Developers can then freely look at the logs without having access to the whole system.
 
@@ -195,17 +190,17 @@ sudo userdel USER_NAME
 sudo passwd USER_NAME
 ```
 
-# ❓ Where are my logs?
+# Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. There you'll find folders for each client's sending logs. The client host name will be used for the folder names.
 
-# 🚨 Test The Setup
+# Test The Setup
 
 Be sure to test the server to make sure it behaves the way we advertise it; not becasue we don't belive it works correctly, but to make sure that you are confortable with the product and knows how it works, especially the resiliance mode.
 
 Terminate the instance and start a new one with the correct UserData in order to see if everything works as expected after the instance booted.
 
-# 🔔 Security Concerns
+# Security Concerns
 
 Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
@@ -215,7 +210,3 @@ Bellow we give you a list of potentail ideas to consider regarding security, but
 - Allow SSH connection only from limited subnets.
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
-
-# 🎗 Support 
-
-If you have any questions regarding our products, go to our [support page](https://support.0x4447.com/).

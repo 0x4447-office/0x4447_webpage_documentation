@@ -3,27 +3,21 @@ title: VPN Server - Using OpenVPN
 summary: Ready to go VPN server using OpenVPN with no soft limits.
 ---
 
-# VPN Server for AWS
+# Prerequisites
 
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://github.com/0x4447-office/0x4447_webpage_documentation/blob/master/docs/img/assets/openvpn.png?raw=true">
+Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# 📍 Our Differentiating Factor
-
-We want to let you know that this is not a regular product. What we build for the marketplace is what we use ourselves on a day-to-day basis. One of our signature traits is that we hate repetitive tasks that can easily be automated. If we find something repetitive in the day-to-day use of our products, rest assured that we'll automate the repetition.
-
-Our goal is to provide you with the right kind of foundation for your company.
-
-# 📜 Understand the basics
-
-### Security
-
-This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network. 
+# Understand the basics
 
 ### Resilience
 
 Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
 
-# 🗂 CloudFormation
+### Security
+
+This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
+
+# CloudFormation
 
 ### Pre-Requisites
 
@@ -34,13 +28,15 @@ Before you hit the orange icon below to launch our complementary CloudFormation 
 ### Launch the Stack
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json">
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a> We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow [this link](https://github.com/0x4447/0x4447_product_paid_openvpn).
+<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
+
+We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow [this link](https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json).
 
 Using our CF will allow you to deploy the stack with minimal work on your part. But if you'd like to do the deployment by hand, from this point on, you'll find the manual on how to do so.
 
 ---
 
-# 📚  Manual
+# Manual
 
 Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in order displayed here:
 
@@ -108,7 +104,7 @@ Explanation:
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, when the instance starts for the first time. This means it won't be triggered if you stop and start the instance. If you chose to not enable resilience and skip the UserData script at boot time, then later on you won't be able to update the UserData with the script or expect for the automation to take place. You have two options: 
+It is important to note that the content of the UserData field will be only executed once, when the instance starts for the first time. This means it won't be triggered if you stop and start the instance. If you chose to not enable resilience and skip the UserData script at boot time, then later on you won't be able to update the UserData with the script or expect for the automation to take place. You have two options:
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new instance, this time with the right UserData, and then copy over from the old instance to the new one all the configuration files.
@@ -119,10 +115,10 @@ Grab a cup of coffee since the first boot will be slower then what you are used 
 
 ### Connect to the server
 
-Once the instance is up and running, get its IP and connect to the instance over SSH using the selected key at deployment time. 
+Once the instance is up and running, get its IP and connect to the instance over SSH using the selected key at deployment time.
 **Note**: SSH access is restricted to the public and to the root user. You will need to allow your specific system access by adding an inbound rule to the Security group used by the VPN EC2 instance. You can then access the VPN server using the EC2 key pair and login as *ec2-user*.
 
-# 👷‍♂️ User Management
+# User Management
 
 ### How to create a user
 
@@ -150,7 +146,7 @@ Since every time you create a user a `.ovpn` configuration file is created, you 
 
 The output is the list of all the users you have available for your VPN server.
 
-# ⬇️ VPN Clients
+# VPN Clients
 
 - Desktop
     - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
@@ -160,30 +156,30 @@ The output is the list of all the users you have available for your VPN server.
     - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
     - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
 
-# 🚨 Test The Setup
+# Test The Setup
 
 Be sure to test the server to confirm that it behaves the way we advertise it; not becasue we don't belive it works correctly, but to make sure you are comfortable with the product and know how it works, especially the resiliance mode.
 
 ### Step 1 - Generate Ubuntu and Windows Clients
 
-```
+```bash
 ### Login to your VPN Server
-$ ssh -i ec2_key_pair ec2-user@<your-elastic-ip> 
+$ ssh -i ec2_key_pair ec2-user@<your-elastic-ip>
 
 ### On your VPN Server
-$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "win-client" 
-$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "ubuntu-client" 
+$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "win-client"
+$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "ubuntu-client"
 
 ### Download the keys to the system that has access to your VPN server
-$ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/win-client.ovpn . 
-$ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/ubuntu-client.ovpn . 
+$ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/win-client.ovpn .
+$ scp -i openssh_key ec2-user@<your-elastic-ip>:openvpn_users/ubuntu-client.ovpn .
 ```
 
 ### Step 2 - Test connectivity from a Ubuntu instance
 
-```
+```bash
 ### Install and run the VPN client on a Ubuntu instance
-$ sudo apt install openvpn 
+$ sudo apt install openvpn
 $ openvpn --config ubuntu-client.ovpn
 
 ### Check if a TUN interface has been created
@@ -208,10 +204,10 @@ PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 
 ### Step 3 - Test connectivity from a windows client
 
-```
+```bash
 ### Download the VPN client for windows and load the win-client.ovpn that was created in Step 1
 ### Run ipconfig on windows cmd prompt or ifconfig on WSL
-ipconfig/ifconfig: 
+ipconfig/ifconfig:
 eth6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 10.8.0.2  netmask 255.255.0.0  broadcast 10.8.255.255
         inet6 fe80::24c4:b8be:de58:cf4c  prefixlen 64  scopeid 0xfd<compat,link,site,host>
@@ -235,9 +231,9 @@ Stop the EC2 instance and change the instance type to a larger or smaller one ba
 
 ### Step 5 - Site to Site connectivity
 
-```
-### Login to your VPN Server 
-$ ssh -i ec2_key_pair ec2-user@<your-elastic-ip> 
+```bash
+### Login to your VPN Server
+$ ssh -i ec2_key_pair ec2-user@<your-elastic-ip>
 
 ### On your VPN Server
 $ sysctl net.ipv4.ip_forward=1
@@ -251,11 +247,11 @@ PING 10.8.0.2 (10.8.0.2) 56(84) bytes of data.
 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
 ```
 
-# 💾 Backup your Data
+# Backup your Data
 
 Make sure you regularly backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
-# 🔔 Security Concerns
+# Security Concerns
 
 Below we give you a list of potentail ideas that are worth considiering regarding security, but this list dose not exhaust all possibilities; it is just a good starting point.
 
@@ -265,36 +261,34 @@ Below we give you a list of potentail ideas that are worth considiering regardin
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
 
-# 🎗 Support 
-
-### Troubleshooting tips
+# Troubleshooting tips
 
 These are some of the common solutions to problems you may run into:
 
-#### My CloudFormation stack failed with the following error
+## My CloudFormation stack failed with the following error
 
 ```
 API: ec2:RunInstances Not authorized for images:
 ```
 
-**SOLUTION**: 
+**SOLUTION**:
 - Accept the subscription for this image on AWS marketplace and then re-launch your stack.
 
-#### Failed to access the VPN server using SSH
+## Failed to access the VPN server using SSH
 
-**SOLUTION**: 
+**SOLUTION**:
 - Ensure that your public IP address is allowed to access the VPN EC2 instance. You will need to add an inbound rule to the Security Group used by the VPN EC2 instance.
 - Ensure you are using the right EC2 Key Pair that you provided when you launched your stack using Cloud Formation.
 - Ensure you are not using the *root* user to login as this is disabled. You need to login as *ec2-user*
 
-#### User Management failed with an error
+## User Management failed with an error
 
 ```
-sh-4.2$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "test-client" 
+sh-4.2$ sudo bash /opt/0x4447/openvpn/ov_user_add.sh "test-client"
 /opt/0x4447/openvpn/ov_user_add.sh: line 23: vars: No such file or directory
 ```
 
-**SOLUTION**: 
+**SOLUTION**:
 - The above error indicates that this instance failed to mount your EFS drive. You will also see the following message in your dmesg
 
 ```
@@ -303,14 +297,12 @@ amazon/efs/mount.log:2020-09-04 23:29:58,803 - ERROR - Failed to mount fs-90d252
 
 - Ensure that your EFS Drive allows inbound connections on TCP Port 2049 from your Elastic IP and the EC2 subnet being used by the VPN Server
 
-#### Ping to another client instance over VPN fails
+## Ping to another client instance over VPN fails
 
-**SOLUTION**: 
+**SOLUTION**:
 - If you can ping the default gateway 10.8.0.1 but cannot reach another client behind VPN, check if you have enabled ip_forward on the VPN Server.
 
-```
+```bash
 ### On your VPN Server
 $ sysctl net.ipv4.ip_forward=1
 ```
-
-If you have any questions regarding our product, go to our [support page](https://support.0x4447.com/).
