@@ -1,9 +1,3 @@
-# 0x4447_foundation
+# 0x4447 Documentation
 
-📚 This is the foundation of 0x4447, LLC.
-
-# Serve
-
-```
-mkdocs serve
-```
+Documentation page build with [VuePress](https://vuepress.vuejs.org/)
