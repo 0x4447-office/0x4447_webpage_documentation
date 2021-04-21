@@ -71,20 +71,30 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Rsyslog',
-        link: '/rsyslog/'
+        text: 'Products',
+        ariaLabel: 'Products Menu',
+        items: [
+          {
+            text: 'Rsyslog',
+            link: '/rsyslog/',
+          },
+          {
+            text: 'SFTP',
+            link: '/sftp/'
+          },
+          {
+            text: 'VPN',
+            link: '/vpn/'
+          },
+          {
+            text: 'Samba',
+            link: '/samba/'
+          }
+        ]
       },
       {
-        text: 'SFTP',
-        link: '/sftp/'
-      },
-      {
-        text: 'VPN',
-        link: '/vpn/'
-      },
-      {
-        text: 'Samba',
-        link: '/samba/'
+        text: 'Support',
+        link: 'https://support.0x4447.com/',
       }
     ],
     plugins: {
