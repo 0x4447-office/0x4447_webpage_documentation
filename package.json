@@ -22,7 +22,6 @@
     "create-vuepress-site": "^0.4.2-beta"
   },
   "devDependencies": {
-    "vuepress": "^1.8.2",
-    "vuepress-plugin-auto-sidebar": "^2.2.2"
+    "vuepress": "^1.8.2"
   }
 }

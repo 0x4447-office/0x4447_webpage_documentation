@@ -18,7 +18,9 @@ module.exports = {
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
 
   /**
@@ -35,7 +37,7 @@ module.exports = {
     nav: [
       {
         text: 'Rsyslog',
-        link: '/rsyslog/',
+        link: '/rsyslog/'
       },
       {
         text: 'SFTP',
@@ -50,28 +52,7 @@ module.exports = {
         link: '/samba/'
       }
     ],
-    plugins: {
-      "vuepress-plugin-auto-sidebar": {
-        titleMap: {
-          'samba': 'Samba'
-        },
-        sort: {
-          mode: "asc",
-          readmeFirst: true,
-        },
-        title: {
-          mode: "titlecase",
-          map: {}
-        },
-        sidebarDepth: 1,
-        collapse: {
-          open: false,
-          collapseList: [],
-          uncollapseList: []
-        },
-        ignore: []
-      }
-    }
+    sidebar: 'auto'
   },
 
   /**
@@ -79,6 +60,6 @@ module.exports = {
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    '@vuepress/plugin-medium-zoom'
   ]
 }
