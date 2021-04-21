@@ -16,9 +16,48 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'theme-color', content: '#ffffff' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#2b5797' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    [
+      'meta',
+      {
+        name: 'msapplication-TileImage',
+        content: '/icons/mstile-150x150.png'
+      }],
+    ['meta', { name: 'msapplication-TileColor', content: '#2b5797' }],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png'
+      }],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png'
+      }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['link', { rel: 'apple-touch-icon', href: '/icons/apple-touch-icon.png' }],
+    [
+      'link',
+      {
+        rel: 'mask-icon',
+        href: '/icons/safari-pinned-tab.svg',
+        color: '#5bbad5'
+      }]
   ],
 
   /**
@@ -35,7 +74,7 @@ module.exports = {
     nav: [
       {
         text: 'Rsyslog',
-        link: '/rsyslog/',
+        link: '/rsyslog/'
       },
       {
         text: 'SFTP',
@@ -80,5 +119,12 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+    [
+      '@vuepress/pwa',
+      {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ]
   ]
 }
