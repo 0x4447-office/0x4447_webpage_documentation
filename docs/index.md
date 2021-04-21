@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
+heroImage: /images/logo.png
 tagline: Products that will help you build your foundation
 features:
 - title: Rsyslog
@@ -11,7 +11,6 @@ features:
   details: Feature 3 Description
 - title: Samba
   details: Feature 3 Description
-footer: Est.2016, Copr.0x4447™ LLC.
 ---
 
 This is the offcial Documentation page for 0x4447, LLC. On this site you'll fin the documentation for all of our products that we have on the [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=80edcebf-11fb-4c36-a3f4-49eb40b518a3).
