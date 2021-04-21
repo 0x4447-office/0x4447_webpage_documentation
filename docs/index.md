@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
+heroImage: /images/logo.png
 tagline: Products that will help you build your foundation
 features:
 - title: Rsyslog
