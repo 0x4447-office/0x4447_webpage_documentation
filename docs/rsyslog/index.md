@@ -11,15 +11,15 @@ Before you start you need to be aware this is not a product for everyone. This p
 
 ### Resilience
 
-Our Rsyslog server has built in resilience to make sure that even if the server gets terminated, it has the capability to apply the same configuration to each new instance. Meaning, if you provide a S3 bucket in the EC2 UserData, we will store all the necessary data in this bucket to allow you to automate the whole client setup in the most efficient, automated way possible. This way your clients can keep sending logs as soon as the server shows up.
-
-Another important component is that the certificate relies on the internal IP of the server. This means that for the cert to work even after termination, the instance needs to start with the same internal (local) IP that was used to create the initial cert.
+Our complementary CloudFormation is setup in a way that you have to provide a internal IP that you'd like the server to always use, this way even if the instance is temrinated for a server type chagne, the IP will remain the same and the clients will be able to reconnect without any chagnes.
 
 ### Security
 
 Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public Internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs.
 
-You can block traffic and instances using ACL rules at the VPC or instance level.
+### Automation
+
+Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure wach client, or modify the script to fits your needs.
 
 # CloudFormation
 
@@ -32,7 +32,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# Manual
+# The Manual Way
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -40,7 +40,7 @@ Before launching an instance, you'll have to do some manual inputs to make every
 
 ### Custom Role
 
-You need to create an EC2 role to allow the Rsyslog Server to upload and get the certificate and bash script from S3. This allows you to reuse the same cert on termination, and allows for your clients to automatically pull the public cert when they boot up. Below is the Policy Document that you need add to create this:
+You need to create an EC2 role to allow the Rsyslog Server to upload and get files from S3. Below is the Policy Document that you need add to create this:
 
 ```json
 {
@@ -92,12 +92,12 @@ echo LOG_TTL=$LOG_TTL >> /home/ec2-user/.env
 
 Explanation:
 
-1. Set the name of the S3 bucket.
-1. Append the S3 bucket anem to the .env file.
+1. Set the name of the S3 bucket where to upload the files.
+1. Set the logs retention period in days.
 
 **Understand how UserData works**
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options:
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. You won't be able to later update the UserData and expect the configuration to change. If you need to make chagnes to the user data, you have two options:
 
 - Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
@@ -113,15 +113,9 @@ Once the server is deployed correctly, you can configure your clients with the f
 ```bash
 #!/bin/bash
 
-# Set the main variables, Replace <S3_BUCKET_RSYSLOG> with the name of the S3 bucket that you provided as a parameter to the Cloud Formation
-BUCKET_RSYSLOG=<S3_BUCKET_RSYSLOG>
-RSYLOG_INTERNAL_IP=RSYLOG_INTERNAL_IP
-
-# Pull the cert from S3
-aws s3 cp s3://$BUCKET_RSYSLOG/certs/ca-cert.pem /tmp
-
-# move the cert in to the final destination
-sudo mv /tmp/ca-cert.pem /etc/ssl/ca-cert.pem
+# Set the main variables, Replace S3_BUCKET_RSYSLOG with the name of the S3 bucket that you provided as a parameter to the Cloud Formation
+BUCKET_RSYSLOG=S3_BUCKET_RSYSLOG
+RSYLOG_INTERNAL_IP=RSYLOG_SERVER_INTERNAL_IP
 
 # Copy the bash script which will configure the client
 aws s3 cp s3://$BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
@@ -131,35 +125,6 @@ chmod +x /home/ec2-user/rsyslog-client-setup.sh
 
 # Configure the client to send the logs to the Rsyslog server
 /home/ec2-user/rsyslog-client-setup.sh $RSYLOG_INTERNAL_IP
-```
-
-# Manual Client Setup
-
-You can also setup a client manually if you can't use the EC2 UserData by executing the following commands on your client.
-
-## Copy certs and client setup scripts to your local system
-
-Run the following on your local system
-
-```bash
-# Copy the cert and rsyslog-client-setup from the AWS S3 bucket to your local system.
-aws s3 cp s3://<S3_BUCKET_RSYSLOG>/certs/ca-cert.pem .
-aws s3 cp s3://<S3_BUCKET_RSYSLOG>/bash/rsyslog-client-setup.sh .
-
-# Now, copy both these files to the client you wish to setup
-scp ca-cert.pem rsyslog-client-setup.sh ec2-user@YOUR-CLIENT-IP
-```
-
-## Configure your client to send logs to Rsyslog
-Login to your Client represented by YOUR-CLIENT-IP, and run the following
-
-```bash
-
-# Move the cert to the SSL path on your client
-sudo mv ca-cert.pm /etc/ssl/
-chmod +x rsyslog-client-setup.sh
-./rsyslog-client-setup.sh <RSYSLOG_SERVER_IP>
-
 ```
 
 # User Management
