@@ -19,12 +19,10 @@ Our product has built in resilience to make sure that you don't lose all your da
 
 Before you click on the button, make sure to [subscribe first](https://aws.amazon.com/marketplace/pp/B08R9BKR8Q) to the product on the AWS Marketplace.
 
-<a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-SFTP-Single-User&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json">
-<img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
-
-We provide a complementary CloudFormation file. Click the orange button to deploy the stack. If you want to check the CloudFormation yourself, follow [this link](https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json).
-
-Using our CF will allow you to deploy the stack with minimal work on your part. But, if you'd like to deploy the stack by hand, from this point on you'll find the manual on how to do so.
+<cloud-formation 
+  deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-SFTP-Single-User&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json"
+  cloud-formation-url="https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json" 
+/>
 
 ---
 
