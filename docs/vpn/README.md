@@ -3,11 +3,13 @@ title: VPN Server - Using OpenVPN
 summary: Ready to go VPN server using OpenVPN with no soft limits.
 ---
 
-# Prerequisites
+# VPN Server - Using OpenVPN
+
+## Prerequisites
 
 Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# Understand the basics
+## Understand the basics
 
 ### Resilience
 
@@ -17,7 +19,7 @@ Our VPN Server has built in resilience to make sure that you don't lose all your
 
 This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
 
-# CloudFormation
+## CloudFormation
 
 ### Pre-Requisites
 
@@ -36,7 +38,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# Manual
+## Manual
 
 Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in order displayed here:
 
@@ -118,7 +120,7 @@ Grab a cup of coffee since the first boot will be slower then what you are used 
 Once the instance is up and running, get its IP and connect to the instance over SSH using the selected key at deployment time.
 **Note**: SSH access is restricted to the public and to the root user. You will need to allow your specific system access by adding an inbound rule to the Security group used by the VPN EC2 instance. You can then access the VPN server using the EC2 key pair and login as *ec2-user*.
 
-# User Management
+## User Management
 
 ### How to create a user
 
@@ -146,7 +148,7 @@ Since every time you create a user a `.ovpn` configuration file is created, you 
 
 The output is the list of all the users you have available for your VPN server.
 
-# VPN Clients
+## VPN Clients
 
 - Desktop
     - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
@@ -156,7 +158,7 @@ The output is the list of all the users you have available for your VPN server.
     - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
     - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
 
-# Test The Setup
+## Test The Setup
 
 Be sure to test the server to confirm that it behaves the way we advertise it; not becasue we don't belive it works correctly, but to make sure you are comfortable with the product and know how it works, especially the resiliance mode.
 
@@ -247,11 +249,11 @@ PING 10.8.0.2 (10.8.0.2) 56(84) bytes of data.
 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
 ```
 
-# Backup your Data
+## Backup your Data
 
 Make sure you regularly backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
-# Security Concerns
+## Security Concerns
 
 Below we give you a list of potentail ideas that are worth considiering regarding security, but this list dose not exhaust all possibilities; it is just a good starting point.
 
@@ -261,7 +263,7 @@ Below we give you a list of potentail ideas that are worth considiering regardin
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
 
-# Troubleshooting tips
+## Troubleshooting tips
 
 These are some of the common solutions to problems you may run into:
 

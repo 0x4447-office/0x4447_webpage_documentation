@@ -3,17 +3,19 @@ title: SFTP Server for AWS
 summary: Single user SFTP with infinite storage.
 ---
 
-# Prerequisites
+# SFTP Server for AWS
+
+## Prerequisites
 
 Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# Understand the basics
+## Understand the basics
 
 ### Resilience
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 
-# CloudFormation
+## CloudFormation
 
 Before you click on the button, make sure to [subscribe first](https://aws.amazon.com/marketplace/pp/B08R9BKR8Q) to the product on the AWS Marketplace.
 
@@ -26,7 +28,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# Manual
+## Manual
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -62,25 +64,25 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SFTP using the credentials that you provided. You can still access the server using thie defualt `ec2-user` account and the SSH you selected at boot time.
 
-# Test The Setup
+## Test The Setup
 
 Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
-## Test 1 - Termination and IP retention
+### Test 1 - Termination and IP retention
 
 Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
-# Backup Your Data
+## Backup Your Data
 
 Make sure you regularly backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
 
-# Security Concerns
+## Security Concerns
 
 Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
 
 - Don't give root access to anyone but yourself.
 
-# Troubleshooting tips
+## Troubleshooting tips
 
 These are some of the common solutions to problems you may run into:
 
@@ -94,7 +96,7 @@ API: ec2:RunInstances Not authorized for images:
 
 - Accept the subscription for this image on AWS marketplace and then re-launch your stack.
 
-## The product is not behaving as expected
+### The product is not behaving as expected
 
 When the server got deployed after following the documentation the prodcut is not acting as documented.
 

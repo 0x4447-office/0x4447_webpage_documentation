@@ -76,7 +76,7 @@ module.exports = {
         items: [
           {
             text: 'Rsyslog',
-            link: '/rsyslog/',
+            link: '/rsyslog/'
           },
           {
             text: 'SFTP',
@@ -94,35 +94,10 @@ module.exports = {
       },
       {
         text: 'Support',
-        link: 'https://support.0x4447.com/',
+        link: 'https://support.0x4447.com/'
       }
     ],
-    plugins: {
-      "vuepress-plugin-auto-sidebar": {
-        titleMap: {
-          'samba': 'Samba'
-        },
-        sort: {
-          mode: "asc",
-          readmeFirst: true,
-        },
-        title: {
-          mode: "titlecase",
-          map: {}
-        },
-        sidebarDepth: 1,
-        collapse: {
-          open: false,
-          collapseList: [],
-          uncollapseList: []
-        },
-        ignore: []
-      }
-    },
-
-    docsRepo: '0x4447-office/0x4447_webpage_documentation',
-    docsDir: 'docs',
-    editLinks: true
+    sidebar: 'auto',
   },
 
   /**

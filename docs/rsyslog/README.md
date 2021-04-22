@@ -3,11 +3,13 @@ title: Rsyslog Server for AWS
 summary: Rsyslog Server for developers for ease debugging.
 ---
 
-# Prerequisites
+# Rsyslog Server for AWS
+
+## Prerequisites
 
 Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# Understand the basics
+## Understand the basics
 
 ### Resilience
 
@@ -21,7 +23,7 @@ Our product is configured to allow any server to send it logs. The data will be 
 
 Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure wach client, or modify the script to fits your needs.
 
-# CloudFormation
+## CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-rsyslog&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/rsyslog-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
@@ -32,7 +34,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# The Manual Way
+## The Manual Way
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -106,7 +108,7 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SSH uisng the slected key at deployment time.
 
-# Automatic Client Setup
+## Automatic Client Setup
 
 Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This ensures that everything will be automatically set up at boot time.
 
@@ -127,7 +129,7 @@ chmod +x /home/ec2-user/rsyslog-client-setup.sh
 /home/ec2-user/rsyslog-client-setup.sh $RSYLOG_INTERNAL_IP
 ```
 
-# User Management
+## User Management
 
 By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. Developers can then freely look at the logs without having access to the whole system.
 
@@ -155,17 +157,17 @@ sudo userdel USER_NAME
 sudo passwd USER_NAME
 ```
 
-# Where are my logs?
+## Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. There you'll find folders for each client's sending logs. The client host name will be used for the folder names.
 
-# Test The Setup
+## Test The Setup
 
 Be sure to test the server to make sure it behaves the way we advertise it; not becasue we don't belive it works correctly, but to make sure that you are confortable with the product and knows how it works, especially the resiliance mode.
 
 Terminate the instance and start a new one with the correct UserData in order to see if everything works as expected after the instance booted.
 
-# Security Concerns
+## Security Concerns
 
 Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
