@@ -3,11 +3,13 @@ title: Samba Server for AWS
 summary: Mount dozens of drive under one Samba server.
 ---
 
-# Prerequisites
+# Samba Server for AWS
+
+## Prerequisites
 
 Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
 
-# Understand the basics
+## Understand the basics
 
 ### Resilience
 
@@ -21,7 +23,7 @@ But this also means that **you can't have the server deployed on a public networ
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
-# CloudFormation
+## CloudFormation
 
 <a target="_blank" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json">
 <img align="left" style="float: left; margin: 0 10px 0 0;" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png"></a>
@@ -32,7 +34,7 @@ Using our CF will allow you to deploy the stack with minimal work on your part. 
 
 ---
 
-# Manual
+## Manual
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
@@ -96,11 +98,11 @@ It is important to note that the content of the UserData field will be only exec
 
 Once the instance is up and running, get its IP and connect to the instance over SSH using the slected key at deployment time.
 
-# Test The Setup
+## Test The Setup
 
 Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
 
-## Test 1 - Viewing shares from your Ubuntu Client
+### Test 1 - Viewing shares from your Ubuntu Client
 
 ```
 # sudo apt install smbclient
@@ -113,7 +115,7 @@ Enter WORKGROUP\ubuntu's password:
         IPC$            IPC       IPC Service (samba_server)
 ```
 
-## Test 2 - Mounting the Samba Drive from your Ubuntu Client
+### Test 2 - Mounting the Samba Drive from your Ubuntu Client
 
 ```
 # sudo apt install cifs-utils
@@ -121,15 +123,15 @@ Enter WORKGROUP\ubuntu's password:
 # cd /mnt/samba
 ```
 
-## Test 3 - Termination and IP retention
+### Test 3 - Termination and IP retention
 
 Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
 
-# Backup Your Data
+## Backup Your Data
 
 Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
 
-# Security Concerns
+## Security Concerns
 
 Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
 

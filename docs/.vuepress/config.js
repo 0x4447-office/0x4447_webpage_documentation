@@ -76,7 +76,7 @@ module.exports = {
         items: [
           {
             text: 'Rsyslog',
-            link: '/rsyslog/',
+            link: '/rsyslog/'
           },
           {
             text: 'SFTP',
@@ -94,10 +94,10 @@ module.exports = {
       },
       {
         text: 'Support',
-        link: 'https://support.0x4447.com/',
+        link: 'https://support.0x4447.com/'
       }
     ],
-    sidebar: 'auto'
+    sidebar: 'auto',
   },
 
   /**
