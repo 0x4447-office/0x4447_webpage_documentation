@@ -32,6 +32,14 @@ We provide a complementary CloudFormation file. Click the orange button to deplo
 
 Using our CF will allow you to deploy the stack with minimal work on your part. But, if you'd like to deploy the stack by hand, from this point on you'll find the manual on how to do so.
 
+
+## CloudFormation
+
+<cloud-formation
+  deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json"
+  cloud-formation-url="https://github.com/0x4447-Paid-Products/0x4447_product_paid_samba"
+/>
+
 ---
 
 ## Manual
