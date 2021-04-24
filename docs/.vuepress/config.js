@@ -108,6 +108,7 @@ module.exports = {
     '@vuepress/plugin-medium-zoom',
     '@vuepress/last-updated',
     '@vuepress/active-header-links',
+    'vuepress-plugin-smooth-scroll',
     [
       '@vuepress/pwa',
       {
