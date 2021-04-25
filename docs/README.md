@@ -2,15 +2,6 @@
 home: true
 heroImage: /images/logo.png
 tagline: Products that will help you build your foundation
-features:
-- title: Rsyslog
-  details: Feature 1 Description
-- title: SFTP
-  details: Feature 2 Description
-- title: VPN
-  details: Feature 3 Description
-- title: Samba
-  details: Feature 3 Description
 footer: Est.2016, Copr.0x4447™ LLC.
 ---
 
