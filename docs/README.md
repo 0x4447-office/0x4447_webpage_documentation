@@ -1,6 +1,5 @@
 ---
 home: true
-heroImage: /images/logo.png
 tagline: Products that will help you build your foundation
 footer: Est.2016, Copr.0x4447™ LLC.
 ---
