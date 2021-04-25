@@ -69,6 +69,8 @@ module.exports = {
     repo: '0x4447-office/0x4447_webpage_documentation',
     search: false,
     lastUpdated: false,
+    docsRepo: '0x4447-office/0x4447_webpage_documentation',
+    docsDir: 'docs',
     editLinks: true,
     editLinkText: 'Edit on GitHub',
     nav: [
