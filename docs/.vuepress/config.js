@@ -76,24 +76,38 @@ module.exports = {
     editLinkText: 'Edit on GitHub',
     nav: [
       {
-        text: 'Products',
-        ariaLabel: 'Products Menu',
+        text: 'Rsyslog',
         items: [
           {
-            text: 'Rsyslog',
-            link: '/rsyslog/'
-          },
+            text: '1.0',
+            link: '/rsyslog/1.0/'
+          }
+        ]
+      },
+      {
+        text: 'SFTP',
+        items: [
           {
-            text: 'SFTP',
-            link: '/sftp/'
-          },
+            text: '1.0',
+            link: '/sftp/1.0/'
+          }
+        ]
+      },
+      {
+        text: 'VPN',
+        items: [
           {
-            text: 'VPN',
-            link: '/vpn/'
-          },
+            text: '1.0',
+            link: '/vpn/1.0/'
+          }
+        ]
+      },
+      {
+        text: 'Samba',
+        items: [
           {
-            text: 'Samba',
-            link: '/samba/'
+            text: '1.0',
+            link: '/samba/1.0/'
           }
         ]
       },
