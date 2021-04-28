@@ -28,22 +28,22 @@ export default {
         {
           image: '/images/products/rsyslog.png',
           title: 'Rsyslog',
-          url: '/rsyslog/'
+          url: '/rsyslog/1.3.0/'
         },
         {
           image: '/images/products/sftp.png',
           title: 'SFTP',
-          url: '/sftp/'
+          url: '/sftp/1.0.1/'
         },
         {
           image: '/images/products/vpn.png',
           title: 'VPN',
-          url: '/vpn/'
+          url: '/vpn/1.1.0/'
         },
         {
           image: '/images/products/samba.png',
           title: 'Samba',
-          url: '/samba/'
+          url: '/samba/1.2.0/'
         }
       ]
     }
