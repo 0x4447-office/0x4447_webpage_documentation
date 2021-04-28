@@ -28,9 +28,8 @@ Our product includes a bash script that when run on a client will autoamtically 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-rsyslog&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/rsyslog-server.json"
   cloud-formation-url="https://github.com/0x4447-Paid-Products/0x4447_product_paid_rsyslog"
+  product-url="https://aws.amazon.com/marketplace/pp/B07YN9CCV4"
 />
-
----
 
 ## The Manual Way
 
