@@ -79,8 +79,8 @@ module.exports = {
         text: 'Rsyslog',
         items: [
           {
-            text: '1.0',
-            link: '/rsyslog/1.0/'
+            text: '1.3.0',
+            link: '/rsyslog/1.3.0/'
           }
         ]
       },
@@ -88,8 +88,8 @@ module.exports = {
         text: 'SFTP',
         items: [
           {
-            text: '1.0',
-            link: '/sftp/1.0/'
+            text: '1.0.1',
+            link: '/sftp/1.0.1/'
           }
         ]
       },
@@ -97,8 +97,8 @@ module.exports = {
         text: 'VPN',
         items: [
           {
-            text: '1.0',
-            link: '/vpn/1.0/'
+            text: '1.1.0',
+            link: '/vpn/1.1.0/'
           }
         ]
       },
@@ -106,8 +106,8 @@ module.exports = {
         text: 'Samba',
         items: [
           {
-            text: '1.0',
-            link: '/samba/1.0/'
+            text: '1.2.0',
+            link: '/samba/1.2.0/'
           }
         ]
       },
