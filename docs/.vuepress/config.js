@@ -88,8 +88,8 @@ module.exports = {
         text: 'SFTP',
         items: [
           {
-            text: '1.0.1',
-            link: '/sftp/1.0.1/'
+            text: '1.0.2',
+            link: '/sftp/1.0.2/'
           }
         ]
       },

@@ -33,7 +33,7 @@ export default {
         {
           image: '/images/products/sftp.png',
           title: 'SFTP',
-          url: '/sftp/1.0.1/'
+          url: '/sftp/1.0.2/'
         },
         {
           image: '/images/products/vpn.png',
