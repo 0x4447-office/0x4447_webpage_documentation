@@ -30,7 +30,7 @@
 .cloud-formation > a {
   flex-shrink: 0;
   margin-right: 20px;
-  margin-top: 1em;
+  margin-top: 1.4em;
   display: block;
 }
 
