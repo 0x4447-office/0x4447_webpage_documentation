@@ -21,21 +21,11 @@ This product was designed for public access, but we recommend you don't allow SS
 
 ## CloudFormation
 
-
-### Pre-Requisites
-
-Before you hit the orange icon below to launch our complementary CloudFormation file, you will need the following pre-requisite resources in AWS:
-
-- **EC2 Key Pair**: An EC2 key pair to access your EC2 instance via SSH. This needs to be specified in the CloudFormation parameter *KeyNameParam*
-
-### Launch the Stack
-
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json"
   cloud-formation-url="https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json"
+  product-url="https://aws.amazon.com/marketplace/pp/B0839R5C7Z"
 />
-
----
 
 ## Manual
 
