@@ -25,12 +25,13 @@
 <style>
 .cloud-formation {
   display: flex;
-  align-items: center;
 }
 
 .cloud-formation > a {
   flex-shrink: 0;
   margin-right: 20px;
+  margin-top: 1em;
+  display: block;
 }
 
 @media (max-width: 768px) {
