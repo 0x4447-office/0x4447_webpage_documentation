@@ -69,7 +69,6 @@ module.exports = {
     logo: '/images/logo.png',
     repo: '0x4447-office/0x4447_webpage_documentation',
     search: false,
-    lastUpdated: false,
     docsRepo: '0x4447-office/0x4447_webpage_documentation',
     docsDir: 'docs',
     editLinks: true,
@@ -129,7 +128,6 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-    '@vuepress/last-updated',
     '@vuepress/active-header-links',
     'vuepress-plugin-smooth-scroll',
     [
