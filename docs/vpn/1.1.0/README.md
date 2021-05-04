@@ -31,7 +31,9 @@ This product was designed for public access, but we recommend you don't allow SS
 
 Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in order displayed here:
 
-**WARNING**: text written in capital letters needs to be replaced with real values.
+::: warning
+Text written in capital-underscore notation needs to be replaced with real values.
+:::
 
 ### Custom Role
 

@@ -28,6 +28,10 @@ Our product has built in resilience to make sure that you don't lose all your da
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
+::: warning
+Text written in capital-underscore notation needs to be replaced with real values.
+:::
+
 ### Security Group
 
 A default security group will be created for you automatically from the product configuration, but if you'd like to make one by hand, you need to have one of these ports open:

@@ -35,7 +35,9 @@ Our product includes a bash script that when run on a client will autoamtically 
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
-**WARNING**: text written in capital letters needs to be replaced with real values.
+::: warning
+Text written in capital-underscore notation needs to be replaced with real values.
+:::
 
 ### Custom Role
 
