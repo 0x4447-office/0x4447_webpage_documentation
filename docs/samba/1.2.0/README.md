@@ -1,13 +1,13 @@
 ---
-title: Samba Server for AWS
-summary: Mount dozens of drive under one Samba server.
+title: Samba Server - Ready to Go
+summary: A Samba Server with supports to up to 25 EBS drives.
 ---
 
-# Samba Server for AWS
+# Samba Server - Ready to Go
 
-## Prerequisites
-
-Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
+::: danger Note
+This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
+:::
 
 ## Understand the basics
 
@@ -23,7 +23,7 @@ But this also means that **you can't have the server deployed on a public networ
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
-## CloudFormation
+## Setup - Automated with CloudFormation
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json"
@@ -31,7 +31,7 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
   product-url="https://aws.amazon.com/marketplace/pp/B084HF14KL"
 />
 
-## Manual
+## Setup - Manual Approach
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 

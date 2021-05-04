@@ -1,13 +1,13 @@
 ---
-title: SFTP Server for AWS
-summary: Single user SFTP with infinite storage.
+title: SFTP Server - Single User Setup
+summary: Ready to go SFTP server with infinite EFS storage.
 ---
 
-# SFTP Server for AWS
+# SFTP Server - Single User Setup
 
-## Prerequisites
-
-Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
+::: danger Note
+This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
+:::
 
 ## Understand the basics
 
@@ -15,7 +15,7 @@ Before you start you need to be aware this is not a product for everyone. This p
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 
-## CloudFormation
+## Setup - Automated with CloudFormation
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-SFTP-Single-User&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json"
@@ -24,7 +24,7 @@ Our product has built in resilience to make sure that you don't lose all your da
 
 />
 
-## Manual
+## Setup - Manual Approach
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 

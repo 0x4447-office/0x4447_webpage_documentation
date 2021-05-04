@@ -1,13 +1,13 @@
 ---
-title: SFTP Server for AWS
-summary: Single user SFTP with infinite storage.
+title: SFTP Server - Single User Setup
+summary: Ready to go SFTP server with infinite EFS storage.
 ---
 
-# SFTP Server for AWS
+# SFTP Server - Single User Setup
 
-## Prerequisites
-
-Before you start you need to be aware this is not a product for everyone. This product is for DevOps that know AWS, and all its intricacy. You need to be experience with AWS, to use this product.
+::: danger Note
+This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
+:::
 
 ## Understand the basics
 
