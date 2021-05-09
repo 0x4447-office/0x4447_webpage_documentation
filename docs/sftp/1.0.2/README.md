@@ -17,7 +17,6 @@ The main idea is to allow only one user per server for those situations where se
 
 There two good uses cases for this product, situations where you have to ingest an unknown amount of data since the EFS will grow alongside with the uploaded data. The second use case is a way to quickly check the content of a EFS drive that you are not sure anymore about. Provide the EFS ID at boot time, set the credentials, with 45 sec for the instance to boot and mount the drive, and you are in browsing the content of the drive.
 
-
 ### Key aspects
 
 - Single user per server for better security, and organization.
@@ -30,7 +29,7 @@ There two good uses cases for this product, situations where you have to ingest 
 - Allow financial institutions share data with you in a secure manner.
 - Browse EFS drive that you might have in your account
 
-## Understand the basics
+## Additional details
 
 ### Resilience
 

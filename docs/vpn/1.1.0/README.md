@@ -28,7 +28,7 @@ We took away the complexity of setting all the certificates and keys, added supp
 - Secure offie resources in a private subnet and allow partial traffic for employees to access them.
 - Connect tow or more offices together with a secure link
 
-## Understand the basics
+## Additional details
 
 ### Resilience
 

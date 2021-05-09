@@ -28,7 +28,7 @@ Your imagination is your limit, but here are some ideas that are worth consideri
 - If you design your infrastructure where you don't give remote access to production server to anyone, you can stream the logs from those server in to our product for secure access to production logs - ideal for developers to debug potential issues
 - Stream logs from docker containers by setting docker to pass the logs in to the host OS, which then can forward those messages to our product.
 
-## Understand the basics
+## Additional details
 
 ### Resilience
 

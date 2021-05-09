@@ -28,7 +28,7 @@ Our two products: VPN, and Samba, combined together will allow to access drives 
 - Remote storage with easy backup options to access the data anywhere in the world.
 - Adaptable to other uses and ideas.
 
-## Understand the basics
+## Additional details
 
 ### Resilience
 
