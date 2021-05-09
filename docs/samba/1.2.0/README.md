@@ -46,7 +46,7 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json"
-  cloud-formation-url="https://github.com/0x4447-Paid-Products/0x4447_product_paid_samba"
+  cloud-formation-url="https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json"
   product-url="https://aws.amazon.com/marketplace/pp/B084HF14KL"
 />
 
