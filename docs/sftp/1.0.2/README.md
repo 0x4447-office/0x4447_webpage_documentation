@@ -9,6 +9,27 @@ summary: Ready to go SFTP server with infinite EFS storage.
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
 :::
 
+## What is this product about
+
+We took the simple idea of a SFTP server and added support for an AWS EFS drive out of the box.
+
+The main idea is to allow only one user per server for those situations where securing the network is paramount, and each client using the SFTP must be siloed in its own environment.
+
+There two good uses cases for this product, situations where you have to ingest an unknown amount of data since the EFS will grow alongside with the uploaded data. The second use case is a way to quickly check the content of a EFS drive that you are not sure anymore about. Provide the EFS ID at boot time, set the credentials, with 45 sec for the instance to boot and mount the drive, and you are in browsing the content of the drive.
+
+
+### Key aspects
+
+- Single user per server for better security, and organization.
+- Unlimited storage for the uploaded data.
+- Ability to easily browse pre-existing EFS drives.
+
+### Example use cases
+
+- Ingest vast amount of data for with a predictable price
+- Allow financial institutions share data with you in a secure manner.
+- Browse EFS drive that you might have in your account
+
 ## Understand the basics
 
 ### Resilience

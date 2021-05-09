@@ -9,6 +9,25 @@ summary: Predictable price, central place and easy access.
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
 :::
 
+## What is this product about
+
+We took the best what Rsyslog has to offer and create a product that gose beyond the default aspects of Rsyslog. We create a solution that can accept logs from any server or product that uses the Rsyslog standard over a secure connection while providing you the ability to give access to this logs to selected people over SSH.
+
+We wanted to create a product that can help you secure your infrastructure even more by allowing you to lockdown remote access to the production servers, while still letting your team know what is going on those servers.
+
+### Key aspects
+
+- SSL is enabled by default to only accept logs over a secure channel.
+- User access is over SSH using passwords, and limited only to the log folder.
+- Logs are organized in separated folders using the remote host name.
+
+### Example use cases
+
+Your imagination is your limit, but here are some ideas that are worth considering.
+
+- If you design your infrastructure where you don't give remote access to production server to anyone, you can stream the logs from those server in to our product for secure access to production logs - ideal for developers to debug potential issues
+- Stream logs from docker containers by setting docker to pass the logs in to the host OS, which then can forward those messages to our product.
+
 ## Understand the basics
 
 ### Resilience

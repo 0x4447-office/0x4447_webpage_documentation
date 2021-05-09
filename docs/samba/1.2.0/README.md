@@ -9,6 +9,25 @@ summary: A Samba Server with supports to up to 25 EBS drives.
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
 :::
 
+## What is this product about
+
+We love the idea of the Office in the Cloud, and decided to create a NAS in the cloud where you could attach to the product a bunch of EBS drives and allowing you to mount them on your computers as if they were local to your network, given, you need to use a VPN to gain access to the private subnet.
+
+Our two products: VPN, and Samba, combined together will allow to access drives from anywhere in the world, share data across cloud instances and local machines in harmony.
+
+### Key aspects
+
+- Mount up to 25 EBS drives
+- Mount the drives as if they were on the local lan while using a VPN.
+- Share data across instances in the cloud.
+
+### Example use cases
+
+- Share data between servers inside a VPC
+- Mount drive(s) locally when using a VPN.
+- Remote storage with easy backup options to access the data anywhere in the world.
+- Adaptable to other uses and ideas.
+
 ## Understand the basics
 
 ### Resilience

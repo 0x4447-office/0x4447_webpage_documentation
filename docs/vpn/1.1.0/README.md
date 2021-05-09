@@ -9,6 +9,25 @@ summary: Ready to go VPN server using OpenVPN with no soft limits.
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
 :::
 
+## What is this product about
+
+We took the popular OpenVPN server, and created a preconfigured, easy to use and resilient product that once booted is ready to go.
+
+We took away the complexity of setting all the certificates and keys, added support to resilience by keeping all the suers and unique data in to a EFS drive, this way even if for whatever reason the server gets terminated by whatever reason, as long as the EFS drive stays in place, you can boot another instance of the product, provide the EFS ID, and all will be as you left it. Minimizing drastically the down Tim for the users.
+
+### Key aspects
+
+- Removed the complexity of configuration.
+- All or partial traffic option.
+- Minimized downtime thanks to our custom resilience feature
+- No more stress to recreated all the certificate users if you lose the server or the drive.
+
+### Example use cases
+
+- Route all the traffic over the VPN server for remote workers
+- Secure offie resources in a private subnet and allow partial traffic for employees to access them.
+- Connect tow or more offices together with a secure link
+
 ## Understand the basics
 
 ### Resilience
