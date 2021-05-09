@@ -42,7 +42,7 @@ Our product is configured to allow any server to send it logs. The data will be 
 
 Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure wach client, or modify the script to fits your needs.
 
-## Setup - Automated with CloudFormation
+## Deploy Automatically
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-rsyslog&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/rsyslog-server.json"
@@ -50,7 +50,7 @@ Our product includes a bash script that when run on a client will autoamtically 
   product-url="https://aws.amazon.com/marketplace/pp/B07YN9CCV4"
 />
 
-## Setup - Manual Approach
+## Deploy Manually
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 

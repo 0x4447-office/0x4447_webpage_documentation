@@ -38,7 +38,7 @@ Our VPN Server has built in resilience to make sure that you don't lose all your
 
 This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
 
-## Setup - Automated with CloudFormation
+## Deploy Automatically
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json"
@@ -46,7 +46,7 @@ This product was designed for public access, but we recommend you don't allow SS
   product-url="https://aws.amazon.com/marketplace/pp/B0839R5C7Z"
 />
 
-## Setup - Manual Approach
+## Deploy Manually
 
 Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in order displayed here:
 

@@ -35,7 +35,7 @@ There two good uses cases for this product, situations where you have to ingest 
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 
-## Setup - Automated with CloudFormation
+## Deploy Automatically
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-SFTP-Single-User&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/sftp-single-user-server.json"
@@ -44,7 +44,7 @@ Our product has built in resilience to make sure that you don't lose all your da
 
 />
 
-## Setup - Manual Approach
+## Deploy Manually
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 

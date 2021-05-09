@@ -42,7 +42,7 @@ But this also means that **you can't have the server deployed on a public networ
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
-## Setup - Automated with CloudFormation
+## Deploy Automatically
 
 <cloud-formation
   deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-Samba&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/samba-server.json"
@@ -50,7 +50,7 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
   product-url="https://aws.amazon.com/marketplace/pp/B084HF14KL"
 />
 
-## Setup - Manual Approach
+## Deploy Manually
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
 
