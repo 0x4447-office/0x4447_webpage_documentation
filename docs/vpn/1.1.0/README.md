@@ -46,6 +46,31 @@ This product was designed for public access, but we recommend you don't allow SS
   product-url="https://aws.amazon.com/marketplace/pp/B0839R5C7Z"
 />
 
+### What will be deployed
+
+- 1x EC2 instance with 0x4447 custom AMI.
+  - 1x IAM Role.
+  - 1x IAM Policy.
+  - 1x Security Group.
+  - 1x Instance profile.
+  - 1x Elastic IP.
+  - 1x Elastic IP Association.
+- 4x CloudWatch Alarms:
+  - CPU Burst.
+  - CPU Load.
+  - EC2 Instance Recovery.
+- 1x SNS Topic.
+  - 1x SNS Pilicy.
+- 1x CloudWatch Dashboard for instance overview.
+- 1x EFS drive
+  - 1x Mount target.
+  - 1x Security group.
+- 1x Backup
+  - 1x Plan
+  - 1x Role
+  - 1x Selection
+  - 1x Vault
+
 ## Deploy Manually
 
 Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in order displayed here:

@@ -50,6 +50,23 @@ Our product includes a bash script that when run on a client will autoamtically 
   product-url="https://aws.amazon.com/marketplace/pp/B07YN9CCV4"
 />
 
+### What will be deployed
+
+- 1x EC2 instance with 0x4447 custom AMI.
+  - 1x IAM Role.
+  - 1x IAM Policy.
+  - 1x Security Group.
+  - 1x Instance profile.
+- 4x CloudWatch Alarms:
+  - CPU Burst.
+  - CPU Load.
+  - Disk Usage.
+  - EC2 Instance Recovery.
+- 1x SNS Topic.
+  - 1x SNS Pilicy.
+- 1x CloudWatch Dashboard for instance overview.
+- 1x S3 Bucket to store external scripts.
+
 ## Deploy Manually
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:

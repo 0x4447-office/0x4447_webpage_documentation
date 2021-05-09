@@ -50,6 +50,21 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
   product-url="https://aws.amazon.com/marketplace/pp/B084HF14KL"
 />
 
+### What will be deployed
+
+- 1x EC2 instance with 0x4447 custom AMI.
+  - 1x IAM Role.
+  - 1x IAM Policy.
+  - 1x Security Group.
+  - 1x Instance profile.
+- 4x CloudWatch Alarms:
+  - CPU Burst.
+  - CPU Load.
+  - EC2 Instance Recovery.
+- 1x SNS Topic.
+  - 1x SNS Pilicy.
+- 1x CloudWatch Dashboard for instance overview.
+
 ## Deploy Manually
 
 Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
