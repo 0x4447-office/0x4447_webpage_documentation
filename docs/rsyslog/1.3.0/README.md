@@ -77,7 +77,7 @@ Text written in capital-underscore notation needs to be replaced with real value
 
 ### Custom Role
 
-You need to create an EC2 role to allow the Rsyslog Server to upload and get files from S3. Below is the Policy Document that you need add to create this:
+Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Bellow you can find the role that you have to create for your EC2 Instance.
 
 ```json
 {
@@ -109,64 +109,74 @@ You need to create an EC2 role to allow the Rsyslog Server to upload and get fil
 
 ### Security Group
 
-A default security group will automatically be created for you from the product configuration, but if you'd like to make one by hand, you'll need to have these ports open towards the instance:
+Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
 
 - `22` over `TCP` for remote managment.
 - `6514` over `TCP` for Rsyslog to take logs in.
 
 ### Bash Script for UserData
 
-When you start to automate your instance, the whole process will provide you with a bucket name so that we can copy the auto generate certificate over to S3, which must be used by the client to send encrypted data to the server.
+Our product needs a few dynamic values custom to you setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance you can create a file like this with all the necessary values. Copy the bash script from bellow and set your custom values.
 
 ```bash
 #!/bin/bash
-S3_BUCKET=BUCKET_NAME
-LOG_TTL=DAYS
 
-echo S3_BUCKET=$S3_BUCKET >> /home/ec2-user/.env
-echo LOG_TTL=$LOG_TTL >> /home/ec2-user/.env
+echo S3_BUCKET="STRING" >> /home/ec2-user/.env
+echo LOG_TTL="INTEGER" >> /home/ec2-user/.env
 ```
 
-Explanation:
+::: tip Explanation
 
 1. Set the name of the S3 bucket where to upload the files.
 1. Set the logs retention period in days.
 
-**Understand how UserData works**
+:::
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. You won't be able to later update the UserData and expect the configuration to change. If you need to make chagnes to the user data, you have two options:
+::: warning Understand how UserData works
 
-- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
-- Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be triggered if you stop and start the instance.
 
-### Connect to the server
+This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have two options:
 
-Once the instance is up and running, get its IP and connect to the instance over SSH uisng the slected key at deployment time.
+- Follow this [AWS solution](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
+- Log-in to the instance, edit the `/home/ec2-user/.env` file, and restart the instance.
+- Terminate the instance and redeploy the product from scratch
+
+:::
 
 ## Automatic Client Setup
 
-Once the server is deployed correctly, you can configure your clients with the following `UserData` to setup everything automatically. This ensures that everything will be automatically set up at boot time.
+Once the server (our product) is deployed correctly, you can configure your clients with the following commands (makes sure to replace the placeholders with real values, and make sure the EC2 instances you run this commands have access to the S3 bucket).
+
+This commands can be executed:
+
+- by hand
+- by placing them in the EC2 Instance UserData
+- by executing them remotely through AWS Systems Manager
 
 ```bash
 #!/bin/bash
 
-# Set the main variables, Replace S3_BUCKET_RSYSLOG with the name of the S3 bucket that you provided as a parameter to the Cloud Formation
-BUCKET_RSYSLOG=S3_BUCKET_RSYSLOG
-RSYLOG_INTERNAL_IP=RSYLOG_SERVER_INTERNAL_IP
+aws s3 cp s3://BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
 
-# Copy the bash script which will configure the client
-aws s3 cp s3://$BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
-
-# Make the script executable
 chmod +x /home/ec2-user/rsyslog-client-setup.sh
 
-# Configure the client to send the logs to the Rsyslog server
-/home/ec2-user/rsyslog-client-setup.sh $RSYLOG_INTERNAL_IP
+/home/ec2-user/rsyslog-client-setup.sh RSYLOG_SERVER_IP
 ```
+
+::: tip Explanation
+
+1. Copy the bash script which will configure the client
+1. Make the script executable
+1. Configure the client to send the logs to the Rsyslog server
+
+:::
 
 ## User Management
 
-By default we create a custom user group in the system called `rsyslog`. This makes it easier for you to add developers as individual users to access the logs. Developers can then freely look at the logs without having access to the whole system.
+Since the idea of our product is to allow others to have easy access to remote servers logs, we made a custom group called `rsyslog`. This way you can create new users that when attached to this group will have only access to the remote logs.
+
+Bellow you can find a reminder how to manage password users under Linux.
 
 ### How to create a user
 
@@ -194,13 +204,11 @@ sudo passwd USER_NAME
 
 ## Where are my logs?
 
-The logs can be found in the `/var/log/0x4447-rsyslog` folder. There you'll find folders for each client's sending logs. The client host name will be used for the folder names.
+The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you will find more folder named after the remote hostname.
 
-## Test The Setup
+## Test the setup
 
-Be sure to test the server to make sure it behaves the way we advertise it; not becasue we don't belive it works correctly, but to make sure that you are confortable with the product and knows how it works, especially the resiliance mode.
-
-Terminate the instance and start a new one with the correct UserData in order to see if everything works as expected after the instance booted.
+Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
 
 ## Security Concerns
 
