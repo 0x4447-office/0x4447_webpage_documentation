@@ -69,43 +69,11 @@ Our product includes a bash script that when run on a client will autoamtically 
 
 ## Deploy Manually
 
-Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
+Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in the order displayed here:
 
 ::: warning
-Text written in capital-underscore notation needs to be replaced with real values.
+Text starting with `PARAM_` needs to be replaced with real values.
 :::
-
-### Custom Role
-
-Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Bellow you can find the role that you have to create for your EC2 Instance.
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::BUCKET_NAME/*",
-                "arn:aws:s3:::BUCKET_NAME"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListAllMyBuckets",
-                "s3:HeadBucket"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
-```
 
 ### Security Group
 
@@ -121,8 +89,8 @@ Our product needs a few dynamic values custom to you setup. To get access to thi
 ```bash
 #!/bin/bash
 
-echo S3_BUCKET="STRING" >> /home/ec2-user/.env
-echo LOG_TTL="INTEGER" >> /home/ec2-user/.env
+echo S3_BUCKET=PARAM_STRING >> /home/ec2-user/.env
+echo LOG_TTL=PARAM_INTEGER >> /home/ec2-user/.env
 ```
 
 ::: tip Explanation
@@ -144,6 +112,38 @@ This means you won't be able to stop the instance, update the UserData and have 
 
 :::
 
+### Custom Role
+
+Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Bellow you can find the role that you have to create for your EC2 Instance.
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::PARAM_BUCKET_NAME/*",
+                "arn:aws:s3:::PARAM_BUCKET_NAME"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:HeadBucket"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
 ## Automatic Client Setup
 
 Once the server (our product) is deployed correctly, you can configure your clients with the following commands (makes sure to replace the placeholders with real values, and make sure the EC2 instances you run this commands have access to the S3 bucket).
@@ -157,11 +157,11 @@ This commands can be executed:
 ```bash
 #!/bin/bash
 
-aws s3 cp s3://BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
+aws s3 cp s3://PARAM_BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
 
 chmod +x /home/ec2-user/rsyslog-client-setup.sh
 
-/home/ec2-user/rsyslog-client-setup.sh RSYLOG_SERVER_IP
+/home/ec2-user/rsyslog-client-setup.sh PARAM_RSYLOG_SERVER_IP
 ```
 
 ::: tip Explanation
@@ -181,36 +181,38 @@ Bellow you can find a reminder how to manage password users under Linux.
 ### How to create a user
 
 ```bash
-sudo useradd -g rsyslog USER_NAME
+sudo useradd -g rsyslog PARAM_USER_NAME
 ```
 
 ### How to set a password
 
 ```bash
-sudo passwd USER_NAME
+sudo passwd PARAM_USER_NAME
 ```
 
 ### How to delete a user
 
 ```bash
-sudo userdel USER_NAME
+sudo userdel PARAM_USER_NAME
 ```
 
 ### How to change a password
 
 ```bash
-sudo passwd USER_NAME
+sudo passwd PARAM_USER_NAME
 ```
 
-## Where are my logs?
+## Final Thought
+
+### Where are my logs?
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you will find more folder named after the remote hostname.
 
-## Test the setup
+### Test the setup
 
 Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
 
-## Security Concerns
+### Security Concerns
 
 Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
@@ -220,3 +222,45 @@ Bellow we give you a list of potentail ideas to consider regarding security, but
 - Allow SSH connection only from limited subnets.
 - Ideally allow SSH connection only from another central instance.
 - Don't give root access to anyone but yourself.
+
+## F.A.Q
+
+These are some of the common solutions to problems you may run into:
+
+### Not authorized for images
+
+My CloudFormation stack failed with the following error `API: ec2:RunInstances Not authorized for images:...` in the Event tab.
+
+::: tip Solution
+
+You have to accept the subscription from the AWS Marketplace first, before you use our CloudFormation file.
+
+:::
+
+### The product is missbehaving
+
+I did follow all the instruction from the documentation.
+
+::: tip Solution
+
+Check if the values entered in the UserData reached the instance itself.
+
+```
+sudo cat /var/lib/cloud/instance/user-data.txt
+```
+
+:::
+
+### UserData seams ok...
+
+The UserData reached the instacne, and yet the product is not acting as it should.
+
+::: tip Solution
+
+Use the following command to see if there were any errors douring the boot process.
+
+```
+sudo cat /var/log/messages | grep 0x4447
+```
+
+:::
