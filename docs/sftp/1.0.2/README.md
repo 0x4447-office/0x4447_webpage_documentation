@@ -122,16 +122,16 @@ This means you won't be able to stop the instance, update the UserData and have 
 
 Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
 
-### Backup Your Data
-
-Make sure you regularly backup your EFS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
-
 ### Security Concerns
 
 Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
 - Limit access to the server to just a fixed IP.
 - Don't give root access to anyone but yourself.
+
+### Backup Your Data
+
+Make sure you regularly backup your drive(s). One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
 
 ## F.A.Q
 

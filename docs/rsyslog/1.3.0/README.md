@@ -202,11 +202,11 @@ sudo userdel PARAM_USER_NAME
 sudo passwd PARAM_USER_NAME
 ```
 
-## Final Thought
-
-### Where are my logs?
+## Logs location
 
 The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you will find more folder named after the remote hostname.
+
+## Final Thought
 
 ### Test the setup
 
