@@ -67,15 +67,51 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
 
 ## Deploy Manually
 
-Before launching an instance, you'll have to do some manual inputs to make everything work correctly. Please follow these steps in the order displayed here:
+Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in the order displayed here:
 
 ::: warning
-Text written in capital-underscore notation needs to be replaced with real values.
+Text starting with `PARAM_` needs to be replaced with real values.
+:::
+
+### Security Group
+
+Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+
+- `445` over `TCP` for connectivity to Samba
+
+Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual input needed in the OS itself.
+
+### Bash Script for UserData
+
+Our product needs a few dynamic values custom to you setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance you can create a file like this with all the necessary values. Copy the bash script from bellow and set your custom values.
+
+```bash
+#!/bin/bash
+
+echo DRIVES=PARAM_EBS_ID1,PARAM_EBS_ID2,PARAM_EBS_ID3,PARAM_EBS_ID25 >> /home/ec2-user/.env
+```
+
+::: tip Explanation
+
+1. Set the variable with a list (separated by commas and no space) of EBS drives to be mounted - max 25.
+
+:::
+
+::: warning Understand how UserData works
+
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be triggered if you stop and start the instance.
+
+This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have two options:
+
+- Follow this [AWS solution](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
+- Log-in to the instance, edit the `/home/ec2-user/.env` file, and restart the instance.
+- Terminate the instance and redeploy the product from scratch
+
 :::
 
 ### Custom Role
 
-Create a new role for the instance that will carry our product. The role must be for the `EC2` resource; it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy and have this inline policy:
+Create a new role for the instance that will carry our product. The role must be for the `EC2` resource; it needs to have attached the `AmazonEC2ReadOnlyAccess` managed policy and have the following inline policy:
 
 ```json
 {
@@ -94,83 +130,96 @@ Create a new role for the instance that will carry our product. The role must be
 }
 ```
 
-### Security Group
+## Mount the drives
 
-A default security group will be automatically created for you from the product configuration, but if you'd like to make one by hand, you need to have this port open towards the instance:
+Once the server is up and running, need to be on the same network that our prodcut is (over VPN, in the same VPC (Subnet), etc). Bellow you can find detailed instructions how to mount the drive under the most popular operating systems.
 
-- `445` over `TCP` for connectivity to Samba
+### Windows 10
 
-Opening port `22` is unnecessary since this product is unmanaged, meaning there is no manual input needed in the OS itself.
+1. Open the File Manager.
+1. On the left side, right click on Network.
+1. Select Map network drive....
+1. In the new window in the Folder field, type this: `\\PARAM_SAMBA_LOCAL_IP` (the slashes are important)
+1. Then click Browse....
+1. From the drop down menu you will see a list of driver(s) select the one that you want and, click OK.
+1. Then click Finish.
+1. If you get a popup asking for credentials, type in the `Username` field: `guest`.
 
-### Bash Script for UserData
+### MacOS 11.x
 
-Once you have everything setup, you can replace the place holder values with the real ID's. Make sure to replace the values that are in all CAPS that end with `_ID` with the real data.
+1. Open Finder.
+1. In the menu follow: `Go` > `Connect to Server...`
+1. In the new Window type the local IP of the server.
+1. Click Connect.
+1. When prompted, select `Guest` as the user to log in as.
+1. The connection might take a moment, but once all is done you should see the Samba server on the left side of Finder.
 
-```bash
-#!/usr/bin/env bash
+### Ubuntu 20.x
 
-cat << EOF > /home/ec2-user/.env
-DRIVES=EBS_ID,EBS_ID,EBS_ID,EBS_ID,ETC...
-HOSTNAME=THE_NAME_OF_THE_HOST
-EOF
+Other distribution might have a simmilar approach.
+
+```sh
+sudo apt install cifs-utils
+sudo mount -t cifs //172.31.0.21/vol-PARAM_ID_OF_THE_COLUME /mnt/samba
+cd /mnt/samba
 ```
 
-Explanation:
+## Final Thought
 
-1. Set the variable with a list (separated by commas) of EBS drives to be mounted - max 25.
-1. Set the hostname of the instance, so you you can name your server.
+### Test the setup
 
-**Understand how UserData works**
+Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
 
-It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be trigered if you stop and start the instance. If you choose to not enable resilience and want to skip the UserData script at boot time, then you won't be able to later update the UserData with the script and can't expect for the automation to take place. You have two options:
+### Security Concerns
 
-- Either you follow [this link](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
-- Or your start a new instance, this time with the right UserData, and then copy over all the configuration files from the old instance to the new one.
+Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
-### Connect to the Server
-
-Once the instance is up and running, get its IP and connect to the instance over SSH using the slected key at deployment time.
-
-## Test The Setup
-
-Be sure to test the server to make sure it behaves the way we have described it; not because we don't belive it works correctly, but to make sure you are confortable with the product and know how it works, especially the resiliance mode.
-
-### Test 1 - Viewing shares from your Ubuntu Client
-
-```
-# sudo apt install smbclient
-# smbclient -L \\<samba-local-ip>\
-Enter WORKGROUP\ubuntu's password:
-
-        Sharename       Type      Comment
-        ---------       ----      -------
-        vol-02df7017709d5ec45 Disk
-        IPC$            IPC       IPC Service (samba_server)
-```
-
-### Test 2 - Mounting the Samba Drive from your Ubuntu Client
-
-```
-# sudo apt install cifs-utils
-# sudo mount -t cifs //172.31.0.21/vol-02df7017709d5ec45 /mnt/samba
-# cd /mnt/samba
-```
-
-### Test 3 - Termination and IP retention
-
-Terminate the instance and start a new one with the correct UserData, and see if after the instance booted everything works as expected.
-
-## Backup Your Data
-
-Make sure you regularly backup your EFS and EBS drive. One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/) for EFS and snapshotting for EBS.
-
-## Security Concerns
-
-Bellow we give you a list of potential ideas worth considiering regarding security, but this list is not exhaustive; it is just a good starting point.
-
-- Never expose this server to the public. Use it only inside a private network to limit who can send logs.
-- Allow mounting only from specific subnets.
-- Block public SSH access.
-- Allow SSH connection only from limited subnets.
-- Ideally allow SSH connection only from another central instance.
+- Allow access only from within the same subnet.
+- Don't put the server on to the public internet.
 - Don't give root access to anyone but yourself.
+
+### Backup Your Data
+
+Make sure you regularly backup your drive(s). One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
+
+## F.A.Q
+
+These are some of the common solutions to problems you may run into:
+
+### Not authorized for images
+
+My CloudFormation stack failed with the following error `API: ec2:RunInstances Not authorized for images:...` in the Event tab.
+
+::: tip Solution
+
+You have to accept the subscription from the AWS Marketplace first, before you use our CloudFormation file.
+
+:::
+
+### The product is missbehaving
+
+I did follow all the instruction from the documentation.
+
+::: tip Solution
+
+Check if the values entered in the UserData reached the instance itself.
+
+```
+sudo cat /var/lib/cloud/instance/user-data.txt
+```
+
+:::
+
+### UserData seams ok...
+
+The UserData reached the instacne, and yet the product is not acting as it should.
+
+::: tip Solution
+
+Use the following command to see if there were any errors douring the boot process.
+
+```
+sudo cat /var/log/messages | grep 0x4447
+```
+
+:::
