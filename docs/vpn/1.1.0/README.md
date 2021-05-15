@@ -157,9 +157,9 @@ This Policy Document will give the Instance the ability to attach the Elastic IP
 
 The first boot will be slower then what you are used to. This is due to all the certificate that we need to generate for the VPN. Since at boot time there isn't much going on in the system, this process can take few minutes longer then usual.
 
-## Connect to the server
+## Connecting to the server
 
-Once the instance is up and running, get its IP and connect to the instance over SSH using the selected key at deployment time using the user `ec2-user`.
+Get its IP and connect to the instance over SSH using the selected key at deployment time using the user `ec2-user`.
 
 ## User Management
 
