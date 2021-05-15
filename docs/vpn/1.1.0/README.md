@@ -94,21 +94,13 @@ Our product needs a few dynamic values custom to you setup. To get access to thi
 ```bash
 #!/bin/bash
 
-EFS_ID=fs-REPLACE_WITH_REAL_VALUE
-EIP_ID=eipalloc-REPLACE_WITH_REAL_VALUE
-SERVER_DNS=DNS_NAME
+echo EFS_ID=PARAM_EFS_ID >> /home/ec2-user/.env
+echo EIP_ID=PARAM_ELASTIC_IP >> /home/ec2-user/.env
+echo SERVER_DNS=PARAM_DNS_NAME >> /home/ec2-user/.env
 
-VPN_SPLIT_TUNNEL=DNS_NAME
-VPN_SPLIT_TUNNEL_NETWORK=IP_OF_THE_NETWORK_FOR_EXAMPLE_10.0.0.0
-VPN_SPLIT_TUNNEL_SUBNET=IP_OF_THE_NETWORK_MASK_FOR_EXAMPLE_255.255.255.0
-
-echo EFS_ID=$EFS_ID >> /home/ec2-user/.env
-echo EIP_ID=$EIP_ID >> /home/ec2-user/.env
-echo SERVER_DNS=$SERVER_DNS >> /home/ec2-user/.env
-
-echo VPN_SPLIT_TUNNEL=$VPN_SPLIT_TUNNEL >> /home/ec2-user/.env
-echo VPN_SPLIT_TUNNEL_NETWORK=$VPN_SPLIT_TUNNEL_NETWORK >> /home/ec2-user/.env
-echo VPN_SPLIT_TUNNEL_SUBNET=$VPN_SPLIT_TUNNEL_SUBNET >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL=PARAM_TRUE_OR_FALSE >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL_NETWORK=PARAM_IP_OF_THE_NETWORK_FOR_EXAMPLE_10.0.0.0 >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL_SUBNET=PARAM_IP_OF_THE_NETWORK_MASK_FOR_EXAMPLE_255.255.255.0 >> /home/ec2-user/.env
 ```
 
 ::: tip Explanation
