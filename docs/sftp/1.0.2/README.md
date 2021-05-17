@@ -116,6 +116,14 @@ This means you won't be able to stop the instance, update the UserData and have 
 
 :::
 
+## The First Boot
+
+The boot time of our product will be slower then if you started an instance from a clean AMI, this is due to our custom code that needs to be executed in order to prepare the product for you. This process can take few minutes longer then usual.
+
+## Connecting to the Server
+
+If you need to connect to the server: get it's IP, connect to the instance over SSH with the username `ec2-user`, while using the private key you selected at deployment time. If sucesfully connected, you should be greeted with a custom MOTD detailing the product information.
+
 ## Final Thought
 
 ### Test the setup

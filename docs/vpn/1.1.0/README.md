@@ -147,11 +147,11 @@ This Policy Document will give the Instance the ability to attach the Elastic IP
 
 ## The First Boot
 
-The first boot will be slower then what you are used to. This is due to all the certificate that we need to generate for the VPN. Since at boot time there isn't much going on in the system, this process can take few minutes longer then usual.
+The boot time of our product will be slower then if you started an instance from a clean AMI, this is due to our custom code that needs to be executed in order to prepare the product for you. This process can take few minutes longer then usual.
 
-## Connecting to the server
+## Connecting to the Server
 
-Get its IP and connect to the instance over SSH using the selected key at deployment time using the user `ec2-user`.
+If you need to connect to the server: get it's IP, connect to the instance over SSH with the username `ec2-user`, while using the private key you selected at deployment time. If sucesfully connected, you should be greeted with a custom MOTD detailing the product information.
 
 ## User Management
 
