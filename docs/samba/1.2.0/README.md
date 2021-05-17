@@ -3,7 +3,7 @@ title: Samba Server - Ready to Go
 summary: A Samba Server with supports to up to 25 EBS drives.
 ---
 
-# Samba Server - Ready to Go
+# {{ $frontmatter.title }}
 
 ::: danger Note
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.

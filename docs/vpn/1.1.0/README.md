@@ -3,7 +3,7 @@ title: VPN Server - Using OpenVPN
 summary: Ready to go VPN server using OpenVPN with no soft limits.
 ---
 
-# VPN Server - Using OpenVPN
+# {{ $frontmatter.title }}
 
 ::: danger Note
 This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
