@@ -5,8 +5,8 @@ summary: Predictable price, central place and easy access.
 
 # {{ $frontmatter.title }}
 
-::: danger Note
-This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
+::: warning Note
+This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
 ## What is this product about
@@ -69,7 +69,7 @@ Our product includes a bash script that when run on a client will autoamtically 
 
 ## Deploy Manually
 
-Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in the order displayed here:
+Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
 
 ::: warning
 Text starting with `PARAM_` needs to be replaced with real values.
@@ -84,18 +84,18 @@ Our product configuration in the AWS Marketplace already have set all the ports 
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to you setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance you can create a file like this with all the necessary values. Copy the bash script from bellow and set your custom values.
+Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/tmp/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
 
 ```bash
 #!/bin/bash
 
-echo S3_BUCKET=PARAM_STRING >> /home/ec2-user/.env
-echo LOG_TTL=PARAM_INTEGER >> /home/ec2-user/.env
+echo S3_BUCKET=PARAM_STRING >> /tmp/.env
+echo LOG_TTL=PARAM_INTEGER >> /tmp/.env
 ```
 
 ::: tip Explanation
 
-1. Set the name of the S3 bucket where to upload the files.
+1. Set the name of the S3 bucket where to upload the product custom script for client auto configuration.
 1. Set the logs retention period in days.
 
 :::
@@ -104,11 +104,11 @@ echo LOG_TTL=PARAM_INTEGER >> /home/ec2-user/.env
 
 It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be triggered if you stop and start the instance.
 
-This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have two options:
+This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have the following options:
 
 - Follow this [AWS solution](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
-- Log-in to the instance, edit the `/home/ec2-user/.env` file, and restart the instance.
-- Terminate the instance and redeploy the product from scratch
+- Log-in to the instance, edit the `/tmp/.env` file, and restart the instance.
+- Terminate the instance and redeploy the product from scratch.
 
 :::
 
@@ -146,22 +146,29 @@ Our software uses a S3 bucket to copy over the custom client configuration scrip
 
 ## Automatic Client Setup
 
-Once the server (our product) is deployed correctly, you can configure your clients with the following commands (makes sure to replace the placeholders with real values, and make sure the EC2 instances you run this commands have access to the S3 bucket).
+::: warning Note
+
+This step is optional. If you know what you are doing, feel free to configure your client servers yourself. Or you are using another product that forwards logs etc, use whathever UI the prodcut has to set it up.
+
+:::
+
+Once the server (our product) is deployed correctly, you can configure your clients with the following commands (makes sure to replace the placeholder values with real ones, and make sure the EC2 instances you run this commands have access to the S3 bucket where the custom script is located).
 
 This commands can be executed:
 
-- by hand
-- by placing them in the EC2 Instance UserData
-- by executing them remotely through AWS Systems Manager
+- by hand.
+- by placing them in the EC2 Instance UserData.
+- by executing them remotely through AWS Systems Manager.
+- etc.
 
 ```bash
 #!/bin/bash
 
-aws s3 cp s3://PARAM_BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /home/ec2-user/rsyslog-client-setup.sh
+aws s3 cp s3://PARAM_BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /tmp/rsyslog-client-setup.sh
 
-chmod +x /home/ec2-user/rsyslog-client-setup.sh
+chmod +x /tmp/rsyslog-client-setup.sh
 
-/home/ec2-user/rsyslog-client-setup.sh PARAM_RSYLOG_SERVER_IP
+./tmp/rsyslog-client-setup.sh PARAM_RSYLOG_SERVER_IP
 ```
 
 ::: tip Explanation
@@ -174,7 +181,7 @@ chmod +x /home/ec2-user/rsyslog-client-setup.sh
 
 ## User Management
 
-Since the idea of our product is to allow others to have easy access to remote servers logs, we made a custom group called `rsyslog`. This way you can create new users that when attached to this group will have only access to the remote logs.
+To allow other team members to access the logs from remote servers throuh our product, we created a special user group called `rsyslog` that has access only to the remote logs.
 
 Bellow you can find a reminder how to manage password users under Linux.
 
@@ -204,7 +211,7 @@ sudo passwd PARAM_USER_NAME
 
 ## Logs location
 
-The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you will find more folder named after the remote hostname.
+The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you'll find more folders named after the remote hostname for easy indentification.
 
 ## Final Thought
 
@@ -264,3 +271,7 @@ sudo cat /var/log/messages | grep 0x4447
 ```
 
 :::
+
+## Support
+
+If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.

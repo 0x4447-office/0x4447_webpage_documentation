@@ -5,8 +5,8 @@ summary: A Samba Server with supports to up to 25 EBS drives.
 
 # {{ $frontmatter.title }}
 
-::: danger Note
-This product is intended to be used by Cloud professionals how have experience with the Linux OS, networking in the cloud and understand Cloud pricing.
+::: warning Note
+This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
 ## What is this product about
@@ -67,7 +67,7 @@ This way the Samba-server can be accessed only through a VPN connection. If you 
 
 ## Deploy Manually
 
-Before launching an instance, you'll have to do some manual work to make everything work correctly. Please follow these steps in the order displayed here:
+Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
 
 ::: warning
 Text starting with `PARAM_` needs to be replaced with real values.
@@ -83,7 +83,7 @@ Opening port `22` is unnecessary since this product is unmanaged, meaning there 
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to you setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance you can create a file like this with all the necessary values. Copy the bash script from bellow and set your custom values.
+Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
 
 ```bash
 #!/bin/bash
@@ -101,11 +101,11 @@ echo DRIVES=PARAM_EBS_ID1,PARAM_EBS_ID2,PARAM_EBS_ID3,PARAM_EBS_ID25 >> /home/ec
 
 It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be triggered if you stop and start the instance.
 
-This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have two options:
+This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have the following options:
 
 - Follow this [AWS solution](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
 - Log-in to the instance, edit the `/home/ec2-user/.env` file, and restart the instance.
-- Terminate the instance and redeploy the product from scratch
+- Terminate the instance and redeploy the product from scratch.
 
 :::
 
@@ -223,3 +223,7 @@ sudo cat /var/log/messages | grep 0x4447
 ```
 
 :::
+
+## Support
+
+If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.

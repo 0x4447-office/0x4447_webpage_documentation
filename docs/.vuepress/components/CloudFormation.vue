@@ -14,10 +14,10 @@
       We provide a complementary CloudFormation file. Before you click the orange
       button to deploy the stack, make sure to <a :href="$attrs['product-url']" target="_blank">subscribe first</a>
       to the product on the AWS Marketplace, and if you want to
-      check the CloudFormation yourself, follow
+      check the CloudFormation prior to deployment, follow
       <a :href="$attrs['cloud-formation-url']" target="_blank">this link</a>.
       Using our CF will allow you to deploy the stack with minimal work on your part. But, if you'd like to deploy the
-      stack by hand, from this point on you'll find the manual on how to do so.
+      stack by hand, check the <a href="#deploy-manually">Deploy Manually</a> section.
     </p>
   </div>
 </template>
