@@ -9,6 +9,16 @@ summary: A Samba Server with supports to up to 25 EBS drives.
 This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
+## Core Idea
+
+The core idea of this product was to design it in a way where there would be as little management as possible. This way you can focus on what matters and not have to manage yet another server.
+
+For this reason you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
+
+We will provide over time updates to add features, fix bugs or update version of different packages.
+
+This product should be treaded as an appliance, use its featrues described bellow, and send featrue requests if some usefull capability is missing that could make your life easier.
+
 ## What is this product about
 
 We love the idea of the Office in the Cloud, and decided to create a NAS in the cloud where you could attach to the product a bunch of EBS drives and allowing you to mount them on your computers as if they were local to your network, given, you need to use a VPN to gain access to the private subnet.
