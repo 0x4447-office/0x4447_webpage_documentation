@@ -38,13 +38,13 @@ Our two products: VPN, and Samba, combined together will allow to access drives 
 - Remote storage with easy backup options to access the data anywhere in the world.
 - Adaptable to other uses and ideas.
 
-## Additional details
+### Additional details
 
-### Resilience
+#### Resilience
 
 If you want to always be able to connect the same internal IP, make sure to start the EC2 Instance and keep the same local IP settings. This way, even if the instance gets terminated and you have to recreate it, the IP will stay the same and your user won't have to change any of their configurations.
 
-### Security
+#### Security
 
 Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company.
 

@@ -39,9 +39,9 @@ There two good uses cases for this product, situations where you have to ingest 
 - Allow financial institutions share data with you in a secure manner.
 - Browse EFS drive that you might have in your account
 
-## Additional details
+### Additional details
 
-### Resilience
+#### Resilience
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 

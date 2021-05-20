@@ -38,13 +38,13 @@ We took away the complexity of setting all the certificates and keys, added supp
 - Secure offie resources in a private subnet and allow partial traffic for employees to access them.
 - Connect tow or more offices together with a secure link
 
-## Additional details
+### Additional details
 
-### Resilience
+#### Resilience
 
 Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
 
-### Security
+#### Security
 
 This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
 

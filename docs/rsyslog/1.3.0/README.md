@@ -38,17 +38,17 @@ Your imagination is your limit, but here are some ideas that are worth consideri
 - If you design your infrastructure where you don't give remote access to production server to anyone, you can stream the logs from those server in to our product for secure access to production logs - ideal for developers to debug potential issues
 - Stream logs from docker containers by setting docker to pass the logs in to the host OS, which then can forward those messages to our product.
 
-## Additional details
+### Additional details
 
-### Resilience
+#### Resilience
 
 Our complementary CloudFormation is setup in a way that you have to provide a internal IP that you'd like the server to always use, this way even if the instance is temrinated for a server type chagne, the IP will remain the same and the clients will be able to reconnect without any chagnes.
 
-### Security
+#### Security
 
 Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public Internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs.
 
-### Automation
+#### Automation
 
 Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure wach client, or modify the script to fits your needs.
 
