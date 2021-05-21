@@ -9,23 +9,13 @@ summary: Ready to go SFTP server with infinite EFS storage.
 This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
-## Core Idea
-
-The core idea of this product was to design it in a way where there would be as little management as possible. This way you can focus on what matters and not have to manage yet another server.
-
-For this reason you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
-
-We will provide over time updates to add features, fix bugs or update version of different packages.
-
-This product should be treaded as an appliance, use its featrues described bellow, and send featrue requests if some usefull capability is missing that could make your life easier.
-
 ## What is this product about
 
-We took the simple idea of a SFTP server and added support for an AWS EFS drive out of the box.
+We took the simple idea of a SFTP server and extended it with a EFS drive, which converts the SFTP in to infinite sotrage.
 
-The main idea is to allow only one user per server for those situations where securing the network is paramount, and each client using the SFTP must be siloed in its own environment.
+Our solution removes the stress of running out of storeage forevere. The days are gone where you have to alockate huge ammount of storeage hoping it is going to be enough over time, while also monitoring if the storage is running out, and spend the time to migrate to another EBS drive.
 
-There two good uses cases for this product, situations where you have to ingest an unknown amount of data since the EFS will grow alongside with the uploaded data. The second use case is a way to quickly check the content of a EFS drive that you are not sure anymore about. Provide the EFS ID at boot time, set the credentials, with 45 sec for the instance to boot and mount the drive, and you are in browsing the content of the drive.
+We created a product that once is deployed, you can forget about it, and worring only about product updates while not loosing any data stored in the EFS drives.
 
 ### Key aspects
 
@@ -35,9 +25,9 @@ There two good uses cases for this product, situations where you have to ingest 
 
 ### Example use cases
 
-- Ingest vast amount of data for with a predictable price
+- Ingest vast amount of data for with a predictable price.
 - Allow financial institutions share data with you in a secure manner.
-- Browse EFS drive that you might have in your account
+- Browse existing EFS drive that you might have in your account and forgot what is contained within them.
 
 ### Additional details
 

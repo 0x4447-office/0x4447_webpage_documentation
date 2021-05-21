@@ -9,34 +9,24 @@ summary: A Samba Server with supports to up to 25 EBS drives.
 This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
-## Core Idea
-
-The core idea of this product was to design it in a way where there would be as little management as possible. This way you can focus on what matters and not have to manage yet another server.
-
-For this reason you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
-
-We will provide over time updates to add features, fix bugs or update version of different packages.
-
-This product should be treaded as an appliance, use its featrues described bellow, and send featrue requests if some usefull capability is missing that could make your life easier.
-
 ## What is this product about
 
-We love the idea of the Office in the Cloud, and decided to create a NAS in the cloud where you could attach to the product a bunch of EBS drives and allowing you to mount them on your computers as if they were local to your network, given, you need to use a VPN to gain access to the private subnet.
+Samba is an old technology that we decided to refrehs to fit the modern Cloud era, by givving you the ability to mount multiple EBS drives and share them across your private network within the VPC or with remote offices ofver a VPN connecction.
 
-Our two products: VPN, and Samba, combined together will allow to access drives from anywhere in the world, share data across cloud instances and local machines in harmony.
+The ease of use was paramount for this product to the point that by defualt you don't need SSH acccess, since there is nothing for you to do. All the configuration is done at deployment time. You have to wait for few minutes, and you are ready to mount locally your drives.
 
 ### Key aspects
 
 - Mount up to 25 EBS drives
 - Mount the drives as if they were on the local lan while using a VPN.
-- Share data across instances in the cloud.
+- Share data across instances within the same VPC.
 
 ### Example use cases
 
 - Share data between servers inside a VPC
 - Mount drive(s) locally when using a VPN.
 - Remote storage with easy backup options to access the data anywhere in the world.
-- Adaptable to other uses and ideas.
+- Browse existing EBS drive that you might have in your account and forgot what is contained within them.
 
 ### Additional details
 

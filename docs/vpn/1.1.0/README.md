@@ -9,34 +9,27 @@ summary: Ready to go VPN server using OpenVPN with no soft limits.
 This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 :::
 
-## Core Idea
-
-The core idea of this product was to design it in a way where there would be as little management as possible. This way you can focus on what matters and not have to manage yet another server.
-
-For this reason you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
-
-We will provide over time updates to add features, fix bugs or update version of different packages.
-
-This product should be treaded as an appliance, use its featrues described bellow, and send featrue requests if some usefull capability is missing that could make your life easier.
-
 ## What is this product about
 
-We took the popular OpenVPN server, and created a preconfigured, easy to use and resilient product that once booted is ready to go.
+We took the popular OpenVPN server, and created a preconfigured, easy to use and resilient product that once booted is ready to go, and virtually impossible to take donw.
 
-We took away the complexity of setting all the certificates and keys, added support to resilience by keeping all the suers and unique data in to a EFS drive, this way even if for whatever reason the server gets terminated by whatever reason, as long as the EFS drive stays in place, you can boot another instance of the product, provide the EFS ID, and all will be as you left it. Minimizing drastically the down Tim for the users.
+We removed the compleksity of setting it up and added mechanism that no matter what you do you user will be able to reconect to the server. As long as you don't phisically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it, and as long as the same EFS ID is sued, all the configuration will be there, all you users certs and more is preserved and always restored at boot time.
+
+We made the most stress free OpenVPN prodcut out there.
 
 ### Key aspects
 
 - Removed the complexity of configuration.
 - All or partial traffic option.
-- Minimized downtime thanks to our custom resilience feature
-- No more stress to recreated all the certificate users if you lose the server or the drive.
+- Minimized downtime thanks to our custom resilience feature.
+- No more stress to recreated all the users if you lose the server.
+- The downtime minimized to the time it takes to boot the EC2 Instacne and mount the EFS drive.
 
 ### Example use cases
 
-- Route all the traffic over the VPN server for remote workers
+- Route all the traffic over the VPN server for remote workers.
 - Secure offie resources in a private subnet and allow partial traffic for employees to access them.
-- Connect tow or more offices together with a secure link
+- Connect tow or more offices together with a secure link.
 
 ### Additional details
 
