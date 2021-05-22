@@ -66,6 +66,7 @@ This section lists all the fetures of this product for easy referencing.
 1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
 1. SNS Topic for the alarms.
 1. Same local IP for the server so even after termination the clients won't need reconfiguration.
+1. EC2 Instance termination protection enabled by default.
 
 :::
 
