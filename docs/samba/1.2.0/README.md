@@ -44,6 +44,31 @@ But this also means that **you can't have the server deployed on a public networ
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
+## Complete feature list
+
+This section lists all the fetures of this product for easy referencing.
+
+::: details Detailed list
+
+**The  product itself**
+
+1. Mount up to 25 EBS drives.
+1. No manual managment needed.
+1. All the configuration is done through the EC2 Instance UserData section.
+1. Drive are mounted using Guest access.
+1. Anyone in the same subnet is free to mount the drives.
+1. Mount one or all of the drives.
+
+**Using our CloudFormation**
+
+1. Alarm to check for CPU Bursts.
+1. Alarm to check for CPU Load.
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. SNS Topic for the alarms.
+1. Same local IP for the server so even after termination the clients won't need reconfiguration.
+
+:::
+
 ## Deploy Automatically
 
 <cloud-formation

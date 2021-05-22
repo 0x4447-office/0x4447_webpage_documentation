@@ -43,6 +43,28 @@ Our VPN Server has built in resilience to make sure that you don't lose all your
 
 This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
 
+## Complete feature list
+
+This section lists all the fetures of this product for easy referencing.
+
+::: details Detailed list
+
+**The  product itself**
+
+1. No soft limits on how manu user you can create and connect
+1. Part of the configuration is done through the EC2 Instance UserData section.
+1. Unique server settings are stored in to a EFS drive, this way it is save to terminate an instacne and not lose any custom confuguration (users, key, certificates etc)
+
+**Using our CloudFormation**
+
+1. Alarm to check for CPU Bursts.
+1. Alarm to check for CPU Load.
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. SNS Topic for the alarms.
+1. Same public IP for the server so even after termination the clients won't need reconfiguration.
+
+:::
+
 ## Deploy Automatically
 
 <cloud-formation

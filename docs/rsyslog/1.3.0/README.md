@@ -40,7 +40,30 @@ Our product is configured to allow any server to send it logs. The data will be 
 
 #### Automation
 
-Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure wach client, or modify the script to fits your needs.
+Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure each client, or modify the script to fits your needs.
+
+## Complete feature list
+
+This section lists all the fetures of this product for easy referencing.
+
+::: details Detailed list
+
+**The  product itself**
+
+1. Default SSL connection
+1. Bash script for client configuration
+1. Separated users for log access
+
+**Using our CloudFormation**
+
+1. Alarm to check for CPU Bursts.
+1. Alarm to check for CPU Load.
+1. Alarm to check for Disk usage.
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. SNS Topic for the alarms
+1. Same local IP for the server so even after termination the clients won't need reconfiguration.
+
+:::
 
 ## Deploy Automatically
 

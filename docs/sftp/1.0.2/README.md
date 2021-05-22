@@ -37,6 +37,29 @@ Your imagination is your limit, but here are some ideas that are worth consideri
 
 Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
 
+## Complete feature list
+
+This section lists all the fetures of this product for easy referencing.
+
+::: details Detailed list
+
+**The  product itself**
+
+1. Single user access using password.
+1. No manual managment needed.
+1. All the configuration is done through the EC2 Instance UserData section.
+1. Infinite storage using a EFS drive
+
+**Using our CloudFormation**
+
+1. Alarm to check for CPU Bursts.
+1. Alarm to check for CPU Load.
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. SNS Topic for the alarms.
+1. Same public IP for the server so even after termination the clients won't need reconfiguration.
+
+:::
+
 ## Deploy Automatically
 
 <cloud-formation
