@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: '0x4447 Documentation',
+  title: 'Documentation for',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
