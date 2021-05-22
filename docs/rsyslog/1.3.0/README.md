@@ -48,7 +48,7 @@ This section lists all the fetures of this product for easy referencing.
 
 ::: details Detailed list
 
-**The  product itself**
+**The product itself**
 
 1. Default SSL connection
 1. Bash script for client configuration

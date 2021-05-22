@@ -43,7 +43,7 @@ This section lists all the fetures of this product for easy referencing.
 
 ::: details Detailed list
 
-**The  product itself**
+**The product itself**
 
 1. Single user access using password.
 1. No manual managment needed.

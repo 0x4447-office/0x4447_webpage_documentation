@@ -49,7 +49,7 @@ This section lists all the fetures of this product for easy referencing.
 
 ::: details Detailed list
 
-**The  product itself**
+**The product itself**
 
 1. No soft limits on how manu user you can create and connect
 1. Part of the configuration is done through the EC2 Instance UserData section.
