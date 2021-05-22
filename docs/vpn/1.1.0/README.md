@@ -27,6 +27,8 @@ We made the most stress free OpenVPN prodcut out there.
 
 ### Example use cases
 
+Your imagination is your limit, but here are some ideas that are worth considering:
+
 - Route all the traffic over the VPN server for remote workers.
 - Secure offie resources in a private subnet and allow partial traffic for employees to access them.
 - Connect tow or more offices together with a secure link.

@@ -23,6 +23,8 @@ The ease of use was paramount for this product to the point that by defualt you 
 
 ### Example use cases
 
+Your imagination is your limit, but here are some ideas that are worth considering:
+
 - Share data between servers inside a VPC
 - Mount drive(s) locally when using a VPN.
 - Remote storage with easy backup options to access the data anywhere in the world.

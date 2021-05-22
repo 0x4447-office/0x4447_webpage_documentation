@@ -25,6 +25,8 @@ We created a product that once is deployed, you can forget about it, and worring
 
 ### Example use cases
 
+Your imagination is your limit, but here are some ideas that are worth considering:
+
 - Ingest vast amount of data for with a predictable price.
 - Allow financial institutions share data with you in a secure manner.
 - Browse existing EFS drive that you might have in your account and forgot what is contained within them.
