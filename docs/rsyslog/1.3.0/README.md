@@ -200,7 +200,7 @@ aws s3 cp s3://PARAM_BUCKET_RSYSLOG/bash/rsyslog-client-setup.sh /tmp/rsyslog-cl
 
 chmod +x /tmp/rsyslog-client-setup.sh
 
-./tmp/rsyslog-client-setup.sh PARAM_RSYLOG_SERVER_IP
+/tmp/rsyslog-client-setup.sh PARAM_RSYLOG_SERVER_IP
 ```
 
 ::: tip Explanation
