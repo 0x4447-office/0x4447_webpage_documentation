@@ -140,7 +140,7 @@ This means you won't be able to stop the instance, update the UserData and have 
 
 Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Bellow you can find the role that you have to create for your EC2 Instance.
 
-```json
+```json line-numbers
 {
     "Version": "2012-10-17",
     "Statement": [
