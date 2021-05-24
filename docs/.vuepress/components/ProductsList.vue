@@ -24,7 +24,7 @@ export default {
 
   computed: {
     products () {
-      return this.$root.$themeConfig.nav.
+      return this.$root.$themeConfig.nav[0]?.items.
         filter((navItem) => navItem.items?.length > 0).
         map((navItem) => {
           return {
