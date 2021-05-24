@@ -67,7 +67,7 @@ module.exports = {
    */
   themeConfig: {
     logo: '/images/logo.png',
-    search: true,
+    search: false,
     docsRepo: '0x4447-office/0x4447_webpage_documentation',
     docsDir: 'docs',
     editLinks: true,
