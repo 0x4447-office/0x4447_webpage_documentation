@@ -67,7 +67,7 @@ module.exports = {
    */
   themeConfig: {
     logo: '/images/logo.png',
-    search: false,
+    search: true,
     docsRepo: '0x4447-office/0x4447_webpage_documentation',
     docsDir: 'docs',
     editLinks: true,
@@ -129,6 +129,9 @@ module.exports = {
     '@vuepress/plugin-medium-zoom',
     '@vuepress/active-header-links',
     'vuepress-plugin-smooth-scroll',
+    ['vuepress-plugin-code-copy', {
+      align: 'top'
+    }],
     [
       '@vuepress/pwa',
       {
