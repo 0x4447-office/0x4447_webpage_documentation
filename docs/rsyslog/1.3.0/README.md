@@ -1,13 +1,11 @@
 ---
 title: Rsyslog server - Unlimited Connections
 summary: Predictable price, central place and easy access.
+note: This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
+
 ---
 
 # {{ $frontmatter.title }}
-
-::: warning Note
-This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
-:::
 
 ## What is this product about
 

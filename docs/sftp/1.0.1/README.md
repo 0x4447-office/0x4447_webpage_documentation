@@ -1,13 +1,10 @@
 ---
 title: SFTP Server - Single User Setup
 summary: Ready to go SFTP server with infinite EFS storage.
+note: This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
 ---
 
 # {{ $frontmatter.title }}
-
-::: warning Note
-This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
-:::
 
 ## Understand the basics
 
