@@ -74,46 +74,51 @@ module.exports = {
     editLinkText: 'Edit on GitHub',
     nav: [
       {
-        text: 'Rsyslog',
-        image: '/images/products/rsyslog.png',
+        text: 'Products',
         items: [
           {
-            text: '1.3.0',
-            link: '/rsyslog/1.3.0/'
-          }
-        ]
-      },
-      {
-        text: 'SFTP',
-        image: '/images/products/sftp.png',
-        items: [
-          {
-            text: '1.0.1',
-            link: '/sftp/1.0.1/'
+            text: 'Rsyslog',
+            image: '/images/products/rsyslog.png',
+            items: [
+              {
+                text: '1.3.0',
+                link: '/rsyslog/1.3.0/'
+              }
+            ]
           },
           {
-            text: '1.0.2',
-            link: '/sftp/1.0.2/'
-          }
-        ]
-      },
-      {
-        text: 'VPN',
-        image: '/images/products/vpn.png',
-        items: [
+            text: 'SFTP',
+            image: '/images/products/sftp.png',
+            items: [
+              {
+                text: '1.0.1',
+                link: '/sftp/1.0.1/'
+              },
+              {
+                text: '1.0.2',
+                link: '/sftp/1.0.2/'
+              }
+            ]
+          },
           {
-            text: '1.1.0',
-            link: '/vpn/1.1.0/'
-          }
-        ]
-      },
-      {
-        text: 'Samba',
-        image: '/images/products/samba.png',
-        items: [
+            text: 'VPN',
+            image: '/images/products/vpn.png',
+            items: [
+              {
+                text: '1.1.0',
+                link: '/vpn/1.1.0/'
+              }
+            ]
+          },
           {
-            text: '1.2.0',
-            link: '/samba/1.2.0/'
+            text: 'Samba',
+            image: '/images/products/samba.png',
+            items: [
+              {
+                text: '1.2.0',
+                link: '/samba/1.2.0/'
+              }
+            ]
           }
         ]
       },
