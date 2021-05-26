@@ -91,12 +91,12 @@ module.exports = {
             image: '/images/products/sftp.png',
             items: [
               {
-                text: '1.0.1',
-                link: '/sftp/1.0.1/'
-              },
-              {
                 text: '1.0.2',
                 link: '/sftp/1.0.2/'
+              },
+              {
+                text: '1.0.1',
+                link: '/sftp/1.0.1/'
               }
             ]
           },
