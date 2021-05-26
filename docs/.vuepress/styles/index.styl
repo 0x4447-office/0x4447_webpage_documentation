@@ -20,6 +20,8 @@
 .page
   padding-bottom 0 !important;
 
+
+// vuepress-copy-to-clipboard plugin overrides
 .code-copy {
   height: 0;
   position: absolute;
@@ -33,5 +35,22 @@
   span {
     right: 74px !important;
     pointer-events: none;
+  }
+}
+
+// markdown.lineNumbers overrides
+.line-numbers-mode {
+  &:not(.line-numbers) {
+    .line-numbers-wrapper {
+      display none;
+    }
+
+    &:after {
+      display none !important;
+    }
+
+    pre {
+      padding-left: 1.5rem !important;
+    }
   }
 }

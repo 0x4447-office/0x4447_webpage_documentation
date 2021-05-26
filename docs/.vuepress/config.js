@@ -127,7 +127,11 @@ module.exports = {
         link: 'https://support.0x4447.com/'
       }
     ],
-    sidebar: 'auto',
+    sidebar: 'auto'
+  },
+
+  markdown: {
+    lineNumbers: true
   },
 
   /**
