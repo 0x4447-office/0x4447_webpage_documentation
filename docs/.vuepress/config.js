@@ -138,6 +138,9 @@ module.exports = {
     '@vuepress/plugin-medium-zoom',
     '@vuepress/active-header-links',
     'vuepress-plugin-smooth-scroll',
+    ['vuepress-plugin-code-copy', {
+      align: 'top'
+    }],
     [
       '@vuepress/pwa',
       {
