@@ -3,16 +3,16 @@
     <a
       v-for="(product, index) in products"
       :key="index"
-      :href="product.url"
-      :title="product.url"
+      :href="product.link"
+      :title="product.link"
     >
       <img
         :src="product.image"
-        :alt="product.title"
+        :alt="product.text"
       >
 
       <span>
-        {{ product.title }}
+        {{ product.text }}
       </span>
     </a>
   </div>
@@ -22,30 +22,17 @@
 export default {
   name: 'ProductsList',
 
-  data () {
-    return {
-      products: [
-        {
-          image: '/images/products/rsyslog.png',
-          title: 'Rsyslog',
-          url: '/rsyslog/1.3.0/'
-        },
-        {
-          image: '/images/products/sftp.png',
-          title: 'SFTP',
-          url: '/sftp/1.0.2/'
-        },
-        {
-          image: '/images/products/vpn.png',
-          title: 'VPN',
-          url: '/vpn/1.1.0/'
-        },
-        {
-          image: '/images/products/samba.png',
-          title: 'Samba',
-          url: '/samba/1.2.0/'
-        }
-      ]
+  computed: {
+    products () {
+      return this.$root.$themeConfig.nav[0]?.items.
+        filter((navItem) => navItem.items?.length > 0).
+        map((navItem) => {
+          return {
+            image: navItem.image,
+            text: navItem.text,
+            link: navItem.items[0].link
+          }
+        })
     }
   }
 }
