@@ -81,8 +81,8 @@ module.exports = {
             image: '/images/products/rsyslog.png',
             items: [
               {
-                text: '1.3.0',
-                link: '/rsyslog/1.3.0/'
+                text: '1.3.1',
+                link: '/rsyslog/1.3.1/'
               }
             ]
           },
