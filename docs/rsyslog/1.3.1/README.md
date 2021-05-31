@@ -276,7 +276,7 @@ You have to accept the subscription from the AWS Marketplace first, before you u
 
 :::
 
-### The product is missbehaving
+### The product is misbehaving
 
 I did follow all the instruction from the documentation.
 
