@@ -11,7 +11,7 @@ This product is intended to be used by Cloud professionals who have experience w
 
 ## What is this product about
 
-We took the best what Rsyslog has to offer and create a product that gose beyond the default aspects of Rsyslog. We create a solution that can accept logs from any server or product that uses the Rsyslog standard over a secure connection while providing you the ability to give access to this logs to selected people over SSH.
+We took the best of what Rsyslog has to offer to create a product that goes beyond the default aspects of Rsyslog. We have created a solution that can accept logs from any server or product that uses the Rsyslog standard over a secure connection, while providing you the ability to give access to this logs to selected people over SSH.
 
 We wanted to create a product that can help you secure your infrastructure even more by allowing you to lockdown remote access to the production servers, while still letting your team know what is going on those servers.
 
@@ -25,22 +25,22 @@ We wanted to create a product that can help you secure your infrastructure even 
 
 Your imagination is your limit, but here are some ideas that are worth considering:
 
-- If you design your infrastructure where you don't give remote access to production server to anyone, you can stream the logs from those server in to our product for secure access to production logs - ideal for developers to debug potential issues
-- Stream logs from docker containers by setting docker to pass the logs in to the host OS, which then can forward those messages to our product.
+- If you design your infrastructure so that you don't give remote access to production server to anyone, you can stream the logs from those servers into our product for secure access to production logs - ideal for developers wanting to debug potential issues.
+- Stream logs from docker containers by setting up docker to pass the logs in to the host OS, which then can forward those messages to our product.
 
 ### Additional details
 
 #### Resilience
 
-Our complementary CloudFormation is setup in a way that you have to provide a internal IP that you'd like the server to always use, this way even if the instance is temrinated for a server type chagne, the IP will remain the same and the clients will be able to reconnect without any chagnes.
+Our complementary CloudFormation is setup in a way that you have to provide a internal IP that you'd like the server to always use, this way even if the instance is temrinated for a server type change, the IP will remain the same and the clients will be able to reconnect without any changes.
 
 #### Security
 
-Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public Internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs.
+Our product is configured to allow any server to send it logs. The data will be sent over an ecrypted connection, but there is not a credential system to prevent instances from sending data. For this reason, this product should not be acessible from the public internet. It was designed to be deployed in a private subnet within a VPC, to allow only local servers to send it logs.
 
 #### Automation
 
-Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your cleitns can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure each client, or modify the script to fits your needs.
+Our product includes a bash script that when run on a client will autoamtically install and configure the Rsyslog service. The bash script will be uploaded to S3, and from there your clients can pull it and run it. Once the server instance is deployed, check the S3 bucket and review the script before using it on a client to make sure it is safe for your environment. If needed you can manaully configure each client, or modify the script to fits your needs.
 
 ## Complete feature list
 
@@ -59,7 +59,7 @@ This section lists all the fetures of this product for easy referencing.
 1. Alarm to check for CPU Bursts.
 1. Alarm to check for CPU Load.
 1. Alarm to check for Disk usage.
-1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. Alarm to auto recover the instance if it gets termianted suddenly by AWS due to hardware failiure.
 1. SNS Topic for the alarms
 1. Same local IP for the server so even after termination the clients won't need reconfiguration.
 1. EC2 Instance termination protection enabled by default.
@@ -76,24 +76,24 @@ This section lists all the fetures of this product for easy referencing.
 
 ### What will be deployed
 
-- 1x EC2 instance with 0x4447 custom AMI.
-  - 1x IAM Role.
-  - 1x IAM Policy.
-  - 1x Security Group.
-  - 1x Instance profile.
+- 1x EC2 instance with 0x4447 custom AMI
+  - 1x IAM Role
+  - 1x IAM Policy
+  - 1x Security Group
+  - 1x Instance profile
 - 4x CloudWatch Alarms:
-  - CPU Burst.
-  - CPU Load.
-  - Disk Usage.
-  - EC2 Instance Recovery.
-- 1x SNS Topic.
-  - 1x SNS Pilicy.
-- 1x CloudWatch Dashboard for instance overview.
-- 1x S3 Bucket to store external scripts.
+  - CPU Burst
+  - CPU Load
+  - Disk Usage
+  - EC2 Instance Recovery
+- 1x SNS Topic
+  - 1x SNS Pilicy
+- 1x CloudWatch Dashboard for instance overview
+- 1x S3 Bucket to store external scripts
 
 ## Deploy Manually
 
-Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
+Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experience is expected):
 
 ::: warning
 Text starting with `PARAM_` needs to be replaced with real values.
@@ -101,14 +101,14 @@ Text starting with `PARAM_` needs to be replaced with real values.
 
 ### Security Group
 
-Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+Our product configuration in the AWS Marketplace already has set all the ports that need to be open for the product to work. If for whatever reason the correct Security Group is not created by AWS, below you can find a list and descriptions of all the ports needed:
 
 - `22` over `TCP` for remote managment.
 - `6514` over `TCP` for Rsyslog to take logs in.
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/tmp/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
+Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/tmp/.env`. By using the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
 
 ```bash
 #!/bin/bash
@@ -138,9 +138,9 @@ This means you won't be able to stop the instance, update the UserData and have 
 
 ### Custom Role
 
-Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Bellow you can find the role that you have to create for your EC2 Instance.
+Our software uses a S3 bucket to copy over the custom client configuration script which is generated at boot time with all the necessary details to setup the Rsyslog client in a way where the client server knows where and how to send the logs to our product. To copy this file to S3 the instance itself needs a custom Role with S3 access for this to happen. Below you can find the role that you have to create for your EC2 Instance.
 
-```json line-numbers
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -184,13 +184,13 @@ This step is optional. If you know what you are doing, feel free to configure yo
 
 :::
 
-Once the server (our product) is deployed correctly, you can configure your clients with the following commands (makes sure to replace the placeholder values with real ones, and make sure the EC2 instances you run this commands have access to the S3 bucket where the custom script is located).
+Once the server (our product) is deployed correctly, you can configure your clients with the following commands (make sure to replace the placeholder values with real ones, and make sure the EC2 instances in which you run these commands have access to the S3 bucket where the custom script is located).
 
-This commands can be executed:
+These commands can be executed:
 
-- by hand.
-- by placing them in the EC2 Instance UserData.
-- by executing them remotely through AWS Systems Manager.
+- by hand
+- by placing them in the EC2 Instance UserData
+- by executing them remotely through AWS Systems Manager
 - etc.
 
 ```bash
@@ -214,18 +214,6 @@ chmod +x /tmp/rsyslog-client-setup.sh
 ## User Management
 
 To allow other team members to access the logs from remote servers throuh our product, we created a special user group called `rsyslog` that has access only to the remote logs.
-
-::: warning Important
-
-Before you create the users you have to chagne the configuration in the `/etc/ssh/sshd_config` file to allow SSH to allow access using password credentials. By default AWS dose not allow products with this feature enabled by default.
-
-Steps:
-
-1. Open the `/etc/ssh/sshd_config` file with your favorite editor.
-1. Replace the line `PasswordAuthentication no` with `PasswordAuthentication yes`.
-1. Restart the SSH service by typing `sudo systemctl restart sshd`.
-
-:::
 
 Bellow you can find a reminder how to manage password users under Linux.
 
@@ -261,18 +249,18 @@ The logs can be found in the `/var/log/0x4447-rsyslog` folder. Inside it you'll 
 
 ### Test the setup
 
-Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
+Before you go in to production, make sure to test the product. This ensures that you get used to how it works.
 
 ### Security Concerns
 
-Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
+Bellow we give you a list of potential ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
-- Never expose this server to the public. Use it only inside a private network to limit who can send it logs.
-- Allow logging only from specific subnets.
-- Block public SSH access.
-- Allow SSH connection only from limited subnets.
-- Ideally allow SSH connection only from another central instance.
-- Don't give root access to anyone but yourself.
+- Never expose this server to the public. Use it only inside a private network to limit who can send it logs
+- Allow logging only from specific subnets
+- Block public SSH access
+- Allow SSH connection only from limited subnets
+- Ideally allow SSH connection only from another central instance
+- Don't give root access to anyone but yourself
 
 ## F.A.Q
 
@@ -294,7 +282,7 @@ I did follow all the instruction from the documentation.
 
 ::: tip Solution
 
-Check if the values entered in the UserData reached the instance itself.
+Check if the values entered in the UserData have reached the instance itself.
 
 ```
 sudo cat /var/lib/cloud/instance/user-data.txt
@@ -304,7 +292,7 @@ sudo cat /var/lib/cloud/instance/user-data.txt
 
 ### UserData seams ok...
 
-The UserData reached the instacne, and yet the product is not acting as it should.
+The UserData reached the instance, and yet the product is not acting as it should.
 
 ::: tip Solution
 
@@ -318,4 +306,4 @@ sudo cat /var/log/messages | grep 0x4447
 
 ## Support
 
-If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
