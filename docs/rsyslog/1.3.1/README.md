@@ -117,7 +117,7 @@ echo S3_BUCKET=PARAM_STRING >> /tmp/.env
 echo LOG_TTL=PARAM_INTEGER >> /tmp/.env
 ```
 
-::: tip Explanation
+::: tip Explination
 
 1. Set the name of the S3 bucket where to upload the product custom script for client auto configuration.
 1. Set the logs retention period in days.
