@@ -11,24 +11,24 @@ This product is intended to be used by Cloud professionals who have experience w
 
 ## What is this product about
 
-Samba is an old technology that we decided to refrehs to fit the modern Cloud era, by givving you the ability to mount multiple EBS drives and share them across your private network within the VPC or with remote offices ofver a VPN connecction.
+Samba is an old technology that we refreshed to fit the modern Cloud era, giving you the ability to mount multiple EBS drives and share them across your private network within the VPC or with remote offices over a VPN connecction.
 
-The ease of use was paramount for this product to the point that by defualt you don't need SSH acccess, since there is nothing for you to do. All the configuration is done at deployment time. You have to wait for few minutes, and you are ready to mount locally your drives.
+Ease of use was paramount for this product to the point that by defualt you don't need SSH acccess, since there is nothing for you to do. All the configuration is done at deployment time. You have to wait for few minutes, and you are ready to locally mount your drives.
 
 ### Key aspects
 
 - Mount up to 25 EBS drives
-- Mount the drives as if they were on the local lan while using a VPN.
-- Share data across instances within the same VPC.
+- Mount the drives as if they were on the local lan while using a VPN
+- Share data across instances within the same VPC
 
 ### Example use cases
 
 Your imagination is your limit, but here are some ideas that are worth considering:
 
 - Share data between servers inside a VPC
-- Mount drive(s) locally when using a VPN.
-- Remote storage with easy backup options to access the data anywhere in the world.
-- Browse existing EBS drive that you might have in your account and forgot what is contained within them.
+- Mount drive(s) locally when using a VPN
+- Remote storage with easy backup options to access the data anywhere in the world
+- Browse existing EBS drives that you might have in your account and forgotten what is contained within them
 
 ### Additional details
 
@@ -40,7 +40,7 @@ If you want to always be able to connect the same internal IP, make sure to star
 
 Our product is configured to only allow guest access, meaning there are no user accounts. This makes it very straight forward for users to mount the drive and share data across the company.
 
-But this also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. By default we do set a public IP using the CloudFormation file, for you to access the server to manage it if needed, but the default setting for the security group is not to have the SSH port open. This way there is no remote access to the public, but the server is always set to be accesed publicly if needed.
+This also means that **you can't have the server deployed on a public network with a public IP**. You need to deploy the server in a private network and use a VPN server to access it. By default we do set a public IP using the CloudFormation file, for you to access the server to manage it if needed. The default setting for the security group is not to have the SSH port open. This way there is no remote access to the public, but the server is always set to be accesed publicly if needed.
 
 This way the Samba-server can be accessed only through a VPN connection. If you are looking for an affordable VPN server, we recommend the [openvpn-server](https://aws.amazon.com/marketplace/pp/B0839R5C7Z).
 
@@ -52,21 +52,21 @@ This section lists all the fetures of this product for easy referencing.
 
 **The product itself**
 
-1. Mount up to 25 EBS drives.
-1. No manual managment needed.
-1. All the configuration is done through the EC2 Instance UserData section.
-1. Drive are mounted using Guest access.
-1. Anyone in the same subnet is free to mount the drives.
-1. Mount one or all of the drives.
+1. Mount up to 25 EBS drives
+1. No manual managment needed
+1. All the configuration is done through the EC2 Instance UserData section
+1. Drives are mounted using Guest access
+1. Anyone in the same subnet is free to mount the drives
+1. Mount one or all of the drives
 
 **Using our CloudFormation**
 
-1. Alarm to check for CPU Bursts.
-1. Alarm to check for CPU Load.
-1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
-1. SNS Topic for the alarms.
-1. Same local IP for the server so even after termination the clients won't need reconfiguration.
-1. EC2 Instance termination protection enabled by default.
+1. Alarm to check for CPU Bursts
+1. Alarm to check for CPU Load
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure
+1. SNS Topic for the alarms
+1. Same local IP for the server so even after termination the clients won't need reconfiguration
+1. EC2 Instance termination protection enabled by default
 
 :::
 
@@ -80,18 +80,18 @@ This section lists all the fetures of this product for easy referencing.
 
 ### What will be deployed
 
-- 1x EC2 instance with 0x4447 custom AMI.
-  - 1x IAM Role.
-  - 1x IAM Policy.
-  - 1x Security Group.
-  - 1x Instance profile.
+- 1x EC2 instance with 0x4447 custom AMI
+  - 1x IAM Role
+  - 1x IAM Policy
+  - 1x Security Group
+  - 1x Instance profile
 - 4x CloudWatch Alarms:
-  - CPU Burst.
-  - CPU Load.
-  - EC2 Instance Recovery.
-- 1x SNS Topic.
-  - 1x SNS Pilicy.
-- 1x CloudWatch Dashboard for instance overview.
+  - CPU Burst
+  - CPU Load
+  - EC2 Instance Recovery
+- 1x SNS Topic
+  - 1x SNS Pilicy
+- 1x CloudWatch Dashboard for instance overview
 
 ## Deploy Manually
 
@@ -103,7 +103,7 @@ Text starting with `PARAM_` needs to be replaced with real values.
 
 ### Security Group
 
-Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+Our product configuration in the AWS Marketplace already has set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
 
 - `445` over `TCP` for connectivity to Samba
 
@@ -111,7 +111,7 @@ Opening port `22` is unnecessary since this product is unmanaged, meaning there 
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
+Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By using the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own.
 
 ```bash
 #!/bin/bash
@@ -168,7 +168,7 @@ If you need to connect to the server: get it's IP, connect to the instance over 
 
 ## Mount the drives
 
-Once the server is up and running, need to be on the same network that our prodcut is (over VPN, in the same VPC (Subnet), etc). Bellow you can find detailed instructions how to mount the drive under the most popular operating systems.
+Once the server is up and running, need to be on the same network that our product is (over VPN, in the same VPC (Subnet), etc). Bellow you can find detailed instructions how to mount the drive under the most popular operating systems.
 
 ### Windows 10
 
@@ -204,7 +204,7 @@ cd /mnt/samba
 
 ### Test the setup
 
-Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
+Before you go in to production, make sure to test the product. This ensures that you get used to how it works.
 
 ### Security Concerns
 
@@ -232,7 +232,7 @@ You have to accept the subscription from the AWS Marketplace first, before you u
 
 :::
 
-### The product is missbehaving
+### The product is misbehaving
 
 I did follow all the instruction from the documentation.
 
@@ -248,7 +248,7 @@ sudo cat /var/lib/cloud/instance/user-data.txt
 
 ### UserData seams ok...
 
-The UserData reached the instacne, and yet the product is not acting as it should.
+The UserData reached the instance, and yet the product is not acting as it should.
 
 ::: tip Solution
 
@@ -262,4 +262,4 @@ sudo cat /var/log/messages | grep 0x4447
 
 ## Support
 
-If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
