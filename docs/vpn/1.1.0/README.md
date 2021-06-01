@@ -13,7 +13,7 @@ This product is intended to be used by Cloud professionals who have experience w
 
 We took the popular OpenVPN server, and created a preconfigured and easy to use, resilient product. Once booted it is ready to go, and virtually impossible to take down.
 
-We removed the complxcity of setup and added a mechanism so that no matter what your user will be able to reconnect to the server. As long as you don't physically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it. If the same EFS ID is used, all the configuration will be there, all your users certs and more is preserved, and always restored at boot time.
+We removed the complexity of setup and added a mechanism so that no matter what your user will be able to reconnect to the server. As long as you don't physically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it. If the same EFS ID is used, all the configuration will be there, all your users certs and more is preserved, and always restored at boot time.
 
 We made the most stress free OpenVPN product out there.
 
