@@ -11,33 +11,33 @@ This product is intended to be used by Cloud professionals who have experience w
 
 ## What is this product about
 
-We took the popular OpenVPN server, and created a preconfigured, easy to use and resilient product that once booted is ready to go, and virtually impossible to take donw.
+We took the popular OpenVPN server, and created a preconfigured and easy to use, resilient product. Once booted it is ready to go, and virtually impossible to take down.
 
-We removed the compleksity of setting it up and added mechanism that no matter what you do you user will be able to reconect to the server. As long as you don't phisically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it, and as long as the same EFS ID is sued, all the configuration will be there, all you users certs and more is preserved and always restored at boot time.
+We removed the complxcity of setup and added a mechanism so that no matter what your user will be able to reconnect to the server. As long as you don't physically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it. If the same EFS ID is used, all the configuration will be there, all your users certs and more is preserved, and always restored at boot time.
 
-We made the most stress free OpenVPN prodcut out there.
+We made the most stress free OpenVPN product out there.
 
 ### Key aspects
 
-- Removed the complexity of configuration.
-- All or partial traffic option.
-- Minimized downtime thanks to our custom resilience feature.
-- No more stress to recreated all the users if you lose the server.
-- The downtime minimized to the time it takes to boot the EC2 Instacne and mount the EFS drive.
+- Removed the complexity of configuration
+- All or partial traffic option
+- Minimized downtime thanks to our custom resilience feature
+- No more stress to recreate all the users if you lose the server
+- The downtime minimized to the time it takes to boot the EC2 Instacne and mount the EFS drive
 
 ### Example use cases
 
 Your imagination is your limit, but here are some ideas that are worth considering:
 
 - Route all the traffic over the VPN server for remote workers.
-- Secure offie resources in a private subnet and allow partial traffic for employees to access them.
-- Connect tow or more offices together with a secure link.
+- Secure offline resources in a private subnet and allow partial traffic for employees to access them.
+- Connect two or more offices together with a secure link.
 
 ### Additional details
 
 #### Resilience
 
-Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you'll get so that you can use them in the EC2 UserData section.
+Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you get so that you can use them in the EC2 UserData section.
 
 #### Security
 
@@ -51,18 +51,18 @@ This section lists all the fetures of this product for easy referencing.
 
 **The product itself**
 
-1. No soft limits on how manu user you can create and connect
-1. Part of the configuration is done through the EC2 Instance UserData section.
-1. Unique server settings are stored in to a EFS drive, this way it is save to terminate an instacne and not lose any custom confuguration (users, key, certificates etc)
+1. No soft limits on how many users you can create and connect
+1. Part of the configuration is done through the EC2 Instance UserData section
+1. Unique server settings are stored in to a EFS drive, this way it is saved to be able to terminate an instance and not lose any custom confuguration (users, key, certificates etc)
 
 **Using our CloudFormation**
 
-1. Alarm to check for CPU Bursts.
-1. Alarm to check for CPU Load.
-1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
-1. SNS Topic for the alarms.
-1. Same public IP for the server so even after termination the clients won't need reconfiguration.
-1. EC2 Instance termination protection enabled by default.
+1. Alarm to check for CPU Bursts
+1. Alarm to check for CPU Load
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure
+1. SNS Topic for the alarms
+1. Same public IP for the server so even after termination the clients won't need reconfiguration
+1. EC2 Instance termination protection enabled by default
 
 :::
 
@@ -76,23 +76,23 @@ This section lists all the fetures of this product for easy referencing.
 
 ### What will be deployed
 
-- 1x EC2 instance with 0x4447 custom AMI.
-  - 1x IAM Role.
-  - 1x IAM Policy.
-  - 1x Security Group.
-  - 1x Instance profile.
-  - 1x Elastic IP.
-  - 1x Elastic IP Association.
+- 1x EC2 instance with 0x4447 custom AMI
+  - 1x IAM Role
+  - 1x IAM Policy
+  - 1x Security Group
+  - 1x Instance profile
+  - 1x Elastic IP
+  - 1x Elastic IP Association
 - 4x CloudWatch Alarms:
-  - CPU Burst.
-  - CPU Load.
-  - EC2 Instance Recovery.
-- 1x SNS Topic.
-  - 1x SNS Pilicy.
-- 1x CloudWatch Dashboard for instance overview.
+  - CPU Burst
+  - CPU Load
+  - EC2 Instance Recovery
+- 1x SNS Topic
+  - 1x SNS Pilicy
+- 1x CloudWatch Dashboard for instance overview
 - 1x EFS drive
-  - 1x Mount target.
-  - 1x Security group.
+  - 1x Mount target
+  - 1x Security group
 - 1x Backup
   - 1x Plan
   - 1x Role
@@ -101,7 +101,7 @@ This section lists all the fetures of this product for easy referencing.
 
 ## Deploy Manually
 
-Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
+Before launching our product, you'll have to do some manual work to make everything is working correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
 
 ::: warning
 Text starting with `PARAM_` needs to be replaced with real values.
@@ -109,7 +109,7 @@ Text starting with `PARAM_` needs to be replaced with real values.
 
 ### Security Group
 
-Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+Our product configuration in the AWS Marketplace already has set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
 
 - `22` over `TCP` for remote managment.
 - `443` over `TCP` for VPN connections.
@@ -117,7 +117,7 @@ Our product configuration in the AWS Marketplace already have set all the ports 
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
+Our product needs a few dynamic values custom to your setup. To get access to these values our product checks for the content of this file `/home/ec2-user/.env`. By using the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own.
 
 ```bash
 #!/bin/bash
@@ -133,12 +133,12 @@ echo VPN_SPLIT_TUNNEL_SUBNET=PARAM_IP_OF_THE_NETWORK_MASK_FOR_EXAMPLE_255.255.25
 
 ::: tip Explanation
 
-1. Set the ID of the EFS drive.
-1. Set the ID of the Elastic IP.
-1. Set the DNS name that you will use to map the public instance IP. This will be used in the VPN profile file.
-1. Set if you want partial or all traffic going thorugh the VPN.
-1. Set the Private VPN server IP.
-1. Set the network mask for the IP.
+1. Set the ID of the EFS drive
+1. Set the ID of the Elastic IP
+1. Set the DNS name that you will use to map the public instance IP. This will be used in the VPN profile file
+1. Set if you want partial or all traffic going thorugh the VPN
+1. Set the Private VPN server IP
+1. Set the network mask for the IP
 
 :::
 
@@ -231,17 +231,17 @@ The output is the list of all the users you have available for your VPN server.
 
 ### Test the setup
 
-Before you go in to production, make sure to test the product; not because we don't believe it, but to make sure that you get used to how it works.
+Before you go in to production, make sure to test the product. This ensures that you get used to how it works.
 
 ### Security Concerns
 
-Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
+Bellow we give you a list of potential ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
-- Expose to the public only the ports needed for clients to connect to the VPN.
-- Block public SSH access.
-- Allow SSH connection only from limited subnets.
-- Ideally allow SSH connection only from another central instance.
-- Don't give root access to anyone but yourself.
+- Expose to the public only the ports needed for clients to connect to the VPN
+- Block public SSH access
+- Allow SSH connection only from limited subnets
+- Ideally allow SSH connection only from another central instance
+- Don't give root access to anyone but yourself
 
 ### Backup Your Data
 
@@ -261,7 +261,7 @@ You have to accept the subscription from the AWS Marketplace first, before you u
 
 :::
 
-### The product is missbehaving
+### The product is misbehaving
 
 I did follow all the instruction from the documentation.
 
@@ -277,7 +277,7 @@ sudo cat /var/lib/cloud/instance/user-data.txt
 
 ### UserData seams ok...
 
-The UserData reached the instacne, and yet the product is not acting as it should.
+The UserData reached the instance, and yet the product is not acting as it should.
 
 ::: tip Solution
 
@@ -320,4 +320,4 @@ Ensure that your EFS Drive allows inbound connections on TCP Port `2049` from yo
 
 ## Support
 
-If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
