@@ -11,17 +11,17 @@ This product is intended to be used by Cloud professionals who have experience w
 
 ## What is this product about
 
-We took the simple idea of a SFTP server and extended it with a EFS drive, which converts the SFTP in to infinite sotrage.
+We took the simple idea of a SFTP server and extended it with an EFS drive, which converts the SFTP in to infinite storage.
 
-Our solution removes the stress of running out of storeage forevere. The days are gone where you have to alockate huge ammount of storeage hoping it is going to be enough over time, while also monitoring if the storage is running out, and spend the time to migrate to another EBS drive.
+Our solution removes the stress of running out of storage, forever. The days are gone where you have to allocate huge ammounts of storage hoping it is going to be enough over time, while also monitoring if the storage is running out, and spending the time to migrate to another EBS drive.
 
-We created a product that once is deployed, you can forget about it, and worring only about product updates while not loosing any data stored in the EFS drives.
+We created a product that once deployed, you can forget about, instead focusing on product updates while not loosing any data stored in the EFS drives.
 
 ### Key aspects
 
-- Single user per server for better security, and organization.
-- Unlimited storage for the uploaded data.
-- Ability to easily browse pre-existing EFS drives.
+- Single user per server for better security, and organization
+- Unlimited storage for the uploaded data
+- Ability to easily browse pre-existing EFS drives
 
 ### Example use cases
 
@@ -35,7 +35,7 @@ Your imagination is your limit, but here are some ideas that are worth consideri
 
 #### Resilience
 
-Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up end running with all that you need.
+Our product has built in resilience to make sure that you don't lose all your data, or lose connectivity by a changing IP. Our CloudFormation provides a quick way to be up and running with all that you need.
 
 ## Complete feature list
 
@@ -45,19 +45,19 @@ This section lists all the fetures of this product for easy referencing.
 
 **The product itself**
 
-1. Single user access using password.
-1. No manual managment needed.
-1. All the configuration is done through the EC2 Instance UserData section.
+1. Single user access using password
+1. No manual managment needed
+1. All the configuration is done through the EC2 Instance UserData section
 1. Infinite storage using a EFS drive
 
 **Using our CloudFormation**
 
-1. Alarm to check for CPU Bursts.
-1. Alarm to check for CPU Load.
-1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure.
-1. SNS Topic for the alarms.
-1. Same public IP for the server so even after termination the clients won't need reconfiguration.
-1. EC2 Instance termination protection enabled by default.
+1. Alarm to check for CPU Bursts
+1. Alarm to check for CPU Load
+1. Alarm to auto recover the instance if it gets termianted suddenly by AWS due to hardware failiure.
+1. SNS Topic for the alarms
+1. Same public IP for the server so even after termination the clients won't need reconfiguration
+1. EC2 Instance termination protection enabled by default
 
 :::
 
@@ -72,23 +72,23 @@ This section lists all the fetures of this product for easy referencing.
 
 ### What will be deployed
 
-- 1x EC2 instance with 0x4447 custom AMI.
-  - 1x IAM Role.
-  - 1x IAM Policy.
-  - 1x Security Group.
-  - 1x Instance profile.
-  - 1x Elastic IP.
-  - 1x Elastic IP Association.
+- 1x EC2 instance with 0x4447 custom AMI
+  - 1x IAM Role
+  - 1x IAM Policy
+  - 1x Security Group
+  - 1x Instance profile
+  - 1x Elastic IP
+  - 1x Elastic IP Association
 - 4x CloudWatch Alarms:
-  - CPU Burst.
-  - CPU Load.
-  - EC2 Instance Recovery.
-- 1x SNS Topic.
-  - 1x SNS Pilicy.
-- 1x CloudWatch Dashboard for instance overview.
+  - CPU Burst
+  - CPU Load
+  - EC2 Instance Recovery
+- 1x SNS Topic
+  - 1x SNS Pilicy
+- 1x CloudWatch Dashboard for instance overview
 - 1x EFS drive
-  - 1x Mount target.
-  - 1x Security group.
+  - 1x Mount target
+  - 1x Security group
 - 1x Backup
   - 1x Plan
   - 1x Role
@@ -97,7 +97,7 @@ This section lists all the fetures of this product for easy referencing.
 
 ## Deploy Manually
 
-Before launching our product, you'll have to do some manual work to make everything work correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
+Before launching our product, you'll have to do some manual work to make everything works correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
 
 ::: warning
 Text starting with `PARAM_` needs to be replaced with real values.
@@ -105,14 +105,14 @@ Text starting with `PARAM_` needs to be replaced with real values.
 
 ### Security Group
 
-Our product configuration in the AWS Marketplace already have set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+Our product configuration in the AWS Marketplace already has set all the ports that need to be open for the product to work. If for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
 
 - `22` over `TCP` for remote accessover SSH.
 - `2049` over `TCP` for EFS to be mounted.
 
 ### Bash Script for UserData
 
-Our product needs a few dynamic values custom to your setup. To get access to this values our product checks for the content of this file `/home/ec2-user/.env`. By suing the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own ones.
+Our product needs a few dynamic values custom to your setup. To get access to these values our product checks for the content of this file `/home/ec2-user/.env`. By using the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own.
 
 ```bash
 #!/bin/bash
@@ -148,7 +148,7 @@ The boot time of our product will be slower then if you started an instance from
 
 ## Connecting to the Server
 
-If you need to connect to the server: get it's IP, connect to the instance over SSH with the username `ec2-user`, while using the private key you selected at deployment time. If sucesfully connected, you should be greeted with a custom MOTD detailing the product information.
+If you need to connect to the server: get it's IP, connect to the instance over SSH with the username `ec2-user`, while using the private key you selected at deployment time. If succesfully connected, you should be greeted with a custom MOTD detailing the product information.
 
 ## Final Thought
 
@@ -158,7 +158,7 @@ Before you go in to production, make sure to test the product; not because we do
 
 ### Security Concerns
 
-Bellow we give you a list of potentail ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
+Bellow we give you a list of potential ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
 
 - Limit access to the server to just a fixed IP.
 - Don't give root access to anyone but yourself.
@@ -181,7 +181,7 @@ You have to accept the subscription from the AWS Marketplace first, before you u
 
 :::
 
-### The product is missbehaving
+### The product is misbehaving
 
 I did follow all the instruction from the documentation.
 
@@ -197,7 +197,7 @@ sudo cat /var/lib/cloud/instance/user-data.txt
 
 ### UserData seams ok...
 
-The UserData reached the instacne, and yet the product is not acting as it should.
+The UserData reached the instance, and yet the product is not acting as it should.
 
 ::: tip Solution
 
@@ -211,4 +211,4 @@ sudo cat /var/log/messages | grep 0x4447
 
 ## Support
 
-If the above section didn't help you come up with a solution to your problem. Feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
