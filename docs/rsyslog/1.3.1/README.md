@@ -217,7 +217,7 @@ To allow other team members to access the logs from remote servers throuh our pr
 
 ::: warning Important
 
-Before you create the users you have to chagne the configuration in the `/etc/ssh/sshd_config` file to allow SSH to allow access using password credentials. By default AWS dose not allow products with this feature enabled by default.
+Before you create the users you have to change the configuration in the `/etc/ssh/sshd_config` file to allow SSH to allow access using password credentials. By default AWS does not allow products with this feature enabled by default.
 
 Steps:
 
@@ -227,7 +227,7 @@ Steps:
 
 :::
 
-Bellow you can find a reminder how to manage password users under Linux.
+Bellow you can find a reminder how to manage users and passwords under Linux.
 
 ### How to create a user
 
@@ -308,7 +308,7 @@ The UserData reached the instance, and yet the product is not acting as it shoul
 
 ::: tip Solution
 
-Use the following command to see if there were any errors douring the boot process.
+Use the following command to see if there were any errors during the boot process.
 
 ```
 sudo cat /var/log/messages | grep 0x4447
