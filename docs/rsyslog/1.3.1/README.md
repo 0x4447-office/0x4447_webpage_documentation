@@ -215,6 +215,18 @@ chmod +x /tmp/rsyslog-client-setup.sh
 
 To allow other team members to access the logs from remote servers throuh our product, we created a special user group called `rsyslog` that has access only to the remote logs.
 
+::: warning Important
+
+Before you create the users you have to chagne the configuration in the `/etc/ssh/sshd_config` file to allow SSH to allow access using password credentials. By default AWS dose not allow products with this feature enabled by default.
+
+Steps:
+
+1. Open the `/etc/ssh/sshd_config` file with your favorite editor.
+1. Replace the line `PasswordAuthentication no` with `PasswordAuthentication yes`.
+1. Restart the SSH service by typing `sudo systemctl restart sshd`.
+
+:::
+
 Bellow you can find a reminder how to manage password users under Linux.
 
 ### How to create a user
