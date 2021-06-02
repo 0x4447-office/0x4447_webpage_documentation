@@ -21,3 +21,7 @@ Thees products should be treaded as  appliances.
 ## Support
 
 If you have any question(s) or issue(s) regarding our products, feel free to reach us through our [support page](https://support.0x4447.com/).
+
+## Feedback
+
+If you have any feedback regarding our products, feel free to reach us through our [feedback page](https://feedback.0x4447.com/).
