@@ -125,6 +125,10 @@ module.exports = {
       {
         text: 'Support',
         link: 'https://support.0x4447.com/'
+      },
+      {
+        text: 'Feedback',
+        link: 'https://feedback.0x4447.com/'
       }
     ],
     sidebar: 'auto'
