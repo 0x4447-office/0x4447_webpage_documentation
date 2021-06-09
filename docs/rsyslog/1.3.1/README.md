@@ -319,3 +319,7 @@ sudo cat /var/log/messages | grep 0x4447
 ## Support
 
 If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+
+## Feedback
+
+If you have any feedback regarding our products, feel free to reach us through our [feedback page](https://feedback.0x4447.com/).
