@@ -10,7 +10,7 @@ This is the official Documentation page for 0x4447, LLC products. On this site y
 
 ## Core Idea behind Our Products
 
-The core idea behind our products is to function with as little management as possible. We have designed them this way so that you can focus on what matters moat to you, without having to manage yet another server.
+The core idea behind our products is to function with as little management as possible. We have designed them this way so that you can focus on what matters most to you, without having to manage yet another server.
 
 With this purpose in mind, you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
 
