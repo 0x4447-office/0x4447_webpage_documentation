@@ -8,19 +8,19 @@ footer: Est.2016, Copr.0x4447™ LLC.
 
 This is the official Documentation page for 0x4447, LLC products. On this site you'll find the documentation for all of our products that we have on the [AWS Marketplace](https://aws.amazon.com/marketplace/seller-profile?id=80edcebf-11fb-4c36-a3f4-49eb40b518a3).
 
-## Core Idea of Our Products
+## Core Idea behind Our Products
 
-The core idea of our products was to design them in a way where there would be as little management as possible. This way you can focus on what matters and not have to manage yet another server.
+The core idea behind our products is to function with as little management as possible. We have designed them this way so that you can focus on what matters moat to you, without having to manage yet another server.
 
-For this reason you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
+With this purpose in mind, you should not make any changes to the underlying operating system, make manual changes in the configuration etc.
 
-We will provide over time updates to add features, fix bugs or update version of different packages.
+Over time We will provide new features, bug fixes, and updated versions of different packages.
 
-Thees products should be treaded as  appliances.
+These products should be treated as appliances.
 
 ## Support
 
-If you have any question(s) or issue(s) regarding our products, feel free to reach us through our [support page](https://support.0x4447.com/).
+If you have any questions or issues regarding our products, feel free to reach us through our [support page](https://support.0x4447.com/).
 
 ## Feedback
 
