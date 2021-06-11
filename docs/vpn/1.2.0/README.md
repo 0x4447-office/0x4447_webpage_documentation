@@ -1,0 +1,349 @@
+---
+title: VPN Server - Using OpenVPN
+summary: Ready to go VPN server using OpenVPN with no soft limits.
+---
+
+# {{ $frontmatter.title }}
+
+::: warning Note
+
+This product is intended to be used by Cloud professionals who have experience with Linux, Cloud Networking, and understand Cloud pricing.
+
+:::
+
+## What is this product about
+
+We took the popular OpenVPN server, and created a preconfigured and easy to use, resilient product. Once booted it is ready to go, and virtually impossible to take down.
+
+We removed the complexity of setup and added a mechanism so that no matter what your user will be able to reconnect to the server. As long as you don't physically delete the EFS drive that is used to store all the unique data of the setup, you can reboot the server, termiante it, recreated it. If the same EFS ID is used, all the configuration will be there, all your users certs and more is preserved, and always restored at boot time.
+
+We made the most stress free OpenVPN product out there.
+
+### Key aspects
+
+- Removed the complexity of configuration
+- All or partial traffic option
+- Minimized downtime thanks to our custom resilience feature
+- No more stress to recreate all the users if you lose the server
+- The downtime minimized to the time it takes to boot the EC2 Instacne and mount the EFS drive
+
+### Example use cases
+
+Your imagination is your limit, but here are some ideas that are worth considering:
+
+- Route all the traffic over the VPN server for remote workers.
+- Secure offline resources in a private subnet and allow partial traffic for employees to access them.
+- Connect two or more offices together with a secure link.
+
+### Additional details
+
+#### Resilience
+
+Our VPN Server has built in resilience to make sure that you don't lose all your users, lose the VPN configuration, or lose connectivity by a changing IP. For this to work, you'll need to allocate an Elastic IP and create an EFS Drive. Also, take note of the IDs that you get so that you can use them in the EC2 UserData section.
+
+#### Security
+
+This product was designed for public access, but we recommend you don't allow SSH connections from the public Internet. Expose only the VPN ports and allow SSH access from a special instance within your private network.
+
+## Complete feature list
+
+This section lists all the fetures of this product for easy referencing.
+
+::: details Detailed list
+
+**The product itself**
+
+1. No soft limits on how many users you can create
+1. No soft limits on how many users can connect to the VPN
+1. Part of the configuration is done through the EC2 Instance UserData section
+1. Unique server settings are stored in to a EFS drive, this way it is saved to be able to terminate an instance and not lose any custom confuguration (users, key, certificates etc)
+
+**Using our CloudFormation**
+
+1. Alarm to check for CPU Bursts
+1. Alarm to check for CPU Load
+1. Alarm to autorecover the instance if it gets termianted suddenly by AWS due to hardware failiure
+1. SNS Topic for the alarms
+1. Same public IP for the server so even after termination the clients won't need reconfiguration
+1. EC2 Instance termination protection enabled by default
+
+:::
+
+## Deploy Automatically
+
+<cloud-formation
+  deploy-url="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=zer0x4447-openvpn&templateURL=https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json"
+  cloud-formation-url="https://s3.amazonaws.com/0x4447-drive-cloudformation/openvpn-server.json"
+  product-url="https://aws.amazon.com/marketplace/pp/B0839R5C7Z"
+/>
+
+### What will be deployed
+
+- 1x EC2 instance with 0x4447 custom AMI
+  - 1x IAM Role
+  - 1x IAM Policy
+  - 1x Security Group
+  - 1x Instance profile
+  - 1x Elastic IP
+  - 1x Elastic IP Association
+- 4x CloudWatch Alarms:
+  - CPU Burst
+  - CPU Load
+  - EC2 Instance Recovery
+- 1x SNS Topic
+  - 1x SNS Pilicy
+- 1x CloudWatch Dashboard for instance overview
+- 1x EFS drive
+  - 1x Mount target
+  - 1x Security group
+- 1x Backup
+  - 1x Plan
+  - 1x Role
+  - 1x Selection
+  - 1x Vault
+
+## Deploy Manually
+
+Before launching our product, you'll have to do some manual work to make everything is working correctly. Please follow these steps (the steps are generally described since Cloud experiance is expected):
+
+::: warning
+
+Text starting with `PARAM_` needs to be replaced with real values.
+
+:::
+
+### Security Group
+
+Our product configuration in the AWS Marketplace already has set all the ports that need to be open for the product to work. But if for whatever reason the correct Security Group is not created by AWS, bellow you can find a list and descriptions of all the ports needed:
+
+- `22` over `TCP` for remote managment.
+- `443` over `TCP` for VPN connections.
+- `2049` over `TCP` for EFS to be mounted.
+
+### Bash Script for UserData
+
+Our product needs a few dynamic values custom to your setup. To get access to these values our product checks for the content of this file `/home/ec2-user/.env`. By using the UserData option that AWS provided for each EC2 Instance, you can create the `.env` file with ease by referencing the bash script from bellow - make sure to replace the placeholder values with your own.
+
+```bash
+#!/bin/bash
+
+echo EFS_ID=PARAM_EFS_ID >> /home/ec2-user/.env
+echo VIRTUAL_NETWORK_PARAM=PARAM_VIRTUAL_NETWORK_PARAM >> /home/ec2-user/.env
+echo VPN_SPLIT_TUNNEL=PARAM_VPN_SPLIT_TUNNEL >> /home/ec2-user/.env
+```
+
+::: tip Explanation
+
+1. Set the ID of the EFS drive
+1. Set the virtual network subnet for internal routing
+1. Set if you want partial or all traffic to go thorugh the VPN
+
+:::
+
+::: warning Understand how UserData works
+
+It is important to note that the content of the UserData field will be only executed once, which occurs when the instance starts for the first time. This means that the content of the UserData won't be triggered if you stop and start the instance.
+
+This means you won't be able to stop the instance, update the UserData and have the changes executed. If you need to make changes to the UserData, you have the following options:
+
+- Follow this [AWS solution](https://aws.amazon.com/premiumsupport/knowledge-center/execute-user-data-ec2/) for a work around.
+- Log-in to the instance, edit the `/home/ec2-user/.env` file, and restart the instance.
+- Terminate the instance and redeploy the product from scratch.
+
+:::
+
+### Custom Role
+
+Before you can set the UserData, you have to attach a Role to the Instance with a Policy that has this Document:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DetachVolume",
+        "ec2:AttachVolume"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:DescribeVolumes",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+This Policy Document will give the Instance the ability to attach the EFS drive to itself. The `"Resource": "*"` is stated this way intentionally, since the action is not resource specific.
+
+### Managed Policy Recomendation
+
+We also recommend adding the following policies managed by AWS to the role:
+
+- `arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy`
+- `arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore`
+
+## The First Boot
+
+The boot time of our product will be slower then if you started an instance from a clean AMI, this is due to our custom code that needs to be executed in order to prepare the product for you. This process can take few minutes longer then usual.
+
+## Connecting to the Server
+
+To connect to the server: get it's IP, connect to the instance over SSH with the username `ec2-user`, while using the private key you selected at deployment time. If sucesfully connected, you should be greeted with a custom MOTD detailing the product information.
+
+## User Management
+
+### How to create a user
+
+1. Run this command:
+
+    ```sh
+    sudo ov_user_add -u USER_NAME
+    ```
+
+2. Every time you do so, a new `.ovpn` file will be created in the `openvpn_users` folder located in the `ec2-user` folder. You can copy the new file to your local computer using the `SCP` command, like so:
+
+    ```sh
+    scp -i ./ssh.key ec2-user@SERVER_IP:/home/ec2-user/openvpn_users/USER_NAME.ovpn .
+    ```
+
+3. Share the `.ovpn` file with the selected user.
+
+### How to delete a user
+
+Just run the following command:
+
+```sh
+sudo ov_user_delete -u USER_NAME -a next_login OR now
+```
+
+This command have the `-a` option which stands for `action`, and you have two posibilities:
+
+- `now`: will delete the user and restart the VPN service which will disconnect all connected users. The deleted user won't be able to reconnect.
+- `next_login`: won't restart the VPN service, but the deleted user will still be able to use the VPN connection untill the next disconnect.
+
+### How to list all the users
+
+Since every time you create a user a `.ovpn` configuration file is created, you can just list the content of the `openvpn_users` folder, like so:
+
+```sh
+ls -la /home/ec2-user/openvpn_users
+```
+
+The output is the list of all the users you have available for your VPN server.
+
+## VPN Clients
+
+- Desktop
+  - [Windows](https://openvpn.net/client-connect-vpn-for-windows/)
+  - [MacOS](https://openvpn.net/client-connect-vpn-for-mac-os/)
+  - [Linux](https://openvpn.net/vpn-server-resources/how-to-connect-to-access-server-from-a-linux-computer/)
+- Mobile
+  - [iOS](https://apps.apple.com/us/app/openvpn-connect/id590379981)
+  - [Android](https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=en)
+
+## Final Thought
+
+### Test the setup
+
+Before you go in to production, make sure to test the product. This ensures that you get used to how it works.
+
+### Security Concerns
+
+Bellow we give you a list of potential ideas to consider regarding security, but this list is not exhaustive – it is just a good starting point.
+
+- Expose to the public only the ports needed for clients to connect to the VPN
+- Block public SSH access
+- Allow SSH connection only from limited subnets
+- Ideally allow SSH connection only from another central instance
+- Don't give root access to anyone but yourself
+
+### Backup Your Data
+
+Make sure you regularly backup your drive(s). One simple solution would be to use [AWS backup](https://aws.amazon.com/backup/).
+
+## F.A.Q
+
+These are some of the common solutions to problems you may run into:
+
+### Not authorized for images
+
+My CloudFormation stack failed with the following error `API: ec2:RunInstances Not authorized for images:...` in the Event tab.
+
+::: tip Solution
+
+You have to accept the subscription from the AWS Marketplace first, before you use our CloudFormation file.
+
+:::
+
+### The product is misbehaving
+
+I did follow all the instruction from the documentation.
+
+::: tip Solution
+
+Check if the values entered in the UserData reached the instance itself.
+
+```sh
+sudo cat /var/lib/cloud/instance/user-data.txt
+```
+
+:::
+
+### UserData seams ok
+
+The UserData reached the instance, and yet the product is not acting as it should.
+
+::: tip Solution
+
+Use the following command to see if there were any errors douring the boot process.
+
+```sh
+sudo cat /var/log/messages | grep 0x4447
+```
+
+:::
+
+### Issue with remote access
+
+Unable to access the server over SSH.
+
+::: tip Solution
+
+- Ensure that your public IP address is allowed to access the EC2 instance. You will need to add an inbound rule to the Security Group used by the EC2 instance.
+- Ensure you are using the right EC2 Key Pair that you provided when you launched your stack.
+- Ensure you are not using the `root` user to login as this is disabled. You need to login as `ec2-user`
+
+:::
+
+### Issue with user management
+
+The bellow error indicates that this instance failed to mount your EFS drive.
+
+```sh
+sudo ov_user_add -u USER_NAME
+No such file or directory
+```
+
+You will also see the following message in your dmesg.
+
+```log
+amazon/efs/mount.log:2020-09-04 23:29:58,803 - ERROR - Failed to mount fs-90d252e8.efs.us-east-2.amazonaws.com at /etc/openvpn/easy-rsa: retu Connection timed out"
+```
+
+::: tip Solution
+
+Ensure that your EFS Drive allows inbound connections on TCP Port `2049` from your Elastic IP and the EC2 subnet being used by the VPN Server.
+
+:::
+
+## Support
+
+If the above section has not helped you come up with a solution to your problem, feel free to [get in touch with us](https://support.0x4447.com/), we'll try to help you out the best way we can.
+
+## Feedback
+
+If you have any feedback regarding our products, feel free to reach us through our [feedback page](https://feedback.0x4447.com/).
