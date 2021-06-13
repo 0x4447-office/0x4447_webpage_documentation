@@ -105,6 +105,10 @@ module.exports = {
             image: '/images/products/vpn.png',
             items: [
               {
+                text: '1.2.0',
+                link: '/vpn/1.2.0/'
+              },
+              {
                 text: '1.1.0',
                 link: '/vpn/1.1.0/'
               }
