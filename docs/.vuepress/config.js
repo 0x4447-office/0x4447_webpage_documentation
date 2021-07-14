@@ -81,8 +81,8 @@ module.exports = {
                         image: '/images/products/rsyslog.png',
                         items: [
                             {
-                                text: '1.3.1',
-                                link: '/rsyslog/1.3.1/'
+                                text: '1.3.x',
+                                link: '/rsyslog/1.3.x/'
                             }
                         ]
                     },
@@ -91,12 +91,8 @@ module.exports = {
                         image: '/images/products/sftp.png',
                         items: [
                             {
-                                text: '1.0.2',
-                                link: '/sftp/1.0.2/'
-                            },
-                            {
-                                text: '1.0.1',
-                                link: '/sftp/1.0.1/'
+                                text: '1.0.x',
+                                link: '/sftp/1.0.x/'
                             }
                         ]
                     },
@@ -105,12 +101,8 @@ module.exports = {
                         image: '/images/products/vpn.png',
                         items: [
                             {
-                                text: '1.2.0',
-                                link: '/vpn/1.2.0/'
-                            },
-                            {
-                                text: '1.1.0',
-                                link: '/vpn/1.1.0/'
+                                text: '1.2.x',
+                                link: '/vpn/1.2.x/'
                             }
                         ]
                     },
@@ -119,8 +111,8 @@ module.exports = {
                         image: '/images/products/samba.png',
                         items: [
                             {
-                                text: '1.2.0',
-                                link: '/samba/1.2.0/'
+                                text: '1.2.x',
+                                link: '/samba/1.2.x/'
                             }
                         ]
                     }
