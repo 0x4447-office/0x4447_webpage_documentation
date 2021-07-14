@@ -1,7 +1,7 @@
 ---
 home: true
 tagline: products that will help you build your foundation
-footer: Est.2016, Copr.0x4447™ LLC.
+footer: Est. 2016, Copr. 0x4447™ LLC.
 ---
 
 <products-list />
